@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { NgxCodeBlock, NgxCodeLanguage, NgxCodeContrast } from '@ngx-workshop/ui';
+import { NgxCodeBlock, NgxCodeLanguage, NgxCodeContrast } from '@tmdjr/ngx-workshop-design-system';
 import { TYPESCRIPT_SAMPLE, HTML_SAMPLE, JSON_SAMPLE, CSS_SAMPLE } from './code-samples';
 @Component({
   selector: 'ngx-code-lab',

@@ -3,7 +3,7 @@
 The shared `theme()` mixin now gives active **CDK Overlay backdrops** a frosted-glass treatment: a translucent canvas tint, 12px blur and gentle saturation. Dialogs, bottom sheets and connected overlays such as select/menu popups inherit it automatically.
 
 ```scss
-@use '@ngx-workshop/ui/theme' as ngx;
+@use '@tmdjr/ngx-workshop-design-system/theme' as ngx;
 @include ngx.theme();
 ```
 

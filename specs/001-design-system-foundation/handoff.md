@@ -7,7 +7,7 @@ Spec: [spec.md](spec.md) · Plan: [plan.md](plan.md) · Tasks: [tasks.md](tasks.
 ## Delivered
 
 Local Git repository on main; Angular/Material/CDK 21.1.0, TypeScript 5.9.3 and Storybook 10.6.3.
-Distributable `@ngx-workshop/ui` package with panel, status and CDK clipboard code block.
+Distributable `@tmdjr/ngx-workshop-design-system` package with panel, status and CDK clipboard code block.
 Public packaged Sass theme, semantic tokens, neon and neutral palettes, Material override adapter.
 Standalone showcase and 15 Storybook stories covering foundations, shared components and Material primitives.
 Spec Kit-like constitution, templates, requirements, plan, task tracking, architecture, development and token docs.

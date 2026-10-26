@@ -15,7 +15,7 @@ import {
   NgxPanelMotion,
   NgxPanelTone,
   NgxStatus,
-} from '@ngx-workshop/ui';
+} from '@tmdjr/ngx-workshop-design-system';
 @Component({
   selector: 'ngx-panel-lab',
   imports: [NgxPanel, NgxStatus, MatButtonModule],

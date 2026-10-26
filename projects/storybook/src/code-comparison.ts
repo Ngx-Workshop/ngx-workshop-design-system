@@ -10,7 +10,7 @@ import {
   inject,
 } from '@angular/core';
 import type { EditorView } from '@codemirror/view';
-import { NgxCodeBlock, NgxCodeContrast } from '@ngx-workshop/ui';
+import { NgxCodeBlock, NgxCodeContrast } from '@tmdjr/ngx-workshop-design-system';
 import { TYPESCRIPT_SAMPLE } from './code-samples';
 @Component({
   selector: 'ngx-code-comparison',

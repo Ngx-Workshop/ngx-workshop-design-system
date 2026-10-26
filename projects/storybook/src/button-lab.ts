@@ -7,7 +7,7 @@ import {
   NgxButtonSurface,
   NgxButtonTone,
   NgxButtonMotion,
-} from '@ngx-workshop/ui';
+} from '@tmdjr/ngx-workshop-design-system';
 @Component({
   selector: 'ngx-button-lab',
   imports: [NgxButton, MatButtonModule, MatIconModule],

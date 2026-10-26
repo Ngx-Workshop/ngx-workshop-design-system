@@ -20,7 +20,7 @@ The toolbar switches Neon and Neutral themes, including Material overlays.
 
 | Project                    | Purpose                                               |
 | -------------------------- | ----------------------------------------------------- |
-| `projects/ngx-workshop-ui` | Packaged `@ngx-workshop/ui` library and Sass theme    |
+| `projects/ngx-workshop-ui` | Packaged `@tmdjr/ngx-workshop-design-system` library and Sass theme    |
 | `projects/storybook`       | Storybook catalog and standalone showcase application |
 
 Included: token/typography foundations, Material buttons, form fields, selects, checkboxes, toggles, tabs, progress and dialogs; shared `NgxPanel`, `NgxStatus` and `NgxCodeBlock`.
@@ -37,14 +37,14 @@ npm install /absolute/path/to/ngx-workshop-design-system/dist/ngx-workshop-ui
 Global `styles.scss`:
 
 ```scss
-@use '@ngx-workshop/ui/theme' as ngx;
+@use '@tmdjr/ngx-workshop-design-system/theme' as ngx;
 @include ngx.theme();
 ```
 
 Standalone component:
 
 ```ts
-import { NgxPanel, NgxStatus, NgxCodeBlock } from '@ngx-workshop/ui';
+import { NgxPanel, NgxStatus, NgxCodeBlock } from '@tmdjr/ngx-workshop-design-system';
 // Add these to your component's imports array.
 ```
 

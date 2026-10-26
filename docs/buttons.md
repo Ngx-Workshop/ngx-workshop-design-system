@@ -4,14 +4,14 @@
 
 ```ts
 import { MatButtonModule } from '@angular/material/button';
-import { NgxButton } from '@ngx-workshop/ui';
+import { NgxButton } from '@tmdjr/ngx-workshop-design-system';
 // Include both in your standalone component imports.
 ```
 
 Include the shared theme once in global Sass:
 
 ```scss
-@use '@ngx-workshop/ui/theme' as ngx;
+@use '@tmdjr/ngx-workshop-design-system/theme' as ngx;
 @include ngx.theme();
 ```
 

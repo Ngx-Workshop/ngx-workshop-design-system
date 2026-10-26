@@ -21,7 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
-import { NgxCodeBlock, NgxPanel, NgxStatus, NgxButton, NgxPanelBackground } from '@ngx-workshop/ui';
+import { NgxCodeBlock, NgxPanel, NgxStatus, NgxButton, NgxPanelBackground } from '@tmdjr/ngx-workshop-design-system';
 
 @Component({
   selector: 'ngx-demo-dialog',
@@ -154,11 +154,11 @@ export class Showcase {
   readonly notifications = signal(true);
   readonly saved = signal(false);
   readonly installCommand = `// npm install /path/to/dist/ngx-workshop-ui
-import { NgxPanel, NgxButton, NgxCodeBlock } from '@ngx-workshop/ui';
+import { NgxPanel, NgxButton, NgxCodeBlock } from '@tmdjr/ngx-workshop-design-system';
 
 // Add your shared components to a standalone view.
 // Global styles.scss:
-// @use '@ngx-workshop/ui/theme' as ngx;
+// @use '@tmdjr/ngx-workshop-design-system/theme' as ngx;
 // @include ngx.theme();`;
   toggleTheme(): void {
     const value =

@@ -1,6 +1,6 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
-import { NgxButton } from '@ngx-workshop/ui';
+import { NgxButton } from '@tmdjr/ngx-workshop-design-system';
 import { ButtonLab } from '../button-lab';
 const meta: Meta<ButtonLab> = {
   title: 'Components/Button/Interaction lab',

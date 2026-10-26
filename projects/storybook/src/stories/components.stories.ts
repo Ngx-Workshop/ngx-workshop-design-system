@@ -1,6 +1,6 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
-import { NgxPanel, NgxStatus } from '@ngx-workshop/ui';
+import { NgxPanel, NgxStatus } from '@tmdjr/ngx-workshop-design-system';
 const meta: Meta<NgxPanel> = {
   title: 'Components/Panel',
   component: NgxPanel,

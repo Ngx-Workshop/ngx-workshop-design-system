@@ -1,5 +1,5 @@
 {
-  "name": "@ngx-workshop/ui",
+  "name": "@tmdjr/ngx-workshop-design-system",
   "version": "0.1.0",
   "peerDependencies": {
     "@angular/common": "21.1.0",

@@ -12,7 +12,7 @@
 | `motion`     | `none`, `boot`, `glitch`, `hologram`                   | `none`            |
 
 ```ts
-import { NgxPanel } from '@ngx-workshop/ui';
+import { NgxPanel } from '@tmdjr/ngx-workshop-design-system';
 // Include NgxPanel in the standalone component imports.
 ```
 

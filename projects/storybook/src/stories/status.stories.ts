@@ -1,5 +1,5 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { NgxStatus } from '@ngx-workshop/ui';
+import { NgxStatus } from '@tmdjr/ngx-workshop-design-system';
 const meta: Meta<NgxStatus> = {
   title: 'Components/Status',
   component: NgxStatus,

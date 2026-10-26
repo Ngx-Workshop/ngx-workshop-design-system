@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { NgxCodeBlock } from '@ngx-workshop/ui';
+import { NgxCodeBlock } from '@tmdjr/ngx-workshop-design-system';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { TYPESCRIPT_SAMPLE, HTML_SAMPLE, CSS_SAMPLE, JSON_SAMPLE } from '../code-samples';
 const meta: Meta<NgxCodeBlock> = {
@@ -37,7 +37,7 @@ export const Terminal: Story = {};
 export const Multiline: Story = {
   args: {
     label: 'styles.scss',
-    code: '@use "@ngx-workshop/ui/theme" as ngx;\n@include ngx.theme();',
+    code: '@use "@tmdjr/ngx-workshop-design-system/theme" as ngx;\n@include ngx.theme();',
   },
 };
 export const EscapedContent: Story = {

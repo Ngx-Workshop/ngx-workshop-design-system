@@ -13,14 +13,14 @@ try {
     temp,
     readdirSync(temp).find((f) => f.endsWith('.tgz')),
   );
-  const target = path.join(temp, 'node_modules/@ngx-workshop/ui');
+  const target = path.join(temp, 'node_modules/@tmdjr/ngx-workshop-design-system');
   mkdirSync(target, { recursive: true });
   execFileSync('tar', ['-xzf', tar, '--strip-components=1', '-C', target]);
   writeFileSync(
     path.join(temp, 'consumer.ts'),
     `import {Component} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
-import {NgxPanel,NgxStatus,NgxCodeBlock,NgxPanelShape,NgxPanelBackground,NgxPanelMotion,NgxButton,NgxButtonShape,NgxCodeLanguage} from '@ngx-workshop/ui';
+import {NgxPanel,NgxStatus,NgxCodeBlock,NgxPanelShape,NgxPanelBackground,NgxPanelMotion,NgxButton,NgxButtonShape,NgxCodeLanguage} from '@tmdjr/ngx-workshop-design-system';
 @Component({selector:'consumer-test',imports:[NgxPanel,NgxStatus,NgxCodeBlock,NgxButton,MatButtonModule],template:'<ngx-panel heading="Consumer" [shape]="shape" [background]="background" [motion]="motion"><ngx-status label="Ready" /></ngx-panel><ngx-code-block code="const ready = true;" [language]="language" contrast="original" [wrap]="true" /><button mat-flat-button ngxButton [shape]="buttonShape" surface="outline" motion="glitch">Execute</button>'})
 export class Consumer { language:NgxCodeLanguage="typescript"; buttonShape: NgxButtonShape = "chevron"; shape: NgxPanelShape = "stepped"; background: NgxPanelBackground = "glass"; motion: NgxPanelMotion = "boot"; }`,
   );
@@ -47,7 +47,7 @@ export class Consumer { language:NgxCodeLanguage="typescript"; buttonShape: NgxB
   );
   const sass = await import('sass');
   const result = sass.compileString(
-    '@use "pkg:@ngx-workshop/ui/theme" as ngx; @include ngx.theme();',
+    '@use "pkg:@tmdjr/ngx-workshop-design-system/theme" as ngx; @include ngx.theme();',
     {
       importers: [new sass.NodePackageImporter(temp)],
       loadPaths: [path.join(root, 'node_modules')],

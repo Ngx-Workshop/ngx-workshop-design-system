@@ -8,7 +8,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
 import { MaterialDemo } from './demo-shell';
-import { NgxButton } from '@ngx-workshop/ui';
+import { NgxButton } from '@tmdjr/ngx-workshop-design-system';
 @Component({
   selector: 'ngx-action-examples',
   imports: [

@@ -7,7 +7,7 @@ The deep-purple background, white foreground, pink keywords, green strings/funct
 ## Lightweight Angular snippets
 
 ```ts
-import { NgxCodeBlock } from '@ngx-workshop/ui';
+import { NgxCodeBlock } from '@tmdjr/ngx-workshop-design-system';
 // Include NgxCodeBlock in your standalone component imports.
 ```
 
@@ -40,7 +40,7 @@ Source changes replace pending results; stale parser work cannot overwrite newer
 Include the shared global theme once:
 
 ```scss
-@use '@ngx-workshop/ui/theme' as ngx;
+@use '@tmdjr/ngx-workshop-design-system/theme' as ngx;
 @include ngx.theme();
 ```
 

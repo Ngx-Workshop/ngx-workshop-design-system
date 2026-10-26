@@ -1,6 +1,6 @@
 # Theme contract
 
-Include `@use '@ngx-workshop/ui/theme' as ngx; @include ngx.theme();` once in global Sass.
+Include `@use '@tmdjr/ngx-workshop-design-system/theme' as ngx; @include ngx.theme();` once in global Sass.
 The default HUD palette uses electric cyan (#27f5ef), magenta (#ff52c6), violet (#aa8cff), signal red (#ff3e68) and midnight navy surfaces. Set `data-ngx-theme="neutral"` on `<html>` for the minimal palette.
 Use the document root so dialogs, selects and other CDK overlays inherit tokens.
 

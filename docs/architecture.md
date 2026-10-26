@@ -1,6 +1,6 @@
 # Architecture
 
-- `projects/ngx-workshop-ui`: distributable `@ngx-workshop/ui` Angular library, public API in `src/public-api.ts`.
+- `projects/ngx-workshop-ui`: distributable `@tmdjr/ngx-workshop-design-system` Angular library, public API in `src/public-api.ts`.
 - `src/styles/_index.scss`: public Ngx tokens, Material adapter, optional neutral palette and global accessibility defaults. ng-packagr copies this into the package's `styles/` directory.
 - Shared components: `NgxPanel` projects body/actions into Material cards; `NgxStatus` labels Material chips; `NgxCodeBlock` displays escaped text and uses CDK Clipboard.
 - `projects/storybook`: standalone showcase application, Storybook configuration and stories. These are development consumers; no story files are shipped in the library.
