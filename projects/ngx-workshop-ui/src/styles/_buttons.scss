@@ -104,6 +104,13 @@ $shapes: (
     --button-ink: var(--button-on-accent);
     @include mat.button-overrides(
       (
+        // Material's rectangular state layer must not fill the cut corners.
+        filled-state-layer-color: transparent,
+        outlined-state-layer-color: transparent,
+        text-state-layer-color: transparent,
+        filled-ripple-color: transparent,
+        outlined-ripple-color: transparent,
+        text-ripple-color: transparent,
         filled-container-color: transparent,
         filled-container-shape: 0,
         filled-disabled-container-color: transparent,
@@ -112,7 +119,7 @@ $shapes: (
         filled-label-text-color: var(--button-ink),
         outlined-label-text-color: var(--button-ink),
         outlined-outline-color: transparent,
-        text-label-text-color: var(--button-ink),
+        text-label-text-color: var(--button-ink)
       )
     );
     position: relative;
@@ -125,7 +132,7 @@ $shapes: (
     white-space: nowrap;
     transition:
       transform var(--ngx-button-hover-duration, 180ms) ease,
-      box-shadow var(--ngx-button-hover-duration, 180ms) ease;
+      filter var(--ngx-button-hover-duration, 180ms) ease;
   }
   html .ngx-button[data-ngx-tone='secondary'] {
     --button-accent: var(--ngx-color-secondary);
@@ -150,10 +157,7 @@ $shapes: (
     inset: 0;
     z-index: 0;
     pointer-events: none;
-  }
-  .ngx-button[data-ngx-surface='filled'] .ngx-button-decoration {
-    background: var(--button-accent);
-    clip-path: var(--button-shape);
+    transition: filter var(--ngx-button-hover-duration, 180ms) ease;
   }
   .ngx-button-decoration::before,
   .ngx-button-decoration::after {
@@ -216,8 +220,8 @@ $shapes: (
     pointer-events: none;
   }
   @media (hover: hover) {
-    html .ngx-button:not(:disabled):not([aria-disabled='true']):hover {
-      box-shadow: 0 0 22px color-mix(in srgb, var(--button-accent) 22%, transparent);
+    html .ngx-button:not(:disabled):not([aria-disabled='true']):hover .ngx-button-decoration {
+      filter: drop-shadow(0 0 11px color-mix(in srgb, var(--button-accent) 22%, transparent));
     }
     .ngx-button[data-ngx-motion='scan']:not(:disabled):not([aria-disabled='true']):hover
       .ngx-button-scan {
@@ -233,7 +237,9 @@ $shapes: (
   html .ngx-button:focus-visible {
     outline: 2px solid var(--button-accent);
     outline-offset: 5px;
-    box-shadow: 0 0 18px color-mix(in srgb, var(--button-accent) 22%, transparent);
+  }
+  html .ngx-button:focus-visible .ngx-button-decoration {
+    filter: drop-shadow(0 0 9px color-mix(in srgb, var(--button-accent) 22%, transparent));
   }
   .ngx-button[data-ngx-motion='scan']:focus-visible .ngx-button-scan {
     animation: ngx-button-scan var(--ngx-button-scan-duration, 480ms) ease-out;
@@ -297,6 +303,9 @@ $shapes: (
     html .ngx-button:hover,
     html .ngx-button:active {
       transform: none !important;
+    }
+    .ngx-button-decoration {
+      transition: none;
     }
     .ngx-button-scan {
       display: none;

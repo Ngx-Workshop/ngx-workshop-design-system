@@ -181,3 +181,35 @@ test('button lab and galleries fit a mobile viewport', async ({ page }) => {
     ).toBe(true);
   }
 });
+
+// Public tokens suppress Material's rectangular hover/ripple; only owned art glows.
+test('hover feedback follows every silhouette without painting rectangular corners', async ({
+  page,
+}) => {
+  await page.goto(url('shapes'));
+  for (const button of await page.locator('button[ngxButton]').all()) {
+    await button.hover();
+    await expect
+      .poll(() =>
+        button.locator('.ngx-button-decoration').evaluate((el) => getComputedStyle(el).filter),
+      )
+      .toContain('drop-shadow');
+    const style = await button.evaluate((el) => {
+      const css = getComputedStyle(el);
+      return {
+        shadow: css.boxShadow,
+        background: css.backgroundColor,
+        state: css.getPropertyValue('--mat-button-filled-state-layer-color').trim(),
+        ripple: css.getPropertyValue('--mat-button-filled-ripple-color').trim(),
+        clip: css.clipPath,
+      };
+    });
+    expect(style).toEqual({
+      shadow: 'none',
+      background: 'rgba(0, 0, 0, 0)',
+      state: 'transparent',
+      ripple: 'transparent',
+      clip: 'none',
+    });
+  }
+});

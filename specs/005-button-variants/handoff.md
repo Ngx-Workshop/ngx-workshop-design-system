@@ -38,3 +38,9 @@ No deployment or sibling repository changes. Upstream Sass notices/Storybook bun
 ## Next action
 
 None for this scope. Explore Components → Button → Interaction lab. API, tokens, semantics and screenshots are recorded in docs/buttons.md.
+
+## Hover geometry correction (2026-10-26)
+
+Replaced host box shadow with decoration drop shadow and made public Material state/ripple colors transparent. This prevents rectangular backgrounds and glow at cut corners. Added all-shape filled/outline hover regression coverage; native focus outline remains unclipped.
+
+Validation: `npm run verify` passed (library, demo, story types, static Storybook and packed consumer); `npx playwright test tests/button.spec.ts`: 8 passed, including the added hover regression.

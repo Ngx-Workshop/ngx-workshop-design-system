@@ -100,3 +100,5 @@ Storybook: **Components → Button → Interaction lab**, including shape/surfac
 ![Button shape comparison](images/button-shapes.png)
 
 ![Button surface and tone matrix](images/button-surfaces.png)
+
+Hover and focus glow uses `drop-shadow` on the owned decoration, so it follows each silhouette. Public Material state-layer and ripple color overrides are transparent on `NgxButton`; shaped scan/press feedback remains enabled. The native hit area and visible keyboard outline remain rectangular and unclipped.
