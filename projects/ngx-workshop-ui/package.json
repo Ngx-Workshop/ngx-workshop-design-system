@@ -1,6 +1,16 @@
 {
   "name": "@tmdjr/ngx-workshop-design-system",
-  "version": "21.0.0",
+  "version": "21.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ngx-Workshop/ngx-workshop-design-system.git",
+    "directory": "projects/ngx-workshop-ui"
+  },
+  "homepage": "https://design-system.ngx-workshop.io",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "peerDependencies": {
     "@angular/common": "21.1.0",
     "@angular/core": "21.1.0",

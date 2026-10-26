@@ -2,6 +2,9 @@
 
 Use Node 22.12+ (22.x) or Node 24.x and npm. Versions are pinned in package-lock.json.
 
+Release preparation checks: `node --test scripts/prepare-release.test.mjs`.
+Main-branch publishing, version policy and server setup: [deployment](deployment.md).
+
 ```sh
 npm ci
 npm run storybook          # http://localhost:6006

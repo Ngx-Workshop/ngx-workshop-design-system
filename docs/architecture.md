@@ -9,6 +9,14 @@
 
 Shell alignment source at creation: `mfe-shell-admin/package.json`, Angular/Material/CDK 21.1.0. This repository pins its own dependencies and builds without sibling checkouts.
 
+`.github/workflows/deploy.yml` verifies the library, demo, Storybook and packed consumer before
+publishing the library through npm OIDC and copying `dist/storybook` to the frontend server.
+`scripts/prepare-release.mjs` selects versions from public registry metadata; npm is the release
+ledger and the runner changes the library manifest without committing back to main.
+The package major matches Angular, minor stays zero and each new commit increments the published
+patch. The static catalog has an exact Nginx virtual host and a read-only Docker mount at
+`/opt/ngx-workshop-design-system`. See [deployment](deployment.md).
+
 HUD frames use component-owned pseudo elements with the public --ngx-frame-shape token. Only those decorative layers are clipped. NgxPanel has an additive primary/secondary/danger tone input. The original vector console illustration belongs to the demo, not the distributed component API.
 
 Panel shapes/backgrounds/motion are independent typed signal inputs. Native Angular host lifecycle bindings own entry and exit; decorative pseudo layers own the geometry and backdrop. See [panels](panels.md) for the public contract and ancestor-removal/focus limitations. Storybook PanelLab is a development-only consumer.

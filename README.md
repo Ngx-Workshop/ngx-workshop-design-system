@@ -63,7 +63,8 @@ Override semantic CSS variables to introduce another palette. Use `data-ngx-them
 This is a lightweight Markdown adaptation of GitHub Spec Kit, with no Spec Kit CLI dependency.
 Read [AGENTS.md](AGENTS.md), the [workflow](.specify/README.md), [constitution](.specify/memory/constitution.md) and [feature index](specs/README.md).
 See [development](docs/development.md) for checks and [architecture](docs/architecture.md) for boundaries.
-No deployment or remote repository is configured.
+Pushes to `main` publish the Angular-aligned npm package and deploy the static Storybook catalog to
+https://design-system.ngx-workshop.io. See [deployment and trusted publishing setup](docs/deployment.md).
 
 Panel variants: [shape, surface and transition guide](docs/panels.md). Use the Storybook panel transition lab to replay boot, glitch and hologram intro/outro sequences.
 

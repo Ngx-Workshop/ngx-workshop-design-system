@@ -13,3 +13,5 @@
 - [006 — Synthwave code presentation](006-synthwave-code/spec.md) — Complete
 
 - [007 — Glass overlay backdrops and overview refresh](007-glass-overlays-overview/spec.md) — Complete
+
+- [008 — Deployment and npm publishing](008-deployment-publishing/spec.md) — Implemented; integration pending
