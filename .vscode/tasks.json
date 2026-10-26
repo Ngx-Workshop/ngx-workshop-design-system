@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm: start",
+      "type": "npm",
+      "script": "start",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Building",
+          "endsPattern": "Local:.*localhost:4200"
+        }
+      }
+    },
+    {
+      "label": "npm: storybook",
+      "type": "npm",
+      "script": "storybook",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting Storybook",
+          "endsPattern": "Storybook ready"
+        }
+      }
+    },
+    {
+      "label": "npm: test",
+      "type": "npm",
+      "script": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "npm: verify",
+      "type": "npm",
+      "script": "verify",
+      "problemMatcher": []
+    }
+  ]
+}

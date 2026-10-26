@@ -1,0 +1,489 @@
+@use '@angular/material' as mat;
+:host {
+  display: block;
+  min-width: 0;
+  height: 100%;
+  --panel-shape: var(--ngx-frame-shape);
+  --panel-enter-duration: var(--ngx-panel-enter-duration, 480ms);
+  --panel-leave-duration: var(--ngx-panel-leave-duration, 320ms);
+  transform-origin: center;
+}
+:host([data-shape='chamfered']) {
+  --panel-shape: polygon(
+    var(--ngx-cut) 0,
+    calc(100% - var(--ngx-cut)) 0,
+    100% var(--ngx-cut),
+    100% calc(100% - var(--ngx-cut)),
+    calc(100% - var(--ngx-cut)) 100%,
+    var(--ngx-cut) 100%,
+    0 calc(100% - var(--ngx-cut)),
+    0 var(--ngx-cut)
+  );
+}
+:host([data-shape='beveled']) {
+  --panel-shape: polygon(
+    0 0,
+    calc(100% - 36px) 0,
+    100% 36px,
+    100% 100%,
+    22px 100%,
+    0 calc(100% - 22px)
+  );
+}
+:host([data-shape='stepped']) {
+  --panel-shape: polygon(
+    0 14px,
+    28px 14px,
+    40px 0,
+    65% 0,
+    calc(65% + 12px) 12px,
+    100% 12px,
+    100% calc(100% - 28px),
+    calc(100% - 14px) calc(100% - 28px),
+    calc(100% - 14px) 100%,
+    40px 100%,
+    28px calc(100% - 12px),
+    0 calc(100% - 12px)
+  );
+}
+:host([data-shape='banner']) {
+  --panel-shape: polygon(
+    0 12px,
+    18% 12px,
+    calc(18% + 12px) 0,
+    calc(82% - 12px) 0,
+    82% 12px,
+    100% 12px,
+    100% calc(100% - 18px),
+    80% calc(100% - 18px),
+    calc(80% - 14px) 100%,
+    calc(20% + 14px) 100%,
+    20% calc(100% - 18px),
+    0 calc(100% - 18px)
+  );
+}
+.frame {
+  --frame-accent: var(--ngx-color-primary);
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  padding: 18px 5px;
+}
+.frame[data-tone='secondary'] {
+  --frame-accent: var(--ngx-color-secondary);
+}
+.frame[data-tone='danger'] {
+  --frame-accent: var(--ngx-color-danger);
+}
+.frame::before,
+.frame::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  clip-path: var(--panel-shape);
+}
+// The outline and surface are independent so glass can reveal the actual scene.
+.frame::before {
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    var(--frame-accent),
+    var(--ngx-color-border) 24%,
+    var(--ngx-color-border) 76%,
+    var(--frame-accent)
+  );
+}
+.frame::after {
+  inset: 1px;
+  background:
+    linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--frame-accent) 4%, transparent),
+      transparent 50%
+    ),
+    linear-gradient(var(--ngx-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ngx-grid-color) 1px, transparent 1px), var(--ngx-color-surface);
+  background-size:
+    auto,
+    24px 24px,
+    24px 24px,
+    auto;
+}
+:host([data-background='solid']) .frame::after {
+  background: var(--ngx-color-surface);
+}
+// Glass needs an actual cut-out frame, not a translucent fill over an opaque plate.
+:host([data-background='glass']) .frame::after {
+  background: var(--ngx-color-surface);
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  :host([data-background='glass']) .frame::after {
+    background: color-mix(
+      in srgb,
+      var(--ngx-color-surface) var(--ngx-panel-glass-opacity, 65%),
+      transparent
+    );
+    backdrop-filter: blur(var(--ngx-panel-blur, 16px)) saturate(130%);
+    -webkit-backdrop-filter: blur(var(--ngx-panel-blur, 16px)) saturate(130%);
+  }
+}
+.frame-detail {
+  position: absolute;
+  top: 1px;
+  left: 44px;
+  height: 2px;
+  width: 48px;
+  background: var(--frame-accent);
+  box-shadow: var(--ngx-glow);
+  pointer-events: none;
+}
+.scan-line {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 20px;
+  height: 1px;
+  opacity: 0;
+  background: var(--frame-accent);
+  box-shadow: 0 0 12px var(--frame-accent);
+  pointer-events: none;
+}
+mat-card {
+  @include mat.card-overrides(
+    (
+      outlined-container-color: transparent,
+      outlined-outline-color: transparent,
+      outlined-container-shape: 0,
+    )
+  );
+  height: 100%;
+}
+mat-card-header {
+  margin: 8px 0 var(--ngx-space-4);
+}
+mat-card-subtitle {
+  color: var(--frame-accent);
+  font: var(--ngx-font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 10px;
+}
+mat-card-title {
+  font-family: var(--ngx-font-mono);
+  font-size: 1.15rem;
+  margin-top: 10px;
+  letter-spacing: -0.03em;
+}
+mat-card-content {
+  color: var(--ngx-color-muted);
+  line-height: 1.65;
+  font-size: 14px;
+}
+mat-card-actions {
+  padding: var(--ngx-space-4);
+  gap: var(--ngx-space-2);
+}
+:host(.ngx-panel-enter-boot) {
+  animation: panel-boot-in var(--panel-enter-duration) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+:host(.ngx-panel-leave-boot) {
+  animation: panel-boot-out var(--panel-leave-duration) ease-in both;
+}
+:host(.ngx-panel-enter-boot) .scan-line {
+  animation: panel-scan var(--panel-enter-duration) ease-out;
+}
+:host(.ngx-panel-enter-glitch) {
+  animation: panel-glitch-in var(--panel-enter-duration) steps(1, end) both;
+}
+:host(.ngx-panel-leave-glitch) {
+  animation: panel-glitch-out var(--panel-leave-duration) steps(1, end) both;
+}
+:host(.ngx-panel-enter-hologram) {
+  animation: panel-hologram-in var(--panel-enter-duration) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+:host(.ngx-panel-leave-hologram) {
+  animation: panel-hologram-out var(--panel-leave-duration) ease-in both;
+}
+:host([class*='ngx-panel-leave-']) {
+  pointer-events: none;
+}
+@keyframes panel-boot-in {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.03) scaleX(0.94);
+  }
+  35% {
+    opacity: 0.7;
+    transform: scaleY(0.03) scaleX(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes panel-boot-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  65% {
+    opacity: 0.7;
+    transform: scaleY(0.03);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(0.03) scaleX(0.85);
+  }
+}
+@keyframes panel-scan {
+  0%,
+  25% {
+    opacity: 0;
+    top: 20px;
+  }
+  35% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.3;
+    top: calc(100% - 20px);
+  }
+  100% {
+    opacity: 0;
+    top: calc(100% - 20px);
+  }
+}
+@keyframes panel-glitch-in {
+  0% {
+    opacity: 0;
+    transform: translate(-8px, 2px) skewX(-1deg);
+  }
+  24% {
+    opacity: 0.6;
+    transform: translate(5px, -1px);
+  }
+  45% {
+    opacity: 0.85;
+    transform: translate(-3px, 0);
+  }
+  68% {
+    opacity: 0.95;
+    transform: translate(2px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes panel-glitch-out {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  25% {
+    opacity: 0.9;
+    transform: translate(-3px, 0);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(5px, -1px);
+  }
+  75% {
+    opacity: 0.3;
+    transform: translate(-8px, 2px) skewX(1deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(10px, 0);
+  }
+}
+@keyframes panel-hologram-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: perspective(800px) rotateX(8deg) translateY(14px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+@keyframes panel-hologram-out {
+  from {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    filter: blur(6px);
+    transform: perspective(800px) rotateX(-8deg) translateY(-12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    --panel-enter-duration: 1ms;
+    --panel-leave-duration: 1ms;
+  }
+  .scan-line {
+    display: none;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :host([data-background='glass']) .frame::after {
+    background: var(--ngx-color-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+// Transparent even-odd rings keep the backdrop visible through the glass surface.
+:host([data-shape='notched']) {
+  --panel-outline: polygon(
+    evenodd,
+    calc(0% + (0px)) calc(0% + (var(--ngx-cut))),
+    calc(0% + (var(--ngx-cut))) calc(0% + (0px)),
+    calc(100% + (-54px)) calc(0% + (0px)),
+    calc(100% + (-44px)) calc(0% + (10px)),
+    calc(100% + (0px)) calc(0% + (10px)),
+    calc(100% + (0px)) calc(100% + (-1 * var(--ngx-cut))),
+    calc(100% + (-1 * var(--ngx-cut))) calc(100% + (0px)),
+    calc(0% + (34px)) calc(100% + (0px)),
+    calc(0% + (24px)) calc(100% + (-8px)),
+    calc(0% + (0px)) calc(100% + (-8px)),
+    calc(0% + (0px)) calc(0% + (var(--ngx-cut))),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 1 + (-8px)),
+    calc(1px + (100% - 2px) * 0 + (24px)) calc(1px + (100% - 2px) * 1 + (-8px)),
+    calc(1px + (100% - 2px) * 0 + (34px)) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 1 + (-1 * var(--ngx-cut))) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 1 + (-1 * var(--ngx-cut))),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 0 + (10px)),
+    calc(1px + (100% - 2px) * 1 + (-44px)) calc(1px + (100% - 2px) * 0 + (10px)),
+    calc(1px + (100% - 2px) * 1 + (-54px)) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0 + (var(--ngx-cut))) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 0 + (var(--ngx-cut))),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 1 + (-8px)),
+    calc(0% + (0px)) calc(0% + (var(--ngx-cut)))
+  );
+}
+:host([data-shape='chamfered']) {
+  --panel-outline: polygon(
+    evenodd,
+    calc(0% + (var(--ngx-cut))) calc(0% + (0px)),
+    calc(100% + (-1 * var(--ngx-cut))) calc(0% + (0px)),
+    calc(100% + (0px)) calc(0% + (var(--ngx-cut))),
+    calc(100% + (0px)) calc(100% + (-1 * var(--ngx-cut))),
+    calc(100% + (-1 * var(--ngx-cut))) calc(100% + (0px)),
+    calc(0% + (var(--ngx-cut))) calc(100% + (0px)),
+    calc(0% + (0px)) calc(100% + (-1 * var(--ngx-cut))),
+    calc(0% + (0px)) calc(0% + (var(--ngx-cut))),
+    calc(0% + (var(--ngx-cut))) calc(0% + (0px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 0 + (var(--ngx-cut))),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 1 + (-1 * var(--ngx-cut))),
+    calc(1px + (100% - 2px) * 0 + (var(--ngx-cut))) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 1 + (-1 * var(--ngx-cut))) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 1 + (-1 * var(--ngx-cut))),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 0 + (var(--ngx-cut))),
+    calc(1px + (100% - 2px) * 1 + (-1 * var(--ngx-cut))) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0 + (var(--ngx-cut))) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 0 + (var(--ngx-cut))),
+    calc(0% + (var(--ngx-cut))) calc(0% + (0px))
+  );
+}
+:host([data-shape='beveled']) {
+  --panel-outline: polygon(
+    evenodd,
+    calc(0% + (0px)) calc(0% + (0px)),
+    calc(100% + (-36px)) calc(0% + (0px)),
+    calc(100% + (0px)) calc(0% + (36px)),
+    calc(100% + (0px)) calc(100% + (0px)),
+    calc(0% + (22px)) calc(100% + (0px)),
+    calc(0% + (0px)) calc(100% + (-22px)),
+    calc(0% + (0px)) calc(0% + (0px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 1 + (-22px)),
+    calc(1px + (100% - 2px) * 0 + (22px)) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 0 + (36px)),
+    calc(1px + (100% - 2px) * 1 + (-36px)) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 1 + (-22px)),
+    calc(0% + (0px)) calc(0% + (0px))
+  );
+}
+:host([data-shape='stepped']) {
+  --panel-outline: polygon(
+    evenodd,
+    calc(0% + (0px)) calc(0% + (14px)),
+    calc(0% + (28px)) calc(0% + (14px)),
+    calc(0% + (40px)) calc(0% + (0px)),
+    calc(65% + (0px)) calc(0% + (0px)),
+    calc(65% + (12px)) calc(0% + (12px)),
+    calc(100% + (0px)) calc(0% + (12px)),
+    calc(100% + (0px)) calc(100% + (-28px)),
+    calc(100% + (-14px)) calc(100% + (-28px)),
+    calc(100% + (-14px)) calc(100% + (0px)),
+    calc(0% + (40px)) calc(100% + (0px)),
+    calc(0% + (28px)) calc(100% + (-12px)),
+    calc(0% + (0px)) calc(100% + (-12px)),
+    calc(0% + (0px)) calc(0% + (14px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 1 + (-12px)),
+    calc(1px + (100% - 2px) * 0 + (28px)) calc(1px + (100% - 2px) * 1 + (-12px)),
+    calc(1px + (100% - 2px) * 0 + (40px)) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 1 + (-14px)) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 1 + (-14px)) calc(1px + (100% - 2px) * 1 + (-28px)),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 1 + (-28px)),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 0 + (12px)),
+    calc(1px + (100% - 2px) * 0.65 + (12px)) calc(1px + (100% - 2px) * 0 + (12px)),
+    calc(1px + (100% - 2px) * 0.65 + (0px)) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0 + (40px)) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0 + (28px)) calc(1px + (100% - 2px) * 0 + (14px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 0 + (14px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 1 + (-12px)),
+    calc(0% + (0px)) calc(0% + (14px))
+  );
+}
+:host([data-shape='banner']) {
+  --panel-outline: polygon(
+    evenodd,
+    calc(0% + (0px)) calc(0% + (12px)),
+    calc(18% + (0px)) calc(0% + (12px)),
+    calc(18% + (12px)) calc(0% + (0px)),
+    calc(82% + (-12px)) calc(0% + (0px)),
+    calc(82% + (0px)) calc(0% + (12px)),
+    calc(100% + (0px)) calc(0% + (12px)),
+    calc(100% + (0px)) calc(100% + (-18px)),
+    calc(80% + (0px)) calc(100% + (-18px)),
+    calc(80% + (-14px)) calc(100% + (0px)),
+    calc(20% + (14px)) calc(100% + (0px)),
+    calc(20% + (0px)) calc(100% + (-18px)),
+    calc(0% + (0px)) calc(100% + (-18px)),
+    calc(0% + (0px)) calc(0% + (12px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 1 + (-18px)),
+    calc(1px + (100% - 2px) * 0.2 + (0px)) calc(1px + (100% - 2px) * 1 + (-18px)),
+    calc(1px + (100% - 2px) * 0.2 + (14px)) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 0.8 + (-14px)) calc(1px + (100% - 2px) * 1 + (0px)),
+    calc(1px + (100% - 2px) * 0.8 + (0px)) calc(1px + (100% - 2px) * 1 + (-18px)),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 1 + (-18px)),
+    calc(1px + (100% - 2px) * 1 + (0px)) calc(1px + (100% - 2px) * 0 + (12px)),
+    calc(1px + (100% - 2px) * 0.82 + (0px)) calc(1px + (100% - 2px) * 0 + (12px)),
+    calc(1px + (100% - 2px) * 0.82 + (-12px)) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0.18 + (12px)) calc(1px + (100% - 2px) * 0 + (0px)),
+    calc(1px + (100% - 2px) * 0.18 + (0px)) calc(1px + (100% - 2px) * 0 + (12px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 0 + (12px)),
+    calc(1px + (100% - 2px) * 0 + (0px)) calc(1px + (100% - 2px) * 1 + (-18px)),
+    calc(0% + (0px)) calc(0% + (12px))
+  );
+}
+
+:host([data-background='glass']) .frame::before {
+  background: linear-gradient(
+    125deg,
+    var(--frame-accent),
+    var(--ngx-color-border) 24%,
+    var(--ngx-color-border) 76%,
+    var(--frame-accent)
+  );
+  clip-path: var(--panel-outline);
+}

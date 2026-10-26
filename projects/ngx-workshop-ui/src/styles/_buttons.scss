@@ -1,0 +1,313 @@
+@use '@angular/material' as mat;
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:string';
+
+// Each vertex: (x percent, x offset, y percent, y offset). One source generates fill and hollow stroke.
+$shapes: (
+  notched: (
+    (0, 0px, 0, 8px),
+    (0, 10px, 0, 8px),
+    (0, 18px, 0, 0px),
+    (100, -26px, 0, 0px),
+    (100, -18px, 0, 8px),
+    (100, 0px, 0, 8px),
+    (100, 0px, 100, -8px),
+    (100, -10px, 100, -8px),
+    (100, -18px, 100, 0px),
+    (0, 26px, 100, 0px),
+    (0, 18px, 100, -8px),
+    (0, 0px, 100, -8px),
+  ),
+  chamfered: (
+    (0, var(--ngx-button-cut), 0, 0px),
+    (100, calc(-1 * var(--ngx-button-cut)), 0, 0px),
+    (100, 0px, 0, var(--ngx-button-cut)),
+    (100, 0px, 100, calc(-1 * var(--ngx-button-cut))),
+    (100, calc(-1 * var(--ngx-button-cut)), 100, 0px),
+    (0, var(--ngx-button-cut), 100, 0px),
+    (0, 0px, 100, calc(-1 * var(--ngx-button-cut))),
+    (0, 0px, 0, var(--ngx-button-cut)),
+  ),
+  beveled: (
+    (0, 0px, 0, 0px),
+    (100, -16px, 0, 0px),
+    (100, 0px, 0, 16px),
+    (100, 0px, 100, 0px),
+    (0, 16px, 100, 0px),
+    (0, 0px, 100, -16px),
+  ),
+  stepped: (
+    (0, 0px, 0, 8px),
+    (0, 14px, 0, 8px),
+    (0, 22px, 0, 0px),
+    (100, -24px, 0, 0px),
+    (100, -16px, 0, 8px),
+    (100, 0px, 0, 8px),
+    (100, 0px, 100, -14px),
+    (100, -8px, 100, -14px),
+    (100, -8px, 100, 0px),
+    (0, 22px, 100, 0px),
+    (0, 14px, 100, -8px),
+    (0, 0px, 100, -8px),
+  ),
+  banner: (
+    (0, 0px, 0, 8px),
+    (20, 0px, 0, 8px),
+    (20, 8px, 0, 0px),
+    (80, -8px, 0, 0px),
+    (80, 0px, 0, 8px),
+    (100, 0px, 0, 8px),
+    (100, 0px, 100, -8px),
+    (80, 0px, 100, -8px),
+    (80, -8px, 100, 0px),
+    (20, 8px, 100, 0px),
+    (20, 0px, 100, -8px),
+    (0, 0px, 100, -8px),
+  ),
+  chevron: (
+    (0, 0px, 0, 0px),
+    (100, -18px, 0, 0px),
+    (100, 0px, 50, 0px),
+    (100, -18px, 100, 0px),
+    (0, 0px, 100, 0px),
+    (0, 10px, 50, 0px),
+  ),
+);
+@function _axis($percent, $offset, $inset: false) {
+  @if $inset {
+    @return string.unquote('calc(1px + (100% - 2px) * #{math.div($percent,100)} + (#{$offset}))');
+  }
+  @return string.unquote('calc(#{$percent}% + (#{$offset}))');
+}
+@function _point($vertex, $inset: false) {
+  @return _axis(list.nth($vertex, 1), list.nth($vertex, 2), $inset)
+    _axis(list.nth($vertex, 3), list.nth($vertex, 4), $inset);
+}
+@function _outline($vertices) {
+  $points: ();
+  @each $vertex in $vertices {
+    $points: list.append($points, _point($vertex), comma);
+  }
+  $points: list.append($points, _point(list.nth($vertices, 1)), comma);
+  @for $i from list.length($vertices) through 1 {
+    $points: list.append($points, _point(list.nth($vertices, $i), true), comma);
+  }
+  $points: list.append($points, _point(list.nth($vertices, list.length($vertices)), true), comma);
+  $points: list.append($points, _point(list.nth($vertices, 1)), comma);
+  @return $points;
+}
+@mixin button-styles() {
+  html .ngx-button {
+    --button-accent: var(--ngx-color-primary);
+    --button-on-accent: var(--ngx-color-on-primary);
+    --button-ink: var(--button-on-accent);
+    @include mat.button-overrides(
+      (
+        filled-container-color: transparent,
+        filled-container-shape: 0,
+        filled-disabled-container-color: transparent,
+        filled-disabled-label-text-color: var(--ngx-color-muted),
+        outlined-disabled-outline-color: transparent,
+        filled-label-text-color: var(--button-ink),
+        outlined-label-text-color: var(--button-ink),
+        outlined-outline-color: transparent,
+        text-label-text-color: var(--button-ink),
+      )
+    );
+    position: relative;
+    isolation: isolate;
+    background: transparent;
+    color: var(--button-ink);
+    border-color: transparent;
+    min-height: 52px;
+    padding-inline: 30px;
+    white-space: nowrap;
+    transition:
+      transform var(--ngx-button-hover-duration, 180ms) ease,
+      box-shadow var(--ngx-button-hover-duration, 180ms) ease;
+  }
+  html .ngx-button[data-ngx-tone='secondary'] {
+    --button-accent: var(--ngx-color-secondary);
+    --button-on-accent: var(--ngx-color-on-secondary);
+  }
+  html .ngx-button[data-ngx-tone='danger'] {
+    --button-accent: var(--ngx-color-danger);
+    --button-on-accent: var(--ngx-color-on-danger);
+  }
+  @each $name, $vertices in $shapes {
+    $points: ();
+    @each $vertex in $vertices {
+      $points: list.append($points, _point($vertex), comma);
+    }
+    html .ngx-button[data-ngx-shape='#{$name}'] {
+      --button-shape: polygon(#{$points});
+      --button-outline: polygon(evenodd, #{_outline($vertices)});
+    }
+  }
+  .ngx-button-decoration {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .ngx-button[data-ngx-surface='filled'] .ngx-button-decoration {
+    background: var(--button-accent);
+    clip-path: var(--button-shape);
+  }
+  .ngx-button-decoration::before,
+  .ngx-button-decoration::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .ngx-button-decoration::before {
+    clip-path: var(--button-shape);
+    background: var(--button-accent);
+  }
+  .ngx-button-decoration::after {
+    inset: 1px;
+    background: transparent;
+  }
+  html .ngx-button[data-ngx-surface='outline'],
+  html .ngx-button[data-ngx-surface='glass'] {
+    --button-ink: var(--button-accent);
+  }
+  .ngx-button[data-ngx-surface='outline'] .ngx-button-decoration::before,
+  .ngx-button[data-ngx-surface='glass'] .ngx-button-decoration::before {
+    clip-path: var(--button-outline);
+  }
+  .ngx-button[data-ngx-surface='outline'] .ngx-button-decoration::after {
+    background: var(--ngx-color-canvas);
+    clip-path: var(--button-shape);
+  }
+  .ngx-button[data-ngx-surface='glass'] .ngx-button-decoration::after {
+    background: var(--ngx-color-surface);
+    clip-path: var(--button-shape);
+  }
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .ngx-button[data-ngx-surface='glass'] .ngx-button-decoration::after {
+      background: color-mix(in srgb, var(--ngx-color-surface) 70%, transparent);
+      backdrop-filter: blur(var(--ngx-button-blur, 12px));
+      -webkit-backdrop-filter: blur(var(--ngx-button-blur, 12px));
+    }
+  }
+  .ngx-button-scan-mask {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    clip-path: var(--button-shape);
+  }
+  .ngx-button-scan {
+    position: absolute;
+    inset: -50% auto -50% -60%;
+    width: 35%;
+    z-index: 1;
+    transform: skewX(-20deg);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--button-ink) 22%, transparent),
+      transparent
+    );
+    opacity: 0;
+    pointer-events: none;
+  }
+  @media (hover: hover) {
+    html .ngx-button:not(:disabled):not([aria-disabled='true']):hover {
+      box-shadow: 0 0 22px color-mix(in srgb, var(--button-accent) 22%, transparent);
+    }
+    .ngx-button[data-ngx-motion='scan']:not(:disabled):not([aria-disabled='true']):hover
+      .ngx-button-scan {
+      animation: ngx-button-scan var(--ngx-button-scan-duration, 480ms) ease-out;
+    }
+    html .ngx-button[data-ngx-motion='glitch']:not(:disabled):not([aria-disabled='true']):hover {
+      animation: ngx-button-glitch 240ms steps(1, end);
+    }
+    html .ngx-button[data-ngx-motion='pulse']:not(:disabled):not([aria-disabled='true']):hover {
+      transform: translateY(-2px);
+    }
+  }
+  html .ngx-button:focus-visible {
+    outline: 2px solid var(--button-accent);
+    outline-offset: 5px;
+    box-shadow: 0 0 18px color-mix(in srgb, var(--button-accent) 22%, transparent);
+  }
+  .ngx-button[data-ngx-motion='scan']:focus-visible .ngx-button-scan {
+    animation: ngx-button-scan var(--ngx-button-scan-duration, 480ms) ease-out;
+  }
+  html .ngx-button[data-ngx-motion='glitch']:focus-visible {
+    animation: ngx-button-glitch 240ms steps(1, end);
+  }
+  html .ngx-button:not(:disabled):not([aria-disabled='true']):active {
+    transform: translateY(1px) scale(0.98);
+  }
+  html .ngx-button:disabled,
+  html .ngx-button[aria-disabled='true'] {
+    --button-accent: var(--ngx-color-border);
+    --button-on-accent: var(--ngx-color-muted);
+    --button-ink: var(--ngx-color-muted);
+    box-shadow: none;
+    cursor: default;
+  }
+  html .ngx-button[data-ngx-motion='none'] {
+    transition: none;
+  }
+  html .ngx-button[data-ngx-motion='none']:active {
+    transform: none;
+  }
+  @keyframes ngx-button-scan {
+    0% {
+      left: -60%;
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    85% {
+      opacity: 1;
+    }
+    100% {
+      left: 130%;
+      opacity: 0;
+    }
+  }
+  @keyframes ngx-button-glitch {
+    0%,
+    100% {
+      transform: none;
+    }
+    20% {
+      transform: translateX(-2px) skewX(-1deg);
+    }
+    45% {
+      transform: translateX(2px);
+    }
+    70% {
+      transform: translateX(-1px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html .ngx-button {
+      transition: none !important;
+      animation: none !important;
+    }
+    html .ngx-button:hover,
+    html .ngx-button:active {
+      transform: none !important;
+    }
+    .ngx-button-scan {
+      display: none;
+      animation: none !important;
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .ngx-button[data-ngx-surface='glass'] .ngx-button-decoration::after {
+      background: var(--ngx-color-surface);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+}

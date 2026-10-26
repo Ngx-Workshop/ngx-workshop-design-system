@@ -1,0 +1,303 @@
+@use '@angular/material' as mat;
+@use './buttons' as buttons;
+@use './code' as code;
+@use './overlays' as overlays;
+@forward './overlays' show overlay-styles;
+@forward './code' show code-styles;
+@forward './buttons' show button-styles;
+
+// Public semantic contract. Consumers may replace these tokens without component edits.
+@mixin tokens() {
+  --ngx-color-canvas: #060714;
+  --ngx-color-surface: #0d1227;
+  --ngx-color-text: #e8f3ff;
+  --ngx-color-muted: #a2b4cc;
+  --ngx-color-border: #34496a;
+  --ngx-color-primary: #27f5ef;
+  --ngx-color-on-primary: #002b30;
+  --ngx-color-secondary: #ff52c6;
+  --ngx-color-on-secondary: #310020;
+  --ngx-color-success: #74f5b5;
+  --ngx-color-warning: #ffd078;
+  --ngx-color-error: #ff8c9e;
+  --ngx-font-body: 'Segoe UI', system-ui, sans-serif;
+  --ngx-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --ngx-font-label: 500 0.75rem/1.5 var(--ngx-font-mono);
+  --ngx-space-2: 0.5rem;
+  --ngx-space-4: 1rem;
+  --ngx-space-6: 1.5rem;
+  --ngx-radius: 2px;
+  --ngx-color-danger: #ff3e68;
+  --ngx-color-on-danger: #21000b;
+  --ngx-color-violet: #aa8cff;
+  --ngx-grid-color: #27f5ef09;
+  --ngx-scanline-opacity: 0.08;
+  --ngx-cut: 16px;
+  --ngx-overlay-backdrop-tint: color-mix(in srgb, var(--ngx-color-canvas) 55%, transparent);
+  --ngx-overlay-backdrop-blur: 12px;
+  --ngx-overlay-backdrop-saturation: 120%;
+  --ngx-overlay-backdrop-fallback: var(--ngx-color-canvas);
+  --ngx-button-cut: 10px;
+  --ngx-button-hover-duration: 180ms;
+  --ngx-button-scan-duration: 480ms;
+  --ngx-button-press-duration: 300ms;
+  --ngx-button-blur: 12px;
+  --ngx-panel-enter-duration: 480ms;
+  --ngx-panel-leave-duration: 320ms;
+  --ngx-panel-blur: 16px;
+  --ngx-panel-glass-opacity: 65%;
+  --ngx-frame-shape: polygon(
+    0 var(--ngx-cut),
+    var(--ngx-cut) 0,
+    calc(100% - 54px) 0,
+    calc(100% - 44px) 10px,
+    100% 10px,
+    100% calc(100% - var(--ngx-cut)),
+    calc(100% - var(--ngx-cut)) 100%,
+    34px 100%,
+    24px calc(100% - 8px),
+    0 calc(100% - 8px)
+  );
+  --ngx-glow: 0 0 28px #27f5ef1a;
+}
+
+@mixin material-adapter() {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
+        primary: mat.$cyan-palette,
+        tertiary: mat.$magenta-palette,
+      ),
+      typography: (
+        plain-family: 'Segoe UI, system-ui, sans-serif',
+        brand-family: 'Consolas, Liberation Mono, monospace',
+      ),
+      density: 0,
+    )
+  );
+  @include mat.theme-overrides(
+    (
+      primary: var(--ngx-color-primary),
+      on-primary: var(--ngx-color-on-primary),
+      primary-container: var(--ngx-color-surface),
+      on-primary-container: var(--ngx-color-primary),
+      secondary: var(--ngx-color-secondary),
+      on-secondary: var(--ngx-color-on-secondary),
+      secondary-container: var(--ngx-color-surface),
+      on-secondary-container: var(--ngx-color-primary),
+      tertiary: var(--ngx-color-secondary),
+      on-tertiary: var(--ngx-color-on-secondary),
+      tertiary-container: var(--ngx-color-surface),
+      on-tertiary-container: var(--ngx-color-secondary),
+      inverse-surface: var(--ngx-color-surface),
+      inverse-on-surface: var(--ngx-color-text),
+      inverse-primary: var(--ngx-color-primary),
+      surface: var(--ngx-color-surface),
+      surface-variant: var(--ngx-color-surface),
+      surface-container: var(--ngx-color-surface),
+      surface-container-low: var(--ngx-color-surface),
+      surface-container-lowest: var(--ngx-color-canvas),
+      surface-container-high: var(--ngx-color-surface),
+      surface-container-highest: var(--ngx-color-surface),
+      on-surface: var(--ngx-color-text),
+      on-surface-variant: var(--ngx-color-muted),
+      background: var(--ngx-color-canvas),
+      on-background: var(--ngx-color-text),
+      outline: var(--ngx-color-border),
+      outline-variant: var(--ngx-color-border),
+      error: var(--ngx-color-error),
+    )
+  );
+  @include mat.button-overrides(
+    (
+      filled-container-shape: var(--ngx-radius),
+      outlined-container-shape: var(--ngx-radius),
+      text-container-shape: var(--ngx-radius),
+      filled-label-text-font: var(--ngx-font-mono),
+      outlined-label-text-font: var(--ngx-font-mono),
+      text-label-text-font: var(--ngx-font-mono),
+      filled-label-text-tracking: 0.04em,
+      outlined-label-text-tracking: 0.04em,
+    )
+  );
+  @include mat.card-overrides(
+    (
+      outlined-container-shape: var(--ngx-radius),
+      outlined-container-color: var(--ngx-color-surface),
+      outlined-outline-color: var(--ngx-color-border),
+    )
+  );
+  @include mat.menu-overrides(
+    (
+      container-shape: var(--ngx-radius),
+    )
+  );
+  @include mat.autocomplete-overrides(
+    (
+      container-shape: var(--ngx-radius),
+    )
+  );
+  @include mat.bottom-sheet-overrides(
+    (
+      container-shape: var(--ngx-radius),
+    )
+  );
+  @include mat.snack-bar-overrides(
+    (
+      container-shape: var(--ngx-radius),
+      container-color: var(--ngx-color-surface),
+      supporting-text-color: var(--ngx-color-text),
+      button-color: var(--ngx-color-primary),
+    )
+  );
+  @include mat.tooltip-overrides(
+    (
+      container-shape: var(--ngx-radius),
+      container-color: var(--ngx-color-primary),
+      supporting-text-color: var(--ngx-color-on-primary),
+    )
+  );
+  @include mat.dialog-overrides(
+    (
+      container-shape: 2px,
+      container-color: var(--ngx-color-surface),
+    )
+  );
+  @include mat.progress-bar-overrides(
+    (
+      track-height: 5px,
+      active-indicator-height: 5px,
+      track-shape: 0,
+    )
+  );
+  @include mat.form-field-overrides(
+    (
+      outlined-container-shape: var(--ngx-radius),
+    )
+  );
+  @include mat.chips-overrides(
+    (
+      outline-color: var(--ngx-color-border),
+      label-text-color: var(--ngx-color-text),
+    )
+  );
+  [data-tone='success'] {
+    @include mat.chips-overrides(
+      (
+        label-text-color: var(--ngx-color-success),
+      )
+    );
+  }
+  [data-tone='warning'] {
+    @include mat.chips-overrides(
+      (
+        label-text-color: var(--ngx-color-warning),
+      )
+    );
+  }
+  [data-tone='error'] {
+    @include mat.chips-overrides(
+      (
+        label-text-color: var(--ngx-color-error),
+      )
+    );
+  }
+  [data-tone='info'] {
+    @include mat.chips-overrides(
+      (
+        label-text-color: var(--ngx-color-primary),
+      )
+    );
+  }
+}
+
+// Include once, at the document root; CDK overlays inherit the same variables.
+@mixin theme() {
+  @include buttons.button-styles();
+  @include code.code-styles();
+  @include overlays.overlay-styles();
+  html {
+    color-scheme: dark;
+    @include tokens();
+    @include material-adapter();
+  }
+  html[data-ngx-theme='neutral'] {
+    --ngx-color-canvas: #121416;
+    --ngx-color-surface: #1c1f22;
+    --ngx-color-text: #f1f3f5;
+    --ngx-color-muted: #bac1c8;
+    --ngx-color-border: #48515a;
+    --ngx-color-primary: #b6c8e0;
+    --ngx-color-on-primary: #152539;
+    --ngx-color-secondary: #c2c5cf;
+    --ngx-color-on-secondary: #252731;
+    --ngx-glow: none;
+    --ngx-grid-color: transparent;
+    --ngx-scanline-opacity: 0;
+    --ngx-color-danger: #ff9cae;
+    --ngx-color-on-danger: #320010;
+    --ngx-color-violet: #c2c5cf;
+  }
+  body {
+    margin: 0;
+    background: var(--ngx-color-canvas);
+    color: var(--ngx-color-text);
+    font-family: var(--ngx-font-body);
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ngx-color-primary);
+    outline-offset: 4px;
+  }
+  html .ngx-action {
+    @include mat.button-overrides(
+      (
+        filled-container-color: transparent,
+        filled-label-text-color: var(--ngx-color-on-primary),
+      )
+    );
+    background:
+      linear-gradient(135deg, transparent 8px, var(--ngx-color-primary) 8px) top / 100% 51%
+        no-repeat,
+      linear-gradient(315deg, transparent 8px, var(--ngx-color-primary) 8px) bottom / 100% 51%
+        no-repeat;
+  }
+  html .ngx-action--secondary {
+    @include mat.button-overrides(
+      (
+        filled-label-text-color: var(--ngx-color-on-secondary),
+      )
+    );
+    background:
+      linear-gradient(135deg, transparent 8px, var(--ngx-color-secondary) 8px) top / 100% 51%
+        no-repeat,
+      linear-gradient(315deg, transparent 8px, var(--ngx-color-secondary) 8px) bottom / 100% 51%
+        no-repeat;
+  }
+  html .ngx-action:focus-visible {
+    outline: 2px solid var(--ngx-color-primary);
+    outline-offset: 4px;
+  }
+  html .ngx-action:disabled {
+    background: var(--ngx-color-border);
+    opacity: 0.5;
+  }
+  ::selection {
+    background: var(--ngx-color-primary);
+    color: var(--ngx-color-on-primary);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

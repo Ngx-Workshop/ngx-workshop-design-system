@@ -1,0 +1,90 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "cli": {
+    "analytics": false
+  },
+  "projects": {
+    "ngx-workshop-ui": {
+      "projectType": "library",
+      "root": "projects/ngx-workshop-ui",
+      "sourceRoot": "projects/ngx-workshop-ui/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/ngx-workshop-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-workshop-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-workshop-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "storybook": {
+      "projectType": "application",
+      "root": "projects/storybook",
+      "sourceRoot": "projects/storybook/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/showcase",
+            "browser": "projects/storybook/src/main.ts",
+            "index": "projects/storybook/src/index.html",
+            "tsConfig": "projects/storybook/tsconfig.app.json",
+            "styles": ["projects/storybook/src/styles.scss"]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "development": {
+              "buildTarget": "storybook:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/storybook/.storybook",
+            "browserTarget": "storybook:build:development",
+            "tsConfig": "projects/storybook/tsconfig.stories.json",
+            "compodoc": false,
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/storybook/.storybook",
+            "browserTarget": "storybook:build:development",
+            "tsConfig": "projects/storybook/tsconfig.stories.json",
+            "compodoc": false,
+            "outputDir": "dist/storybook"
+          }
+        }
+      }
+    }
+  }
+}

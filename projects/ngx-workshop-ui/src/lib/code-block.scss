@@ -1,0 +1,89 @@
+@use '@angular/material' as mat;
+:host {
+  display: block;
+  min-width: 0;
+}
+section {
+  border: 1px solid var(--ngx-code-border);
+  border-left: 2px solid var(--ngx-code-accent);
+  border-radius: var(--ngx-radius, 2px);
+  overflow: visible;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--ngx-code-border);
+  background: var(--ngx-code-header);
+  font: 500 11px/1.6 var(--ngx-code-font);
+  color: var(--ngx-code-accent);
+  letter-spacing: 0.06em;
+}
+header > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+small {
+  display: block;
+  font: 10px/1.6 var(--ngx-code-font);
+  color: var(--ngx-code-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+button {
+  flex-shrink: 0;
+  white-space: nowrap;
+  @include mat.button-overrides(
+    (
+      text-label-text-color: var(--ngx-code-accent),
+      text-label-text-font: var(--ngx-code-font),
+    )
+  );
+}
+pre {
+  margin: 0;
+  padding: 24px;
+  overflow: auto;
+  min-height: 3.5rem;
+  max-width: 100%;
+  font: 14px/1.6 var(--ngx-code-font);
+  white-space: pre;
+  tab-size: 2;
+}
+code {
+  font: inherit;
+}
+pre:focus-visible {
+  outline: 2px solid var(--ngx-code-accent);
+  outline-offset: 3px;
+}
+.ngx-code-wrap {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.empty {
+  margin: 0;
+  padding: 0 24px 24px;
+  color: var(--ngx-code-muted);
+  font: 12px/1.6 var(--ngx-code-font);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (max-width: 500px) {
+  header {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  pre {
+    padding: 18px;
+  }
+}

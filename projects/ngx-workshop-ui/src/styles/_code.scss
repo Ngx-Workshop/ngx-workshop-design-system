@@ -1,0 +1,157 @@
+// Synthwave '84 palette / semantic styles adapted from fsegurai/codemirror-themes 6.0.4.
+// MIT, Copyright (c) 2026 fsegurai. See SYNTHWAVE-LICENSE.txt.
+@mixin code-styles() {
+  :root {
+    --ngx-code-background: #262335;
+    --ngx-code-header: #2a2139;
+    --ngx-code-foreground: #ffffff;
+    --ngx-code-border: #34294f;
+    --ngx-code-selection: #34294f;
+    --ngx-code-accent: #ff7edb;
+    --ngx-code-muted: #848bbd;
+    --ngx-code-comment: #848bbd;
+    --ngx-code-comment-original: #495495;
+    --ngx-code-pink: #ff7edb;
+    --ngx-code-green: #72f1b8;
+    --ngx-code-yellow: #fede5d;
+    --ngx-code-orange: #f97e72;
+    --ngx-code-purple: #b893ce;
+    --ngx-code-blue: #36f9f6;
+    --ngx-code-red: #ff5360;
+    --ngx-code-red-original: #fe4450;
+    --ngx-code-glow-pink: #ff6ad5;
+    --ngx-code-glow-yellow: #f3e877;
+    --ngx-code-font: 'JetBrains Mono', Consolas, monospace;
+  }
+  .ngx-code-surface,
+  pre.ngx-code,
+  :where(pre:has(> code)) {
+    background: var(--ngx-code-background);
+    color: var(--ngx-code-foreground);
+    font-family: var(--ngx-code-font);
+    color-scheme: dark;
+  }
+  [data-code-contrast='original'] {
+    --ngx-code-comment: var(--ngx-code-comment-original);
+    --ngx-code-red: var(--ngx-code-red-original);
+  }
+  pre.ngx-code,
+  :where(pre:has(> code)) {
+    margin: 0;
+    padding: 24px;
+    overflow: auto;
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.6;
+    tab-size: 2;
+  }
+  pre.ngx-code code,
+  :where(pre:has(> code)) > code {
+    font: inherit;
+  }
+  .ngx-code-surface ::selection,
+  pre.ngx-code::selection,
+  pre.ngx-code ::selection,
+  :where(pre:has(> code)) ::selection {
+    background: var(--ngx-code-selection);
+    color: var(--ngx-code-foreground);
+  }
+  :is(.ngx-code-surface, .ngx-code, pre:has(> code)) {
+    .ngx-syntax-text {
+      color: var(--ngx-code-foreground);
+    }
+    .ngx-syntax-keyword {
+      color: var(--ngx-code-pink);
+      font-weight: bold;
+    }
+    .ngx-syntax-tag {
+      color: var(--ngx-code-pink);
+    }
+    .ngx-syntax-property,
+    .ngx-syntax-url {
+      color: var(--ngx-code-blue);
+    }
+    .ngx-syntax-type,
+    .ngx-syntax-class,
+    .ngx-syntax-type-definition {
+      color: var(--ngx-code-yellow);
+    }
+    .ngx-syntax-class {
+      font-style: italic;
+    }
+    .ngx-syntax-type-definition {
+      font-weight: bold;
+    }
+    .ngx-syntax-namespace {
+      color: var(--ngx-code-orange);
+      font-style: italic;
+    }
+    .ngx-syntax-operator,
+    .ngx-syntax-function,
+    .ngx-syntax-string {
+      color: var(--ngx-code-green);
+    }
+    .ngx-syntax-bracket {
+      color: var(--ngx-code-glow-yellow);
+    }
+    .ngx-syntax-brace,
+    .ngx-syntax-regexp {
+      color: var(--ngx-code-glow-pink);
+    }
+    .ngx-syntax-punctuation {
+      color: var(--ngx-code-muted);
+    }
+    .ngx-syntax-definition,
+    .ngx-syntax-literal {
+      color: var(--ngx-code-orange);
+    }
+    .ngx-syntax-annotation,
+    .ngx-syntax-error,
+    .ngx-syntax-invalid,
+    .ngx-syntax-deleted {
+      color: var(--ngx-code-red);
+    }
+    .ngx-syntax-annotation,
+    .ngx-syntax-modifier {
+      font-style: italic;
+    }
+    .ngx-syntax-modifier,
+    .ngx-syntax-purple,
+    .ngx-syntax-link {
+      color: var(--ngx-code-purple);
+    }
+    .ngx-syntax-comment {
+      color: var(--ngx-code-comment);
+      font-style: italic;
+    }
+    .ngx-syntax-strong {
+      color: var(--ngx-code-orange);
+      font-weight: bold;
+    }
+    .ngx-syntax-emphasis {
+      color: var(--ngx-code-pink);
+      font-style: italic;
+    }
+    .ngx-syntax-link,
+    .ngx-syntax-url {
+      text-decoration: underline;
+    }
+    .ngx-syntax-link {
+      font-weight: 500;
+      text-underline-position: under;
+    }
+    .ngx-syntax-url {
+      text-underline-offset: 2px;
+    }
+    .ngx-syntax-invalid {
+      text-decoration: underline wavy;
+    }
+    .ngx-syntax-deleted {
+      text-decoration: line-through;
+    }
+    .ngx-syntax-monospace {
+      color: var(--ngx-code-blue);
+      font-style: italic;
+    }
+  }
+}

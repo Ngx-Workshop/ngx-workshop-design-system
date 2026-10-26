@@ -1,0 +1,711 @@
+:host {
+  display: block;
+}
+.workbench {
+  max-width: 1440px;
+  padding: 0 48px;
+  margin: auto;
+  position: relative;
+  background: radial-gradient(ellipse at 88% 12%, #8737ff0c, transparent 45%);
+}
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 92px;
+  gap: 24px;
+}
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ngx-color-text);
+  font: bold 16px var(--ngx-font-mono);
+  text-decoration: none;
+  letter-spacing: -0.4px;
+}
+.wordmark-slash {
+  color: var(--ngx-color-primary);
+  margin: 0 3px;
+}
+.brand-glyph {
+  color: var(--ngx-color-primary);
+  border: 1px solid var(--ngx-color-primary);
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-content: center;
+  font-size: 22px;
+  background: linear-gradient(135deg, #27f5ef16, transparent);
+}
+.wordmark small {
+  display: block;
+  margin-top: 5px;
+  font: 8px var(--ngx-font-mono);
+  letter-spacing: 2px;
+  color: var(--ngx-color-muted);
+}
+nav {
+  display: flex;
+  gap: 28px;
+}
+nav a {
+  color: var(--ngx-color-muted);
+  text-decoration: none;
+  font: 10px var(--ngx-font-mono);
+  letter-spacing: 0.06em;
+}
+nav a:hover {
+  color: var(--ngx-color-primary);
+}
+.system-bar {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-top: 1px solid var(--ngx-color-border);
+  border-bottom: 1px solid var(--ngx-color-border);
+  font: 9px var(--ngx-font-mono);
+  letter-spacing: 0.1em;
+  color: var(--ngx-color-muted);
+}
+.system-bar > span:first-child {
+  color: var(--ngx-color-primary);
+}
+.live-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--ngx-color-primary);
+  display: inline-block;
+  margin-right: 7px;
+  box-shadow: var(--ngx-glow);
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: 32px;
+  padding: 56px 0 34px;
+}
+.eyebrow {
+  font: 10px var(--ngx-font-mono);
+  letter-spacing: 0.15em;
+  color: var(--ngx-color-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.slash-mark {
+  display: inline-block;
+  width: 24px;
+  height: 12px;
+  background: repeating-linear-gradient(
+    130deg,
+    var(--ngx-color-secondary) 0 3px,
+    transparent 3px 6px
+  );
+}
+h1 {
+  font-family: var(--ngx-font-mono);
+  text-transform: uppercase;
+  font-size: clamp(42px, 5.5vw, 76px);
+  font-weight: 800;
+  line-height: 1.03;
+  letter-spacing: -5px;
+  margin: 25px 0;
+}
+h1 > span {
+  color: var(--ngx-color-primary);
+  text-shadow: 2px 0 var(--ngx-color-secondary);
+}
+.cursor {
+  text-shadow: none;
+  color: var(--ngx-color-secondary);
+}
+.hero-copy > p {
+  max-width: 410px;
+  color: var(--ngx-color-muted);
+  line-height: 1.8;
+  font-size: 14px;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 24px 0 30px;
+}
+.hero-coordinate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: var(--ngx-color-muted);
+  font: 8px var(--ngx-font-mono);
+  letter-spacing: 0.1em;
+}
+.signal-console {
+  position: relative;
+  min-width: 0;
+  padding: 16px 16px 10px;
+  background: linear-gradient(130deg, #27f5ef06, transparent 60%);
+  border-left: 1px solid var(--ngx-color-border);
+  border-right: 1px solid var(--ngx-color-border);
+}
+.signal-console::before,
+.signal-console::after {
+  content: '';
+  position: absolute;
+  height: 9px;
+  width: 44px;
+  pointer-events: none;
+  border-top: 2px solid var(--ngx-color-primary);
+  top: 0;
+}
+.signal-console::before {
+  left: -1px;
+  border-left: 2px solid var(--ngx-color-primary);
+}
+.signal-console::after {
+  right: -1px;
+  border-right: 2px solid var(--ngx-color-primary);
+}
+.console-top,
+.console-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font: 8px var(--ngx-font-mono);
+  letter-spacing: 0.08em;
+  color: var(--ngx-color-muted);
+}
+.console-live {
+  color: var(--ngx-color-primary);
+}
+.console-bottom {
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--ngx-color-border);
+}
+.console-bottom b {
+  color: var(--ngx-color-text);
+}
+.signal-bars {
+  color: var(--ngx-color-primary);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.radar {
+  width: 100%;
+  display: block;
+  color: var(--ngx-color-primary);
+}
+.radar-guide {
+  stroke: var(--ngx-color-border);
+}
+.globe {
+  stroke: var(--ngx-color-secondary);
+  stroke-width: 0.7;
+  opacity: 0.75;
+}
+.radar-links {
+  stroke: var(--ngx-color-primary);
+  stroke-width: 0.7;
+}
+.radar-nodes {
+  fill: var(--ngx-color-primary);
+}
+.radar-labels {
+  font: 9px var(--ngx-font-mono);
+  letter-spacing: 0.06em;
+}
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, var(--ngx-color-primary) 4px);
+  opacity: var(--ngx-scanline-opacity);
+  pointer-events: none;
+}
+.telemetry {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--ngx-color-border);
+  background: var(--ngx-color-surface);
+  margin-bottom: 48px;
+}
+.telemetry > div {
+  padding: 19px 22px;
+  border-right: 1px solid var(--ngx-color-border);
+}
+.telemetry > div:last-child {
+  border: 0;
+}
+.telemetry span,
+.telemetry small {
+  display: block;
+  color: var(--ngx-color-muted);
+  font: 9px var(--ngx-font-mono);
+}
+.telemetry span {
+  letter-spacing: 0.07em;
+}
+.telemetry strong {
+  display: block;
+  margin: 12px 0 6px;
+  font: 500 15px var(--ngx-font-mono);
+}
+.telemetry b {
+  font-weight: 500;
+  color: var(--ngx-color-primary);
+}
+section {
+  scroll-margin-top: 24px;
+}
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.section-caption {
+  font: 8px var(--ngx-font-mono);
+  color: var(--ngx-color-muted);
+  letter-spacing: 0.08em;
+}
+h2 {
+  margin: 10px 0 0;
+  font: 500 25px var(--ngx-font-mono);
+  letter-spacing: -1px;
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 48px;
+}
+.swatch {
+  min-width: 0;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid var(--ngx-color-border);
+  position: relative;
+}
+.swatch::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  width: 12px;
+  height: 12px;
+  background: var(--ngx-color-canvas);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+.swatch span {
+  font: 8px var(--ngx-font-mono);
+  letter-spacing: 0.08em;
+}
+.swatch strong {
+  font: 600 15px var(--ngx-font-mono);
+  margin-top: auto;
+  margin-bottom: 8px;
+}
+.swatch code {
+  font: 9px var(--ngx-font-mono);
+}
+.primary {
+  background: var(--ngx-color-primary);
+  color: var(--ngx-color-on-primary);
+}
+.secondary {
+  background: var(--ngx-color-secondary);
+  color: var(--ngx-color-on-secondary);
+}
+.violet {
+  background: var(--ngx-color-violet);
+  color: var(--ngx-color-on-secondary);
+}
+.danger {
+  background: var(--ngx-color-danger);
+  color: var(--ngx-color-on-danger);
+}
+.surface {
+  background: var(--ngx-color-surface);
+}
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.component-grid > * {
+  min-width: 0;
+}
+.button-row,
+.status-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 22px 0 8px;
+}
+.button-row span {
+  font-size: 12px;
+}
+.specimen-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ngx-color-border);
+  color: var(--ngx-color-muted);
+  font: 8px var(--ngx-font-mono);
+  letter-spacing: 0.06em;
+}
+.specimen-meta > span:last-child {
+  color: var(--ngx-color-primary);
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0 12px;
+  font: 9px var(--ngx-font-mono);
+  letter-spacing: 0.08em;
+}
+form {
+  display: grid;
+  gap: 20px;
+  margin-top: 24px;
+}
+mat-form-field {
+  width: 100%;
+}
+.selection-controls {
+  display: grid;
+  gap: 8px;
+}
+ngx-code-block {
+  margin-top: 24px;
+}
+.terminal-note {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+  font: 11px/1.8 var(--ngx-font-mono);
+}
+.terminal-note > span:first-child {
+  color: var(--ngx-color-secondary);
+  font-size: 26px;
+}
+.terminal-indicator {
+  margin-left: auto;
+  color: var(--ngx-color-primary);
+  white-space: nowrap;
+}
+.alert-specimen {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 0;
+}
+.warning-mark {
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--ngx-color-danger);
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+  color: var(--ngx-color-error);
+  font: 30px var(--ngx-font-mono);
+  background: color-mix(in srgb, var(--ngx-color-danger) 8%, transparent);
+}
+.alert-specimen strong {
+  color: var(--ngx-color-error);
+  font: 13px var(--ngx-font-mono);
+}
+.alert-specimen p {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+.alert-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px solid var(--ngx-color-border);
+}
+.alert-footer > span {
+  font: 9px var(--ngx-font-mono);
+  color: var(--ngx-color-error);
+}
+.protocol-list > div {
+  display: flex;
+  gap: 16px;
+  align-items: start;
+  margin: 10px 0;
+}
+.protocol-list > div > span {
+  color: var(--ngx-color-primary);
+  font: 10px var(--ngx-font-mono);
+  padding-top: 3px;
+}
+.protocol-list p {
+  margin: 0;
+  font-size: 12px;
+}
+.protocol-list strong {
+  display: block;
+  font: 12px var(--ngx-font-mono);
+  color: var(--ngx-color-text);
+  margin-bottom: 4px;
+}
+.principles {
+  margin: 48px 0 34px;
+}
+mat-tab-group p {
+  max-width: 800px;
+  color: var(--ngx-color-muted);
+  font-size: 13px;
+  line-height: 1.8;
+  padding-top: 12px;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-top: 1px solid var(--ngx-color-border);
+  padding: 24px 0;
+  font: 9px var(--ngx-font-mono);
+  letter-spacing: 0.08em;
+}
+.muted {
+  color: var(--ngx-color-muted);
+}
+.footer-signal {
+  color: var(--ngx-color-secondary);
+  margin-left: 16px;
+}
+@media (min-width: 1200px) {
+  .hero {
+    gap: 56px;
+  }
+}
+@media (max-width: 1000px) {
+  .workbench {
+    padding: 0 28px;
+  }
+  nav {
+    gap: 12px;
+  }
+  nav a {
+    font-size: 8px;
+  }
+  .wordmark {
+    font-size: 13px;
+  }
+  .swatch {
+    padding: 12px;
+  }
+  .swatch code {
+    font-size: 8px;
+  }
+  .swatch strong {
+    font-size: 12px;
+  }
+  .telemetry > div {
+    padding: 16px 12px;
+  }
+  .telemetry strong {
+    font-size: 12px;
+  }
+  .console-bottom {
+    font-size: 7px;
+  }
+}
+@media (max-width: 750px) {
+  .masthead nav {
+    display: none;
+  }
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+  }
+  .hero-copy > p {
+    max-width: 470px;
+  }
+  h1 {
+    font-size: clamp(46px, 10vw, 76px);
+  }
+  .signal-console {
+    max-width: 560px;
+    width: 100%;
+    justify-self: center;
+  }
+  .system-id {
+    display: none;
+  }
+  .section-caption {
+    display: none;
+  }
+  .swatches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .component-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .telemetry {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .telemetry > div:nth-child(2) {
+    border-right: 0;
+  }
+  .telemetry > div:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--ngx-color-border);
+  }
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+@media (max-width: 420px) {
+  .workbench {
+    padding: 0 20px;
+  }
+  .wordmark small {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .brand-glyph {
+    display: none;
+  }
+  .masthead {
+    gap: 10px;
+    min-height: 80px;
+  }
+  .system-bar {
+    font-size: 7px;
+    gap: 8px;
+  }
+  .swatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .telemetry strong {
+    font-size: 11px;
+  }
+  .console-bottom {
+    font-size: 6px;
+  }
+  .signal-bars {
+    font-size: 10px;
+  }
+  .console-top {
+    font-size: 7px;
+  }
+  h2 {
+    font-size: 23px;
+  }
+  .alert-specimen {
+    gap: 12px;
+  }
+}
+
+.overlay-section {
+  margin: 0 0 48px;
+}
+.surface-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.surface-controls > button {
+  min-height: 44px;
+  padding-inline: 22px;
+  text-transform: capitalize;
+}
+.glass-experiment {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  padding: 44px 32px;
+  border: 1px solid var(--ngx-color-border);
+  background: var(--ngx-color-canvas);
+}
+.glass-experiment > ngx-panel {
+  width: min(100%, 720px);
+}
+.glass-scene {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 27px, var(--ngx-grid-color) 28px),
+    repeating-linear-gradient(90deg, transparent 0 27px, var(--ngx-grid-color) 28px);
+}
+.glass-scene > i {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 14%,
+    #27f5ef30 14% 29%,
+    transparent 29% 63%,
+    #ff52c630 63% 77%,
+    transparent 77%
+  );
+}
+.glass-scene > span {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font: 8px var(--ngx-font-mono);
+  color: var(--ngx-color-muted);
+  letter-spacing: 0.1em;
+}
+.glass-scene > b {
+  position: absolute;
+  bottom: 6%;
+  right: 4%;
+  font: 700 clamp(48px, 9vw, 100px) var(--ngx-font-mono);
+  color: #aa8cff20;
+}
+.glass-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.overlay-feedback {
+  font: 11px/1.8 var(--ngx-font-mono);
+  color: var(--ngx-color-primary);
+  margin: 18px 0 0;
+}
+.hero-actions .ngx-button {
+  padding-inline: 24px;
+}
+.component-grid .button-row > .ngx-button {
+  padding-inline: 22px;
+}
+@media (max-width: 750px) {
+  .glass-experiment {
+    padding: 38px 16px 24px;
+  }
+  .surface-controls {
+    gap: 8px;
+  }
+}
+@media (max-width: 420px) {
+  .glass-actions {
+    gap: 12px;
+  }
+  .glass-actions > .ngx-button {
+    padding-inline: 22px;
+  }
+}

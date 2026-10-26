@@ -1,0 +1,22 @@
+# Architecture
+
+- `projects/ngx-workshop-ui`: distributable `@ngx-workshop/ui` Angular library, public API in `src/public-api.ts`.
+- `src/styles/_index.scss`: public Ngx tokens, Material adapter, optional neutral palette and global accessibility defaults. ng-packagr copies this into the package's `styles/` directory.
+- Shared components: `NgxPanel` projects body/actions into Material cards; `NgxStatus` labels Material chips; `NgxCodeBlock` displays escaped text and uses CDK Clipboard.
+- `projects/storybook`: standalone showcase application, Storybook configuration and stories. These are development consumers; no story files are shipped in the library.
+- Existing controls remain direct Material imports. A theme adapter can be replaced independently, but replacing Material itself still requires an intentional component migration.
+- Theme selection is document-scoped, so overlays inherit it. No persistence or backend is provided in the demo.
+
+Shell alignment source at creation: `mfe-shell-admin/package.json`, Angular/Material/CDK 21.1.0. This repository pins its own dependencies and builds without sibling checkouts.
+
+HUD frames use component-owned pseudo elements with the public --ngx-frame-shape token. Only those decorative layers are clipped. NgxPanel has an additive primary/secondary/danger tone input. The original vector console illustration belongs to the demo, not the distributed component API.
+
+Panel shapes/backgrounds/motion are independent typed signal inputs. Native Angular host lifecycle bindings own entry and exit; decorative pseudo layers own the geometry and backdrop. See [panels](panels.md) for the public contract and ancestor-removal/focus limitations. Storybook PanelLab is a development-only consumer.
+
+The complete Material catalog uses development-only standalone demos in `projects/storybook/src/material/` and one CSF story file per UI entry point in `src/stories/material/`. `catalog-data.ts` supplies the searchable inventory; `docs/material-coverage.md` records states and interactions. Original SVG icons are registered at Storybook bootstrap. No Material demo wrapper is exported by the shared library.
+
+`NgxButton` is a shared standalone directive on a native Material MatButton host. It adds an owned aria-hidden decorative layer without accessing private Material DOM. Packaged button Sass generates shapes/strokes from one vertex map; CSS owns hover/focus and bounded native Web Animations own activation effects. See [buttons](buttons.md) for semantics, disabled anchors and tokens.
+
+Code presentation has an independent Synthwave ’84 token palette in packaged `_code.scss`. NgxCodeBlock lazily loads a semantic highlighter and standalone Lezer grammar only for an explicit language; plain/native code does not instantiate CodeMirror. Editor/theme dependencies live only in the development comparison demo. Source is rendered as text spans; no innerHTML path exists. See [code guide](code.md).
+
+Packaged `_overlays.scss` styles the public CDK backdrop hooks and leaves overlay content, stacking and interaction behavior with Material/CDK. Workshop Frequency consumes the current button, panel and code APIs and has a surface-switching glass specimen with dialog/sheet previews. See [overlays](overlays.md).

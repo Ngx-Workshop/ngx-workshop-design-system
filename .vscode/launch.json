@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Showcase",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: start",
+      "url": "http://localhost:4200/"
+    },
+    {
+      "name": "Storybook",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: storybook",
+      "url": "http://localhost:6006/?path=/story/start-here-workshop-frequency--overview"
+    }
+  ]
+}

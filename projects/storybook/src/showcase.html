@@ -1,0 +1,400 @@
+<main class="workbench">
+  <header class="masthead">
+    <a class="wordmark" href="#foundation"
+      ><span class="brand-glyph" aria-hidden="true">N/</span
+      ><span
+        >NGX<span class="wordmark-slash">/</span>WORKSHOP<small
+          >INTERFACE SYSTEMS DIVISION</small
+        ></span
+      ></a
+    >
+    <nav aria-label="Showcase sections">
+      <a href="#foundation">01 / SYSTEM</a><a href="#components">02 / COMPONENTS</a
+      ><a href="#overlays">03 / GLASS</a><a href="#protocol">04 / PROTOCOL</a>
+    </nav>
+    <button mat-stroked-button (click)="toggleTheme()">Switch palette</button>
+  </header>
+  <div class="system-bar">
+    <span><i class="live-dot" aria-hidden="true"></i> SYSTEM ONLINE</span
+    ><span>ANGULAR 21.1 / MATERIAL + CDK</span><span class="system-id">NGX–DS // REV.007</span>
+  </div>
+  <section class="hero" id="foundation" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <div class="eyebrow">
+        <span class="slash-mark" aria-hidden="true"></span> A SHARED DESIGN FREQUENCY
+      </div>
+      <h1 id="hero-title">
+        Interface<br />the <span>future<span class="cursor" aria-hidden="true">_</span></span>
+      </h1>
+      <p>
+        Precision-built foundations for your next Angular experience. Familiar controls. A different
+        dimension.
+      </p>
+      <div class="hero-actions">
+        <a mat-flat-button ngxButton shape="chamfered" href="#components">Explore components ↗</a
+        ><button mat-flat-button ngxButton shape="beveled" surface="outline" (click)="openDialog()">
+          Open a dialog
+        </button>
+      </div>
+      <div class="hero-coordinate">
+        <span>40° 43′ N / 73° 59′ W</span><span>DESIGN WITHOUT LIMITS</span>
+      </div>
+    </div>
+    <div class="signal-console" aria-hidden="true">
+      <div class="console-top">
+        <span>CORE / DESIGN ENGINE</span><span class="console-live">● ACTIVE</span>
+      </div>
+      <div class="scanlines"></div>
+      <svg class="radar" viewBox="0 0 560 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="core-halo">
+            <stop stop-color="currentColor" stop-opacity=".12" />
+            <stop offset="1" stop-color="currentColor" stop-opacity="0" />
+          </radialGradient>
+          <pattern id="radar-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+            <path d="M28 0H0V28" stroke="currentColor" stroke-opacity=".1" />
+          </pattern>
+        </defs>
+        <path fill="url(#radar-grid)" d="M0 0h560v400H0z" />
+        <circle cx="280" cy="200" r="185" fill="url(#core-halo)" />
+        <g class="radar-guide">
+          <path d="M30 200H530M280 18V382" stroke-dasharray="3 9" />
+          <circle cx="280" cy="200" r="164" />
+          <circle cx="280" cy="200" r="177" stroke-dasharray="1 7" />
+          <path d="M85 75H56v32M475 75h29v32M85 325H56v-32M475 325h29v-32" />
+        </g>
+        <g class="globe">
+          <circle cx="280" cy="200" r="140" />
+          <ellipse cx="280" cy="200" rx="96" ry="140" />
+          <ellipse cx="280" cy="200" rx="42" ry="140" />
+          <ellipse cx="280" cy="200" rx="140" ry="94" />
+          <ellipse cx="280" cy="200" rx="140" ry="41" />
+          <path d="M140 200H420M280 60V340" />
+          <ellipse cx="280" cy="200" rx="160" ry="55" transform="rotate(-28 280 200)" />
+        </g>
+        <g class="radar-links">
+          <path d="M181 101L105 45H38M398 129l65-55h65M386 290l66 65h72M190 302l-60 45H38" />
+          <path d="M181 97v8m-4-4h8M398 125v8m-4-4h8M386 286v8m-4-4h8" />
+        </g>
+        <g class="radar-nodes">
+          <path
+            d="M173 93h16v16h-16zM390 121h16v16h-16zM273 193h14v14h-14zM378 282h16v16h-16zM184 296h12v12h-12z"
+          />
+        </g>
+        <g class="radar-labels" fill="currentColor" stroke="none">
+          <text x="38" y="34">01 / STRUCTURE</text>
+          <text x="445" y="63">02 / SIGNAL</text>
+          <text x="38" y="370">TOKEN SYNC: 100%</text>
+          <text x="443" y="377">CORE: 021.1</text>
+          <text x="253" y="397">NGX / ONLINE</text>
+        </g>
+      </svg>
+      <div class="console-bottom">
+        <span>SHARED CORE <b>21.1.0</b></span
+        ><span class="signal-bars">▂ ▄ ▆ █ ▆ ▄</span><span>SYNC COMPLETE / 100%</span>
+      </div>
+    </div>
+  </section>
+  <div class="telemetry" aria-label="System foundations">
+    <div>
+      <span>01 / FOUNDATION</span><strong>ANGULAR <b>21.1</b></strong
+      ><small>Material + CDK</small>
+    </div>
+    <div>
+      <span>02 / VISUAL CONTRACT</span><strong>CSS <b>TOKENS</b></strong
+      ><small>One source. Every surface.</small>
+    </div>
+    <div>
+      <span>03 / INTERACTION</span><strong>HUMAN <b>FIRST</b></strong
+      ><small>Keyboard + focus aware</small>
+    </div>
+    <div>
+      <span>04 / ARCHITECTURE</span><strong>BUILT TO <b>EVOLVE</b></strong
+      ><small>Swap the theme. Keep the API.</small>
+    </div>
+  </div>
+  <section class="foundation-section" aria-labelledby="palette-title">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">01 / CHROMATIC SYSTEM</span>
+        <h2 id="palette-title">Calibrate your signal.</h2>
+      </div>
+      <span class="section-caption">MIDNIGHT SURFACES / HIGH-ENERGY ACCENTS</span>
+    </div>
+    <div class="swatches">
+      <div class="swatch primary">
+        <span>01 / ION</span><strong>Electric cyan</strong><code>--ngx-color-primary</code>
+      </div>
+      <div class="swatch secondary">
+        <span>02 / PULSE</span><strong>Hot magenta</strong><code>--ngx-color-secondary</code>
+      </div>
+      <div class="swatch violet">
+        <span>03 / PHASE</span><strong>Ultraviolet</strong><code>--ngx-color-violet</code>
+      </div>
+      <div class="swatch danger">
+        <span>04 / ALERT</span><strong>Signal red</strong><code>--ngx-color-danger</code>
+      </div>
+      <div class="swatch surface">
+        <span>05 / ARMOR</span><strong>Midnight</strong><code>--ngx-color-surface</code>
+      </div>
+    </div>
+  </section>
+  <section id="overlays" aria-labelledby="overlays-title" class="overlay-section">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">02 / SURFACE + DEPTH</span>
+        <h2 id="overlays-title">Keep the signal. Blur the noise.</h2>
+      </div>
+      <div class="surface-controls" role="group" aria-label="Preview panel surface">
+        @for (surface of surfaces; track surface) {
+          <button
+            mat-flat-button
+            ngxButton
+            shape="chamfered"
+            [surface]="previewSurface() === surface ? 'filled' : 'outline'"
+            [attr.aria-pressed]="previewSurface() === surface"
+            (click)="previewSurface.set(surface)"
+          >
+            {{ surface }}
+          </button>
+        }
+      </div>
+    </div>
+    <div class="glass-experiment">
+      <div class="glass-scene" aria-hidden="true">
+        <i></i><span>NGX / TRANSMISSION</span><b>FOCUS_</b>
+      </div>
+      <ngx-panel
+        [heading]="'Surface / ' + previewSurface()"
+        eyebrow="LIVE SPECIMEN / SHARED FOUNDATION"
+        shape="chamfered"
+        [background]="previewSurface()"
+        motion="hologram"
+        ><p>{{ surfaceDescription() }}</p>
+        <p>
+          Open a dialog or share sheet to see the interface recede behind a frosted backdrop. Every
+          overlay stays on the same frequency.
+        </p>
+        <div ngxPanelActions class="glass-actions">
+          <button mat-flat-button ngxButton shape="beveled" (click)="openDialog()">
+            Preview glass dialog</button
+          ><button
+            mat-flat-button
+            ngxButton
+            shape="chamfered"
+            surface="outline"
+            tone="secondary"
+            (click)="openSheet()"
+          >
+            Preview share sheet
+          </button>
+        </div></ngx-panel
+      >
+    </div>
+    <p class="overlay-feedback" role="status">{{ overlayResult() }}</p>
+  </section>
+  <section id="components" aria-labelledby="components-title">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">03 / COMPONENT INVENTORY</span>
+        <h2 id="components-title">Assemble your interface.</h2>
+      </div>
+      <ngx-status label="All systems ready" />
+    </div>
+    <div class="component-grid">
+      <ngx-panel
+        heading="Command / control"
+        eyebrow="SYS.01 / Angular buttons"
+        shape="beveled"
+        background="solid"
+        ><p>Angular geometry. Clear intent. Material interactions, tuned to your frequency.</p>
+        <div class="button-row">
+          <button mat-flat-button ngxButton shape="chamfered" (click)="openDialog()">
+            Launch workshop ↗
+          </button>
+          <button
+            mat-flat-button
+            ngxButton
+            shape="beveled"
+            surface="outline"
+            tone="secondary"
+            motion="glitch"
+            (click)="openSheet()"
+          >
+            Share workshop
+          </button>
+          <a mat-flat-button ngxButton shape="chevron" surface="outline" href="#protocol"
+            >Learn more</a
+          >
+          <button mat-flat-button ngxButton shape="chamfered" disabled>Unavailable</button>
+        </div>
+        <div class="specimen-meta">
+          <span>INPUT: POINTER / KEYBOARD</span><span>READY [01]</span>
+        </div></ngx-panel
+      >
+      <ngx-panel
+        heading="Live diagnostics"
+        eyebrow="SYS.02 / Status + progress"
+        tone="secondary"
+        shape="chamfered"
+        ><p>Every state has a signal. Explicit labels keep the message clear beyond color.</p>
+        <div class="status-row">
+          <ngx-status label="Online" tone="success" /><ngx-status
+            label="In progress"
+            tone="info"
+          /><ngx-status label="Needs review" tone="warning" /><ngx-status
+            label="Build failed"
+            tone="error"
+          />
+        </div>
+        <div class="progress-label"><span>FOUNDATION COMPILE</span><span>72 / 100</span></div>
+        <mat-progress-bar
+          mode="determinate"
+          [value]="72"
+          aria-label="Foundation build 72 percent complete"
+        />
+        <div class="specimen-meta">
+          <span>CORE INTEGRITY / STABLE</span><span>SYNCING_</span>
+        </div></ngx-panel
+      >
+      <ngx-panel
+        heading="Session configuration"
+        eyebrow="SYS.03 / Data entry"
+        shape="stepped"
+        background="solid"
+        ><form (ngSubmit)="save()">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic"
+            ><mat-label>Workshop name</mat-label
+            ><input
+              matInput
+              name="workshopName"
+              required
+              [ngModel]="workshopName()"
+              (ngModelChange)="workshopName.set($event); saved.set(false)"
+            /><mat-hint>Give your next idea a name.</mat-hint></mat-form-field
+          ><mat-form-field appearance="outline" subscriptSizing="dynamic"
+            ><mat-label>Experience level</mat-label
+            ><mat-select
+              name="level"
+              [ngModel]="level()"
+              (ngModelChange)="level.set($event); saved.set(false)"
+              ><mat-option value="Beginner">Beginner</mat-option
+              ><mat-option value="Intermediate">Intermediate</mat-option
+              ><mat-option value="Advanced">Advanced</mat-option></mat-select
+            ></mat-form-field
+          >
+          <div class="selection-controls">
+            <mat-slide-toggle
+              name="notifications"
+              [ngModel]="notifications()"
+              (ngModelChange)="notifications.set($event); saved.set(false)"
+              >Session notifications</mat-slide-toggle
+            ><mat-checkbox>I want hands-on exercises</mat-checkbox>
+          </div>
+          <div class="button-row">
+            <button mat-flat-button ngxButton shape="banner" type="submit">Save session</button
+            ><span role="status">{{
+              saved() ? 'Session saved locally for this preview.' : ''
+            }}</span>
+          </div>
+        </form></ngx-panel
+      >
+      <ngx-panel
+        heading="Initialize the system"
+        eyebrow="SYS.04 / SYNTHWAVE ’84"
+        shape="notched"
+        background="solid"
+        tone="secondary"
+        ><p>
+          A shared purple canvas and neon syntax, from full editor views to lightweight pre/code.
+        </p>
+        <ngx-code-block
+          [code]="installCommand"
+          label="quickstart.ts / local setup"
+          language="typescript"
+          [wrap]="true"
+        />
+        <div class="terminal-note">
+          <span aria-hidden="true">↳</span>
+          <p>Theme tokens define the look.<br />Material owns the interaction.</p>
+          <span class="terminal-indicator" aria-hidden="true">[ OK ]</span>
+        </div></ngx-panel
+      >
+      <ngx-panel
+        heading="Attention required"
+        eyebrow="SYS.05 / Alert specimen"
+        tone="danger"
+        shape="banner"
+        background="solid"
+        ><div class="alert-specimen">
+          <span class="warning-mark" aria-hidden="true">!</span>
+          <div>
+            <strong>Connection interrupted</strong>
+            <p>This is a visual specimen. Check your network before starting the next session.</p>
+          </div>
+        </div>
+        <div class="alert-footer">
+          <span>STATUS / OFFLINE</span><ngx-status label="Needs review" tone="warning" /></div
+      ></ngx-panel>
+      <ngx-panel
+        heading="Built on shared principles"
+        eyebrow="SYS.06 / System protocol"
+        shape="chamfered"
+        background="grid"
+        ><div class="protocol-list">
+          <div>
+            <span>01</span>
+            <p>
+              <strong>Precision over noise</strong>Every line has a job. Every action has a clear
+              signal.
+            </p>
+          </div>
+          <div>
+            <span>02</span>
+            <p>
+              <strong>Power without friction</strong>Material handles focus, semantics and
+              navigation.
+            </p>
+          </div>
+          <div>
+            <span>03</span>
+            <p>
+              <strong>A theme, not a lock-in</strong>Shared tokens keep the visual system adaptable.
+            </p>
+          </div>
+        </div></ngx-panel
+      >
+    </div>
+  </section>
+  <section class="principles" id="protocol" aria-label="Design principles">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">04 / OPEN PROTOCOL</span>
+        <h2>Engineered for what comes next.</h2>
+      </div>
+      <span class="section-caption">SPECIFICATION → COMPONENT → STORY</span>
+    </div>
+    <mat-tab-group animationDuration="0ms"
+      ><mat-tab label="Familiar foundations"
+        ><p>
+          Material owns the hard parts: keyboard navigation, focus management and accessible control
+          semantics. Ngx adds a shared visual language.
+        </p></mat-tab
+      ><mat-tab label="Tokens first"
+        ><p>
+          Semantic CSS custom properties connect your brand to public Material overrides. Replace
+          the palette in one place.
+        </p></mat-tab
+      ><mat-tab label="Room to evolve"
+        ><p>
+          Keep shared compositions small. Start with an existing control, add a story, then extract
+          a reusable pattern when the product needs one.
+        </p></mat-tab
+      ></mat-tab-group
+    >
+  </section>
+  <footer>
+    <span>NGX/WORKSHOP <span class="muted">// INTERFACE SYSTEMS</span></span
+    ><span>END OF TRANSMISSION <span class="footer-signal" aria-hidden="true">■ ■ ■ □</span></span>
+  </footer>
+</main>
