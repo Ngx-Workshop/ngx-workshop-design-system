@@ -1,6 +1,6 @@
 {
   "name": "@tmdjr/ngx-workshop-design-system",
-  "version": "0.1.0",
+  "version": "21.0.0",
   "peerDependencies": {
     "@angular/common": "21.1.0",
     "@angular/core": "21.1.0",
