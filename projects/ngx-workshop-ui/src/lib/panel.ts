@@ -31,7 +31,24 @@ export type NgxPanelMotion = 'none' | 'boot' | 'glitch' | 'hologram';
       ><mat-card-header
         ><div class="panel__heading">
           <mat-card-subtitle>{{ eyebrow() }}</mat-card-subtitle>
-          <mat-card-title>{{ heading() }}</mat-card-title>
+          <mat-card-title
+            [attr.role]="headingMotion() === 'stagger' ? 'heading' : null"
+            [attr.aria-level]="headingMotion() === 'stagger' ? 2 : null"
+            [attr.aria-label]="headingMotion() === 'stagger' ? heading() : null"
+          >
+            @if (headingMotion() === 'stagger') {
+              @for (character of headingCharacters(); track character.key) {
+                <span
+                  class="panel__heading-character"
+                  aria-hidden="true"
+                  [style.animation-delay.ms]="character.delay"
+                  >{{ character.text }}</span
+                >
+              }
+            } @else {
+              {{ heading() }}
+            }
+          </mat-card-title>
         </div>
         <div class="panel__header-content">
           <ng-content select="[ngxPanelHeader]" />
@@ -50,6 +67,20 @@ export class NgxPanel {
   }
 
   readonly heading = input.required<string>();
+  readonly headingMotion = input<'none' | 'stagger'>('none');
+  readonly headingMotionKey = input('');
+  protected readonly headingCharacters = computed(() => {
+    const heading = this.heading();
+    const key = this.headingMotionKey();
+    return Array.from(
+      new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(heading),
+      ({ segment }, index) => ({
+        text: segment === ' ' ? '\u00a0' : segment,
+        key: `${key}:${heading}:${index}`,
+        delay: Math.min(index * 25, 600),
+      }),
+    );
+  });
   readonly eyebrow = input('Workshop module');
   readonly tone = input<NgxPanelTone>('primary');
   readonly shape = input<NgxPanelShape>('notched');

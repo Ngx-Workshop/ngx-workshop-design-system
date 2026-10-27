@@ -65,3 +65,18 @@ export const HeaderContent: StoryObj<NgxPanel> = {
     </ngx-panel>`,
   }),
 };
+
+export const AnimatedHeading: StoryObj<NgxPanel> = {
+  render: () => ({
+    props: { selected: 'one', refreshCount: 0 },
+    template: `<div style="display:grid;gap:16px">
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <button mat-stroked-button (click)="selected = selected === 'one' ? 'two' : 'one'">Switch remote</button>
+        <button mat-stroked-button (click)="refreshCount = refreshCount + 1">Refresh metadata</button>
+      </div>
+      <ngx-panel heading="Seed 🚀 MFE" headingMotion="stagger" [headingMotionKey]="selected" eyebrow="REMOTE CONFIGURATION" background="solid">
+        <p>Metadata refresh {{ refreshCount }}</p>
+      </ngx-panel>
+    </div>`,
+  }),
+};

@@ -118,3 +118,50 @@ test('header slot shares the heading row and wraps without mobile overflow', asy
   await expect(preview).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+test('staggered heading reveals graphemes and replays only when its heading/key changes', async ({
+  page,
+}) => {
+  await page.goto('/iframe.html?id=components-panel--animated-heading&viewMode=story');
+  const title = page.getByRole('heading', { name: 'Seed 🚀 MFE', exact: true });
+  await expect(title).toBeVisible();
+  const characters = title.locator('.panel__heading-character');
+  await expect(characters).toHaveCount(10);
+  await expect(characters.nth(5)).toHaveText('🚀');
+  await expect(characters.nth(4)).toHaveText('\u00a0');
+  expect(await characters.nth(1).evaluate((el) => getComputedStyle(el).animationDelay)).toBe(
+    '0.025s',
+  );
+  await expect
+    .poll(() =>
+      title.evaluate(
+        (el) => el.getAnimations({ subtree: true }).filter((a) => a.playState === 'running').length,
+      ),
+    )
+    .toBe(0);
+  expect(await characters.first().evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
+  const original = await characters.first().elementHandle();
+  await page.getByRole('button', { name: 'Refresh metadata' }).click();
+  expect(await original!.evaluate((el) => el.isConnected)).toBe(true);
+  await page.getByRole('button', { name: 'Switch remote' }).click();
+  await expect.poll(() => original!.evaluate((el) => el.isConnected)).toBe(false);
+  await expect(title).toHaveAttribute('aria-label', 'Seed 🚀 MFE');
+});
+
+test('reduced motion makes staggered headings immediately readable', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 320, height: 640 });
+  await page.goto('/iframe.html?id=components-panel--animated-heading&viewMode=story');
+  const title = page.getByRole('heading', { name: 'Seed 🚀 MFE', exact: true });
+  await expect(title).toBeVisible();
+  const styles = await title
+    .locator('.panel__heading-character')
+    .evaluateAll((elements) =>
+      elements.map((el) => ({
+        opacity: getComputedStyle(el).opacity,
+        animation: getComputedStyle(el).animationName,
+      })),
+    );
+  expect(styles.every((style) => style.opacity === '1' && style.animation === 'none')).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});

@@ -28,3 +28,7 @@ The complete Material catalog uses development-only standalone demos in `project
 Code presentation has an independent Synthwave ’84 token palette in packaged `_code.scss`. NgxCodeBlock lazily loads a semantic highlighter and standalone Lezer grammar only for an explicit language; plain/native code does not instantiate CodeMirror. Editor/theme dependencies live only in the development comparison demo. Source is rendered as text spans; no innerHTML path exists. See [code guide](code.md).
 
 Packaged `_overlays.scss` styles the public CDK backdrop hooks and leaves overlay content, stacking and interaction behavior with Material/CDK. Workshop Frequency consumes the current button, panel and code APIs and has a surface-switching glass specimen with dialog/sheet previews. See [overlays](overlays.md).
+
+NgxPanel's opt-in headingMotion=stagger and headingMotionKey inputs animate only
+title grapheme spans. Accessible full-heading semantics and reduced-motion CSS
+retain readability; panel bodies and controls are not recreated on replay.

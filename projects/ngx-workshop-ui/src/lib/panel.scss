@@ -503,3 +503,29 @@ mat-card-actions {
   );
   clip-path: var(--panel-outline);
 }
+
+.panel__heading-character {
+  display: inline-block;
+  opacity: 0;
+  animation: panel-heading-neon-in 400ms ease-out both;
+}
+@keyframes panel-heading-neon-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+    filter: blur(2px);
+    text-shadow: 0 0 10px var(--frame-accent);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    text-shadow: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .panel__heading-character {
+    animation: none;
+    opacity: 1;
+  }
+}

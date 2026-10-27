@@ -110,3 +110,21 @@ projected layout to wrap as well.
   <div ngxPanelActions><button mat-flat-button>Save changes</button></div>
 </ngx-panel>
 ```
+
+## Staggered heading intro
+
+Set `headingMotion="stagger"` to reveal the heading with a 400ms neon fade per
+character, delayed 25ms per character (delay capped at 600ms). Unicode graphemes,
+including emoji, remain intact and spaces retain their width. The default is `none`.
+Use `[headingMotionKey]="selectedRemoteId"` to replay when selection changes even
+if two records have the same name. Unchanged metadata refreshes do not replay it;
+heading text changes do. This only recreates character spans, preserving panel
+content, focus and form state. Animated titles expose a single level-two accessible
+heading; decorative characters are hidden from assistive technology. Reduced-motion
+preferences disable the animation and show the full title immediately.
+
+```html
+<ngx-panel [heading]="remote.name" headingMotion="stagger" [headingMotionKey]="remote._id">
+  <p>Remote configuration</p>
+</ngx-panel>
+```

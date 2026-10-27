@@ -27,3 +27,29 @@ Build the host first, then remote, and verify the hosted selected heading/ID/act
 and bounded rail. Existing consumers are compatible with the additive slot, but
 the new remote requires it and cannot rely on an older host singleton. No package
 was published, no shell version changed, and no commit/push/deployment was performed.
+
+## Staggered heading intro — 2026-10-27
+
+Added optional headingMotion (none/stagger) and headingMotionKey inputs. Existing
+panels default to no heading animation. Opted-in titles use Unicode grapheme spans,
+25ms stagger capped at 600ms, and 400ms opacity/blur/translation/glow reveal. A full
+accessible level-two heading labels decorative aria-hidden characters. CSS reduced
+motion disables animation and opacity hiding. Changed heading/selection keys rebuild
+only spans; unchanged metadata retains their nodes and does not replay the intro.
+
+Library, demo, story typecheck, static Storybook, packed consumer and all nine panel
+browser tests pass. Tests verify Unicode/space handling, stagger, stable metadata,
+replay for different keys with identical names, reduced motion and 320px overflow.
+The replay assertion waits for Angular's render after the selection click. Screenshots
+inspected at `/tmp/ngx-heading-intro-mid.png`, `/tmp/ngx-heading-intro-finished.png`
+and `/tmp/ngx-heading-intro-reduced-mobile.png`.
+
+Orchestrator binds headingMotion=stagger and headingMotionKey=mfe._id. Its 29 tests
+and production build pass against the local package. Installed manifest is 21.0.3;
+for preview only copied built fesm2022/types code without changing registry manifests
+or lockfiles. Original installed code is backed up at
+`/var/folders/82/rylsmb_n1p591809975j19t80000gn/T/ngx-stagger-heading-original-whp7yape`.
+A clean install restores the published package without these new inputs. Release
+the additive API, pin the actual new version in shell and remote package/lockfiles
+and strict federation requirements, build host before remote, then verify hosted
+intro behavior. No package publication, commit, push or deployment performed.
