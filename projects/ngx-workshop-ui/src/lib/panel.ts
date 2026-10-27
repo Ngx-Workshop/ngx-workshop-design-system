@@ -29,8 +29,13 @@ export type NgxPanelMotion = 'none' | 'boot' | 'glitch' | 'hologram';
     ><span class="scan-line" aria-hidden="true"></span
     ><mat-card appearance="outlined"
       ><mat-card-header
-        ><mat-card-subtitle>{{ eyebrow() }}</mat-card-subtitle
-        ><mat-card-title>{{ heading() }}</mat-card-title></mat-card-header
+        ><div class="panel__heading">
+          <mat-card-subtitle>{{ eyebrow() }}</mat-card-subtitle>
+          <mat-card-title>{{ heading() }}</mat-card-title>
+        </div>
+        <div class="panel__header-content">
+          <ng-content select="[ngxPanelHeader]" />
+        </div> </mat-card-header
       ><mat-card-content><ng-content /></mat-card-content
       ><mat-card-actions><ng-content select="[ngxPanelActions]" /></mat-card-actions
     ></mat-card>

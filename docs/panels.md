@@ -91,3 +91,22 @@ Try **Components → Panel → Shapes**, **Backgrounds**, and **Transition lab**
 ![Panel background comparison](images/panel-backgrounds.png)
 
 ![Panel transition lab](images/panel-transition-lab.png)
+
+## Header content
+
+Place metadata and quick actions in an element marked `ngxPanelHeader` to project
+it alongside the heading. Body content stays unmarked; `ngxPanelActions` continues
+to project into the footer. Existing panels need no changes. Header content wraps
+below the heading when space is limited; keep controls labelled and allow your
+projected layout to wrap as well.
+
+```html
+<ngx-panel heading="Dashboard" eyebrow="REMOTE CONFIGURATION">
+  <div ngxPanelHeader>
+    <span>ID remote-021</span>
+    <button mat-stroked-button>Preview remote</button>
+  </div>
+  <p>Configuration fields</p>
+  <div ngxPanelActions><button mat-flat-button>Save changes</button></div>
+</ngx-panel>
+```

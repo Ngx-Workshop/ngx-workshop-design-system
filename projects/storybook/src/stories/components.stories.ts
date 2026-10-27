@@ -53,3 +53,15 @@ export const Backgrounds: StoryObj<NgxPanel> = {
     template: `<div style="position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:28px;padding:44px 24px;background:repeating-linear-gradient(120deg,#060714 0 80px,#126a75 80px 120px,#060714 120px 190px,#6d255c 190px 240px)">${['grid', 'solid', 'glass'].map((background, i) => `<ngx-panel heading="${background.charAt(0).toUpperCase() + background.slice(1)} surface" eyebrow="SURFACE / 0${i + 1}" shape="chamfered" background="${background}"><p>${background === 'glass' ? 'Translucent color and real backdrop blur soften the scene behind this panel.' : background === 'solid' ? 'An opaque surface removes the decorative grid and isolates the content.' : 'A subtle technical grid adds texture to the opaque surface.'}</p></ngx-panel>`).join('')}</div>`,
   }),
 };
+
+export const HeaderContent: StoryObj<NgxPanel> = {
+  render: () => ({
+    template: `<ngx-panel heading="Dashboard" eyebrow="REMOTE CONFIGURATION" background="solid">
+      <div ngxPanelHeader style="display:flex;flex-wrap:wrap;align-items:center;gap:16px">
+        <span>ID remote-021</span><button mat-stroked-button>Preview remote</button>
+      </div>
+      <p>Configuration fields remain in the panel body.</p>
+      <div ngxPanelActions><button mat-flat-button>Save changes</button></div>
+    </ngx-panel>`,
+  }),
+};

@@ -96,3 +96,25 @@ test('panel lab is accessible and contained at mobile width', async ({ page }) =
   });
   expect(violations).toEqual([]);
 });
+
+test('header slot shares the heading row and wraps without mobile overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/iframe.html?id=components-panel--header-content&viewMode=story');
+  const panel = page.locator('ngx-panel');
+  const header = panel.locator('mat-card-header');
+  const preview = header.getByRole('button', { name: 'Preview remote' });
+  await expect(preview).toBeVisible();
+  await expect(header).toContainText('ID remote-021');
+  await expect(panel.locator('mat-card-content')).not.toContainText('ID remote-021');
+  await expect(
+    panel.locator('mat-card-actions').getByRole('button', { name: 'Save changes' }),
+  ).toBeVisible();
+  const titleBox = await header.locator('mat-card-title').boundingBox();
+  const previewBox = await preview.boundingBox();
+  expect(Math.abs(titleBox!.y - previewBox!.y)).toBeLessThan(40);
+  await preview.focus();
+  await expect(preview).toBeFocused();
+  await page.setViewportSize({ width: 320, height: 640 });
+  await expect(preview).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});

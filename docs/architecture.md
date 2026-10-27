@@ -2,7 +2,7 @@
 
 - `projects/ngx-workshop-ui`: distributable `@tmdjr/ngx-workshop-design-system` Angular library, public API in `src/public-api.ts`.
 - `src/styles/_index.scss`: public Ngx tokens, Material adapter, optional neutral palette and global accessibility defaults. ng-packagr copies this into the package's `styles/` directory.
-- Shared components: `NgxPanel` projects body/actions into Material cards; `NgxStatus` labels Material chips; `NgxCodeBlock` displays escaped text and uses CDK Clipboard.
+- Shared components: `NgxPanel` projects optional `[ngxPanelHeader]` content beside the heading and body/actions into Material cards; `NgxStatus` labels Material chips; `NgxCodeBlock` displays escaped text and uses CDK Clipboard.
 - `projects/storybook`: standalone showcase application, Storybook configuration and stories. These are development consumers; no story files are shipped in the library.
 - Existing controls remain direct Material imports. A theme adapter can be replaced independently, but replacing Material itself still requires an intentional component migration.
 - Theme selection is document-scoped, so overlays inherit it. No persistence or backend is provided in the demo.

@@ -160,7 +160,23 @@ mat-card {
   height: 100%;
 }
 mat-card-header {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ngx-space-4);
   margin: 8px 0 var(--ngx-space-4);
+}
+.panel__heading {
+  flex: 1 1 12rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.panel__header-content {
+  min-width: 0;
+  max-width: 100%;
+  flex: 0 1 auto;
+}
+.panel__header-content:empty {
+  display: none;
 }
 mat-card-subtitle {
   color: var(--frame-accent);
