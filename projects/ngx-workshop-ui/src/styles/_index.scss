@@ -1,3 +1,4 @@
+@forward './material-policy' show expansion-theme, warning-slide-toggle;
 @use '@angular/material' as mat;
 @use './buttons' as buttons;
 @use './code' as code;

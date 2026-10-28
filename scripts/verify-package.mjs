@@ -20,8 +20,8 @@ try {
     path.join(temp, 'consumer.ts'),
     `import {Component} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
-import {NgxPanel,NgxStatus,NgxCodeBlock,NgxPanelShape,NgxPanelBackground,NgxPanelMotion,NgxButton,NgxButtonShape,NgxCodeLanguage} from '@tmdjr/ngx-workshop-design-system';
-@Component({selector:'consumer-test',imports:[NgxPanel,NgxStatus,NgxCodeBlock,NgxButton,MatButtonModule],template:'<ngx-panel heading="Consumer" [shape]="shape" [background]="background" [motion]="motion"><ngx-status label="Ready" /></ngx-panel><ngx-code-block code="const ready = true;" [language]="language" contrast="original" [wrap]="true" /><button mat-flat-button ngxButton [shape]="buttonShape" surface="outline" motion="glitch">Execute</button>'})
+import {NgxEntrance,NgxPanel,NgxStatus,NgxCodeBlock,NgxPanelShape,NgxPanelBackground,NgxPanelMotion,NgxButton,NgxButtonShape,NgxCodeLanguage} from '@tmdjr/ngx-workshop-design-system';
+@Component({selector:'consumer-test',imports:[NgxPanel,NgxStatus,NgxCodeBlock,NgxButton,NgxEntrance,MatButtonModule],template:'<ngx-panel ngxEntrance="grow" [entranceDuration]="420" heading="Consumer" [shape]="shape" [background]="background" [motion]="motion"><ngx-status label="Ready" /></ngx-panel><ngx-code-block code="const ready = true;" [language]="language" contrast="original" [wrap]="true" /><button mat-flat-button ngxButton [shape]="buttonShape" surface="outline" motion="glitch">Execute</button>'})
 export class Consumer { language:NgxCodeLanguage="typescript"; buttonShape: NgxButtonShape = "chevron"; shape: NgxPanelShape = "stepped"; background: NgxPanelBackground = "glass"; motion: NgxPanelMotion = "boot"; }`,
   );
   writeFileSync(
@@ -47,7 +47,7 @@ export class Consumer { language:NgxCodeLanguage="typescript"; buttonShape: NgxB
   );
   const sass = await import('sass');
   const result = sass.compileString(
-    '@use "pkg:@tmdjr/ngx-workshop-design-system/theme" as ngx; @include ngx.theme();',
+    '@use "pkg:@tmdjr/ngx-workshop-design-system/theme" as ngx; @include ngx.theme(); .consumer { @include ngx.expansion-theme(); } .warning { @include ngx.warning-slide-toggle(); }',
     {
       importers: [new sass.NodePackageImporter(temp)],
       loadPaths: [path.join(root, 'node_modules')],

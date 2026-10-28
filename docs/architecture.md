@@ -32,3 +32,8 @@ Packaged `_overlays.scss` styles the public CDK backdrop hooks and leaves overla
 NgxPanel's opt-in headingMotion=stagger and headingMotionKey inputs animate only
 title grapheme spans. Accessible full-heading semantics and reduced-motion CSS
 retain readability; panel bodies and controls are not recreated on replay.
+
+NgxEntrance owns reusable one-shot opacity/intrinsic-height entrances, preference,
+focus/resize cancellation and cleanup. Consumers choose sequencing. Public
+expansion-theme() and warning-slide-toggle() Sass mixins centralize opt-in Material
+policy in the theme export; controls remain native Material. See [entrance guide](entrance.md).

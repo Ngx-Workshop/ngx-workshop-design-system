@@ -17,3 +17,5 @@
 - [008 — Deployment and npm publishing](008-deployment-publishing/spec.md) — Implemented; integration pending
 
 - [009 — Panel header slot](009-panel-header-slot/spec.md) — Implemented; release integration pending
+
+- [010 — Shared motion and Material policy](010-shared-motion-material-policy/spec.md) — Implemented locally; release integration pending

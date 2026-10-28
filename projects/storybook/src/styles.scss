@@ -231,3 +231,11 @@
   width: min(100%, 420px);
   margin-bottom: 24px;
 }
+
+// Opt-in public Material policy specimen (also compiled by the demo build).
+.entrance-example {
+  display: block;
+  padding: 24px;
+  @include ngx.expansion-theme();
+  .warning-toggle { @include ngx.warning-slide-toggle(); }
+}

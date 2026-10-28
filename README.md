@@ -73,3 +73,5 @@ Button variants: [shape, surface and interaction guide](docs/buttons.md). Apply 
 Code blocks: [Synthwave ’84 usage and tokens](docs/code.md). Native `<pre><code>` and `NgxCodeBlock` share the code palette; optional languages load standalone parsers. Compare the lightweight renderer with the actual editor under **Components → Code block → CodeMirror parity**.
 
 Overlay depth: [glass backdrops](docs/overlays.md) are shared across CDK-backed dialogs, sheets and popup backdrops. Workshop Frequency includes an interactive glass/solid/grid preview and live overlay actions.
+
+Shared introductions and Material policy: [NgxEntrance and Sass mixins](docs/entrance.md).

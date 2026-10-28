@@ -1,0 +1,41 @@
+@use '@angular/material' as mat;
+
+// Public, opt-in policy; Material retains control behavior.
+@mixin expansion-theme() {
+  @include mat.expansion-overrides(
+    (
+      container-background-color: var(--ngx-color-surface),
+      container-text-color: var(--ngx-color-text),
+      container-shape: var(--ngx-radius),
+      container-elevation-shadow: none,
+      header-text-color: var(--ngx-color-text),
+      header-description-color: var(--ngx-color-muted),
+      header-indicator-color: var(--ngx-color-primary),
+      header-text-font: var(--ngx-font-mono),
+      header-text-size: 0.85rem,
+      header-hover-state-layer-color: color-mix(in srgb, var(--ngx-color-primary) 8%, transparent),
+      header-focus-state-layer-color: color-mix(in srgb, var(--ngx-color-primary) 14%, transparent),
+      header-collapsed-state-height: 56px,
+      header-expanded-state-height: 56px,
+    )
+  );
+}
+
+@mixin warning-slide-toggle() {
+  @include mat.slide-toggle-overrides(
+    (
+      selected-track-color: var(--ngx-color-warning),
+      selected-hover-track-color: var(--ngx-color-warning),
+      selected-focus-track-color: var(--ngx-color-warning),
+      selected-pressed-track-color: var(--ngx-color-warning),
+      selected-handle-color: var(--ngx-color-canvas),
+      selected-hover-handle-color: var(--ngx-color-canvas),
+      selected-focus-handle-color: var(--ngx-color-canvas),
+      selected-pressed-handle-color: var(--ngx-color-canvas),
+      selected-icon-color: var(--ngx-color-warning),
+      selected-hover-state-layer-color: var(--ngx-color-warning),
+      selected-focus-state-layer-color: var(--ngx-color-warning),
+      selected-pressed-state-layer-color: var(--ngx-color-warning),
+    )
+  );
+}
