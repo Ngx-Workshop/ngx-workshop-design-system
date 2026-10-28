@@ -13,7 +13,7 @@ const meta: Meta = {
 export default meta;
 export const Colors: StoryObj = {
   render: () => ({
-    template: `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">${['primary', 'secondary', 'canvas', 'surface', 'text', 'muted', 'border', 'success', 'warning', 'error'].map((name) => `<div style="border:1px solid var(--ngx-color-border);border-radius:12px;overflow:hidden"><div style="height:100px;background:var(--ngx-color-${name})"></div><p style="padding:12px;font:var(--ngx-font-label)">--ngx-color-${name}</p></div>`).join('')}</div>`,
+    template: `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">${['primary', 'secondary', 'canvas', 'surface', 'text', 'muted', 'border', 'danger', 'violet', 'success', 'warning', 'error'].map((name) => `<div style="border:1px solid var(--ngx-color-border);border-radius:12px;overflow:hidden"><div style="height:100px;background:var(--ngx-color-${name})"></div><p style="padding:12px;font:var(--ngx-font-label)">--ngx-color-${name}</p></div>`).join('')}</div>`,
   }),
 };
 export const Typography: StoryObj = {

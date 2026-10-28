@@ -5,3 +5,4 @@ export * from './lib/button';
 export * from './lib/code-types';
 
 export * from './lib/entrance';
+export * from './lib/background';

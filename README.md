@@ -11,7 +11,11 @@ npm run storybook
 
 Open http://localhost:6006. Start with **Start here → Workshop frequency → Overview**.
 Explore **Material → Catalog → Overview** for the searchable index of all 36 installed Material UI families, with 92 new state stories and working interactions. See the [coverage matrix](docs/material-coverage.md).
-The toolbar switches Neon and Neutral themes, including Material overlays.
+The toolbar switches Neon, Neutral, Light / Daylight, Amber / Dawn, Amber / Dusk, Teal Light/Dark, NASA Light/Dark and Reese’s Light/Dark themes, including Material overlays.
+Daylight pairs pale surfaces with deep cyan and magenta; Dusk draws on amber city light, sage accents and olive-charcoal shadows. Dawn is its light counterpart, with warm ivory, amber, olive and terracotta.
+The Teal pair combines teal, orange and gold on ivory or deep indigo surfaces.
+NASA pairs mission-control blue/red with cool white or deep-space navy surfaces.
+Reese’s pairs orange, peanut-butter gold and chocolate with cream or dark chocolate surfaces.
 `npm start` runs the same showcase as a standalone Angular application on port 4200.
 
 ![HUD design system preview](docs/images/hud-preview.png)
@@ -56,7 +60,7 @@ import { NgxPanel, NgxStatus, NgxCodeBlock } from '@tmdjr/ngx-workshop-design-sy
 <ngx-code-block code="npm run build" />
 ```
 
-Override semantic CSS variables to introduce another palette. Use `data-ngx-theme="neutral"` on `<html>` for the included alternative. See [tokens](docs/tokens.md).
+Override semantic CSS variables to introduce another palette. Use `data-ngx-theme="neutral"`, `"light"`, `"amber-light"`, `"amber"`, `"teal-light"`, `"teal-dark"`, `"nasa-light"`, `"nasa-dark"`, `"reeses-light"` or `"reeses-dark"` on `<html>` for the included alternatives. See [tokens](docs/tokens.md).
 
 ## Workflow and checks
 
@@ -75,3 +79,5 @@ Code blocks: [Synthwave ’84 usage and tokens](docs/code.md). Native `<pre><cod
 Overlay depth: [glass backdrops](docs/overlays.md) are shared across CDK-backed dialogs, sheets and popup backdrops. Workshop Frequency includes an interactive glass/solid/grid preview and live overlay actions.
 
 Shared introductions and Material policy: [NgxEntrance and Sass mixins](docs/entrance.md).
+
+Backgrounds: [Rhombus lattice field](docs/backgrounds.md) adds a bottom-fading animated vector backdrop. Explore **Foundations → Backgrounds**.

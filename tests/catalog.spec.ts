@@ -86,8 +86,22 @@ test('Storybook manager exposes the theme toolbar', async ({ page }) => {
   await expect(frame.locator('html')).toHaveAttribute('data-ngx-theme', 'neutral');
 });
 
-test('foundation has no serious accessibility violations in either palette', async ({ page }) => {
-  for (const theme of ['neon', 'neutral']) {
+test('foundation has no serious accessibility violations in all eleven palettes', async ({
+  page,
+}) => {
+  for (const theme of [
+    'neon',
+    'neutral',
+    'light',
+    'amber-light',
+    'amber',
+    'teal-light',
+    'teal-dark',
+    'nasa-light',
+    'nasa-dark',
+    'reeses-light',
+    'reeses-dark',
+  ]) {
     await page.goto(overview + '&globals=theme:' + theme);
     await expect(page.getByRole('heading', { name: 'Interface the future' })).toBeVisible();
     await page.addScriptTag({ path: 'node_modules/axe-core/axe.min.js' });
@@ -111,7 +125,7 @@ test('overview shared primary action keeps a visible background and keyboard foc
   expect(
     await action
       .locator('.ngx-button-decoration')
-      .evaluate((el) => getComputedStyle(el).backgroundColor),
+      .evaluate((el) => getComputedStyle(el, '::before').backgroundColor),
   ).not.toBe('rgba(0, 0, 0, 0)');
   await action.focus();
   await page.keyboard.press('Tab');

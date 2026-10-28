@@ -1,12 +1,18 @@
 :host {
   display: block;
+  position: relative;
+  isolation: isolate;
 }
 .workbench {
   max-width: 1440px;
   padding: 0 48px;
   margin: auto;
   position: relative;
-  background: radial-gradient(ellipse at 88% 12%, #8737ff0c, transparent 45%);
+  background: radial-gradient(
+    ellipse at 88% 12%,
+    color-mix(in srgb, var(--ngx-color-violet) 5%, transparent),
+    transparent 45%
+  );
 }
 .masthead {
   display: flex;
@@ -36,7 +42,11 @@
   display: grid;
   place-content: center;
   font-size: 22px;
-  background: linear-gradient(135deg, #27f5ef16, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--ngx-color-primary) 9%, transparent),
+    transparent
+  );
 }
 .wordmark small {
   display: block;
@@ -147,7 +157,11 @@ h1 > span {
   position: relative;
   min-width: 0;
   padding: 16px 16px 10px;
-  background: linear-gradient(130deg, #27f5ef06, transparent 60%);
+  background: linear-gradient(
+    130deg,
+    color-mix(in srgb, var(--ngx-color-primary) 3%, transparent),
+    transparent 60%
+  );
   border-left: 1px solid var(--ngx-color-border);
   border-right: 1px solid var(--ngx-color-border);
 }
@@ -656,9 +670,9 @@ footer {
   background: linear-gradient(
     125deg,
     transparent 14%,
-    #27f5ef30 14% 29%,
+    color-mix(in srgb, var(--ngx-color-primary) 19%, transparent) 14% 29%,
     transparent 29% 63%,
-    #ff52c630 63% 77%,
+    color-mix(in srgb, var(--ngx-color-secondary) 19%, transparent) 63% 77%,
     transparent 77%
   );
 }
@@ -675,7 +689,7 @@ footer {
   bottom: 6%;
   right: 4%;
   font: 700 clamp(48px, 9vw, 100px) var(--ngx-font-mono);
-  color: #aa8cff20;
+  color: color-mix(in srgb, var(--ngx-color-violet) 13%, transparent);
 }
 .glass-actions {
   display: flex;

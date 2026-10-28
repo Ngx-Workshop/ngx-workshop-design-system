@@ -20,8 +20,8 @@ try {
     path.join(temp, 'consumer.ts'),
     `import {Component} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
-import {NgxEntrance,NgxPanel,NgxStatus,NgxCodeBlock,NgxPanelShape,NgxPanelBackground,NgxPanelMotion,NgxButton,NgxButtonShape,NgxCodeLanguage} from '@tmdjr/ngx-workshop-design-system';
-@Component({selector:'consumer-test',imports:[NgxPanel,NgxStatus,NgxCodeBlock,NgxButton,NgxEntrance,MatButtonModule],template:'<ngx-panel ngxEntrance="grow" [entranceDuration]="420" heading="Consumer" [shape]="shape" [background]="background" [motion]="motion"><ngx-status label="Ready" /></ngx-panel><ngx-code-block code="const ready = true;" [language]="language" contrast="original" [wrap]="true" /><button mat-flat-button ngxButton [shape]="buttonShape" surface="outline" motion="glitch">Execute</button>'})
+import {NgxBackground,NgxEntrance,NgxPanel,NgxStatus,NgxCodeBlock,NgxPanelShape,NgxPanelBackground,NgxPanelMotion,NgxButton,NgxButtonShape,NgxCodeLanguage} from '@tmdjr/ngx-workshop-design-system';
+@Component({selector:'consumer-test',imports:[NgxBackground,NgxPanel,NgxStatus,NgxCodeBlock,NgxButton,NgxEntrance,MatButtonModule],template:'<ngx-background [animated]="false" placement="viewport" [size]="420" [aspectRatio]="0.65" [spacing]="1.1" [rotation]="30" [traceSeed]="42" /><ngx-panel ngxEntrance="grow" [entranceDuration]="420" heading="Consumer" [shape]="shape" [background]="background" [motion]="motion"><ngx-status label="Ready" /></ngx-panel><ngx-code-block code="const ready = true;" [language]="language" contrast="original" [wrap]="true" /><button mat-flat-button ngxButton [shape]="buttonShape" surface="outline" motion="glitch">Execute</button>'})
 export class Consumer { language:NgxCodeLanguage="typescript"; buttonShape: NgxButtonShape = "chevron"; shape: NgxPanelShape = "stepped"; background: NgxPanelBackground = "glass"; motion: NgxPanelMotion = "boot"; }`,
   );
   writeFileSync(
@@ -55,6 +55,25 @@ export class Consumer { language:NgxCodeLanguage="typescript"; buttonShape: NgxB
   );
   if (!result.css.includes('--ngx-color-primary: #27f5ef'))
     throw Error('Packaged theme did not emit expected tokens');
+  for (const theme of [
+    'light',
+    'amber-light',
+    'amber',
+    'teal-light',
+    'teal-dark',
+    'nasa-light',
+    'nasa-dark',
+    'reeses-light',
+    'reeses-dark',
+  ]) {
+    if (!result.css.includes(`html[data-ngx-theme=${theme}]`))
+      throw Error(`Packaged ${theme} theme is missing`);
+  }
+  if (
+    !result.css.includes('color-scheme: light') ||
+    !result.css.includes('--ngx-color-primary: #ffb547')
+  )
+    throw Error('Packaged light scheme or amber tokens are missing');
   if (
     !result.css.includes('--ngx-code-background: #262335') ||
     !result.css.includes('.ngx-syntax-keyword')

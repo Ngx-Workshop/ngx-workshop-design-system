@@ -1,11 +1,11 @@
 # Architecture
 
 - `projects/ngx-workshop-ui`: distributable `@tmdjr/ngx-workshop-design-system` Angular library, public API in `src/public-api.ts`.
-- `src/styles/_index.scss`: public Ngx tokens, Material adapter, optional neutral palette and global accessibility defaults. ng-packagr copies this into the package's `styles/` directory.
+- `src/styles/_index.scss`: public Ngx tokens, Material adapter, Neon, Neutral, Light, Amber Dawn/Dusk and paired Teal/NASA/Reese’s palettes and global accessibility defaults. ng-packagr copies this into the package's `styles/` directory.
 - Shared components: `NgxPanel` projects optional `[ngxPanelHeader]` content beside the heading and body/actions into Material cards; `NgxStatus` labels Material chips; `NgxCodeBlock` displays escaped text and uses CDK Clipboard.
 - `projects/storybook`: standalone showcase application, Storybook configuration and stories. These are development consumers; no story files are shipped in the library.
 - Existing controls remain direct Material imports. A theme adapter can be replaced independently, but replacing Material itself still requires an intentional component migration.
-- Theme selection is document-scoped, so overlays inherit it. No persistence or backend is provided in the demo.
+- Theme selection is document-scoped, so overlays inherit it. Light, Amber Dawn, Teal Light, NASA Light and Reese’s Light regenerate the public Material adapter with a light scheme; the other palettes use a dark scheme. All palettes map Material color roles to semantic tokens. No persistence or backend is provided in the demo.
 
 Shell alignment source at creation: `mfe-shell-admin/package.json`, Angular/Material/CDK 21.1.0. This repository pins its own dependencies and builds without sibling checkouts.
 
@@ -37,3 +37,9 @@ NgxEntrance owns reusable one-shot opacity/intrinsic-height entrances, preferenc
 focus/resize cancellation and cleanup. Consumers choose sequencing. Public
 expansion-theme() and warning-slide-toggle() Sass mixins centralize opt-in Material
 policy in the theme export; controls remain native Material. See [entrance guide](entrance.md).
+
+`NgxBackground` renders a single deterministic rhombus lattice with one structure path and eight trace groups. Bounded size, aspectRatio, spacing and rotation inputs own geometry. Recursion, depth and childScale have been removed for performance. Defaults render 24 rhombi, and CSS animation count is capped at 17 including entrance. No runtime assets or timers are required.
+
+Local CSS tokens own palette, independent flow/color durations, intensity, height, line widths, random trace-length bounds and delay spread. Seeded hash streams supply repeatable per-group length and delay factors without rebuilding geometry. Reduced motion and still mode expose all traces immediately and stop all animations. Consumers own the isolated stacking context and choose container or viewport placement. See [backgrounds](backgrounds.md).
+
+The development-only BackgroundLab offers live controls, reset, reshuffle and current configuration export via CDK Clipboard with selectable-source fallback. Library geometry has no dependency on Forms or Clipboard. Copied markup omits the removed recursion inputs. The original RhombusFractal story URL remains available, labeled Rhombus lattice.

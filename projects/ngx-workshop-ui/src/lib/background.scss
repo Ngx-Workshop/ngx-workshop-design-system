@@ -1,0 +1,128 @@
+:host {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+}
+:host([data-placement='viewport']) {
+  position: fixed;
+}
+.field {
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--ngx-background-height, min(85vh, 900px));
+  opacity: var(--ngx-background-opacity, 0.48);
+  mask-image: linear-gradient(to bottom, transparent 12%, #000 78%);
+  background: radial-gradient(
+    ellipse at 50% 115%,
+    color-mix(in srgb, var(--ngx-color-primary) 9%, transparent),
+    transparent 65%
+  );
+  animation: ngx-background-arrive 2400ms ease-out both;
+}
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+}
+path {
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+}
+.structure {
+  stroke: var(--ngx-background-color-1, var(--ngx-color-primary));
+  stroke-width: var(--ngx-background-line-width, 0.6px);
+  opacity: 0.24;
+}
+.trace {
+  stroke: var(--ngx-background-color-1, var(--ngx-color-primary));
+  stroke-width: var(--ngx-background-trace-width, 1px);
+  --trace-min: clamp(
+    1,
+    min(
+      var(--ngx-background-trace-min-length, var(--ngx-background-trace-length, 40)),
+      var(--ngx-background-trace-max-length, var(--ngx-background-trace-length, 160))
+    ),
+    719
+  );
+  --trace-max: clamp(
+    1,
+    max(
+      var(--ngx-background-trace-min-length, var(--ngx-background-trace-length, 40)),
+      var(--ngx-background-trace-max-length, var(--ngx-background-trace-length, 160))
+    ),
+    719
+  );
+  --trace-length: calc(
+    var(--trace-min) + (var(--trace-max) - var(--trace-min)) * var(--trace-length-factor)
+  );
+  stroke-dasharray: var(--trace-length) calc(720 - var(--trace-length));
+  opacity: 0;
+  animation:
+    ngx-background-flow var(--ngx-background-flow-duration, var(--ngx-background-duration, 28s))
+      linear infinite,
+    ngx-background-palette var(--ngx-background-color-duration, var(--ngx-background-duration, 28s))
+      ease-in-out infinite;
+  animation-delay: calc(var(--trace-delay) * var(--ngx-background-trace-delay, 8s)), 0s;
+}
+@keyframes ngx-background-flow {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  to {
+    stroke-dashoffset: -720;
+  }
+}
+@keyframes ngx-background-palette {
+  0%,
+  100% {
+    stroke: var(--ngx-background-color-1, var(--ngx-color-primary));
+  }
+  25% {
+    stroke: var(--ngx-background-color-2, var(--ngx-color-violet));
+  }
+  50% {
+    stroke: var(--ngx-background-color-3, var(--ngx-color-secondary));
+  }
+  75% {
+    stroke: var(--ngx-background-color-4, var(--ngx-color-danger));
+  }
+}
+@keyframes ngx-background-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: var(--ngx-background-opacity, 0.48);
+    transform: translateY(0);
+  }
+}
+:host([data-animated='false']) .field,
+:host([data-animated='false']) .trace {
+  animation: none;
+}
+:host([data-animated='false']) .trace {
+  opacity: 0.85;
+  stroke: var(--ngx-background-color-2, var(--ngx-color-violet));
+}
+@media (prefers-reduced-motion: reduce) {
+  .field,
+  .trace {
+    animation: none !important;
+  }
+  .trace {
+    opacity: 0.85;
+    stroke: var(--ngx-background-color-2, var(--ngx-color-violet));
+  }
+}
+@media (forced-colors: active) {
+  :host {
+    display: none;
+  }
+}

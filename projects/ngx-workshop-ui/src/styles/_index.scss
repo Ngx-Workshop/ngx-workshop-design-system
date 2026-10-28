@@ -21,6 +21,7 @@
   --ngx-color-success: #74f5b5;
   --ngx-color-warning: #ffd078;
   --ngx-color-error: #ff8c9e;
+  --ngx-color-on-error: #34000c;
   --ngx-font-body: 'Segoe UI', system-ui, sans-serif;
   --ngx-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   --ngx-font-label: 500 0.75rem/1.5 var(--ngx-font-mono);
@@ -62,11 +63,11 @@
   --ngx-glow: 0 0 28px #27f5ef1a;
 }
 
-@mixin material-adapter() {
+@mixin material-adapter($theme-type: dark) {
   @include mat.theme(
     (
       color: (
-        theme-type: dark,
+        theme-type: $theme-type,
         primary: mat.$cyan-palette,
         tertiary: mat.$magenta-palette,
       ),
@@ -86,7 +87,7 @@
       secondary: var(--ngx-color-secondary),
       on-secondary: var(--ngx-color-on-secondary),
       secondary-container: var(--ngx-color-surface),
-      on-secondary-container: var(--ngx-color-primary),
+      on-secondary-container: var(--ngx-color-secondary),
       tertiary: var(--ngx-color-secondary),
       on-tertiary: var(--ngx-color-on-secondary),
       tertiary-container: var(--ngx-color-surface),
@@ -108,6 +109,24 @@
       outline: var(--ngx-color-border),
       outline-variant: var(--ngx-color-border),
       error: var(--ngx-color-error),
+      on-error: var(--ngx-color-on-error),
+      error-container: var(--ngx-color-surface),
+      on-error-container: var(--ngx-color-error),
+      surface-dim: var(--ngx-color-canvas),
+      surface-bright: var(--ngx-color-surface),
+      surface-tint: var(--ngx-color-primary),
+      primary-fixed: var(--ngx-color-primary),
+      primary-fixed-dim: var(--ngx-color-primary),
+      on-primary-fixed: var(--ngx-color-on-primary),
+      on-primary-fixed-variant: var(--ngx-color-on-primary),
+      secondary-fixed: var(--ngx-color-secondary),
+      secondary-fixed-dim: var(--ngx-color-secondary),
+      on-secondary-fixed: var(--ngx-color-on-secondary),
+      on-secondary-fixed-variant: var(--ngx-color-on-secondary),
+      tertiary-fixed: var(--ngx-color-secondary),
+      tertiary-fixed-dim: var(--ngx-color-secondary),
+      on-tertiary-fixed: var(--ngx-color-on-secondary),
+      on-tertiary-fixed-variant: var(--ngx-color-on-secondary),
     )
   );
   @include mat.button-overrides(
@@ -239,6 +258,211 @@
     --ngx-color-danger: #ff9cae;
     --ngx-color-on-danger: #320010;
     --ngx-color-violet: #c2c5cf;
+  }
+  html[data-ngx-theme='light'] {
+    color-scheme: light;
+    --ngx-color-canvas: #f4f7fa;
+    --ngx-color-surface: #ffffff;
+    --ngx-color-text: #172b3a;
+    --ngx-color-muted: #4d6272;
+    --ngx-color-border: #7b8a99;
+    --ngx-color-primary: #006b70;
+    --ngx-color-on-primary: #ffffff;
+    --ngx-color-secondary: #9b246d;
+    --ngx-color-on-secondary: #ffffff;
+    --ngx-color-success: #176b45;
+    --ngx-color-warning: #805500;
+    --ngx-color-error: #b42340;
+    --ngx-color-on-error: #ffffff;
+    --ngx-color-danger: #b42340;
+    --ngx-color-on-danger: #ffffff;
+    --ngx-color-violet: #7043a5;
+    --ngx-grid-color: #006b700c;
+    --ngx-scanline-opacity: 0;
+    --ngx-glow: none;
+    @include material-adapter(light);
+  }
+  html[data-ngx-theme='amber-light'] {
+    color-scheme: light;
+    --ngx-color-canvas: #fff8ed;
+    --ngx-color-surface: #fffdf6;
+    --ngx-color-text: #30291c;
+    --ngx-color-muted: #665b45;
+    --ngx-color-border: #91816a;
+    --ngx-color-primary: #8a5200;
+    --ngx-color-on-primary: #ffffff;
+    --ngx-color-secondary: #52643d;
+    --ngx-color-on-secondary: #ffffff;
+    --ngx-color-success: #426526;
+    --ngx-color-warning: #805500;
+    --ngx-color-error: #b73b22;
+    --ngx-color-on-error: #ffffff;
+    --ngx-color-danger: #b73b22;
+    --ngx-color-on-danger: #ffffff;
+    --ngx-color-violet: #776017;
+    --ngx-grid-color: #8a52000b;
+    --ngx-scanline-opacity: 0;
+    --ngx-glow: none;
+    @include material-adapter(light);
+  }
+  html[data-ngx-theme='amber'] {
+    --ngx-color-canvas: #12140f;
+    --ngx-color-surface: #22251d;
+    --ngx-color-text: #f5edda;
+    --ngx-color-muted: #bebba5;
+    --ngx-color-border: #72765c;
+    --ngx-color-primary: #ffb547;
+    --ngx-color-on-primary: #291800;
+    --ngx-color-secondary: #b8c49a;
+    --ngx-color-on-secondary: #202716;
+    --ngx-color-success: #b8d58b;
+    --ngx-color-warning: #ffd078;
+    --ngx-color-error: #ff9b78;
+    --ngx-color-on-error: #391005;
+    --ngx-color-danger: #ff794f;
+    --ngx-color-on-danger: #300d03;
+    --ngx-color-violet: #d6c281;
+    --ngx-grid-color: #ffb5470b;
+    --ngx-scanline-opacity: 0.04;
+    --ngx-glow: 0 0 28px #ffb5471a;
+  }
+  // Teal, orange and gold palette pair.
+  html[data-ngx-theme='teal-light'] {
+    color-scheme: light;
+    --ngx-color-canvas: #fff6e9;
+    --ngx-color-surface: #fffcf5;
+    --ngx-color-text: #182039;
+    --ngx-color-muted: #51566b;
+    --ngx-color-border: #8d7f78;
+    --ngx-color-primary: #007577;
+    --ngx-color-on-primary: #ffffff;
+    --ngx-color-secondary: #b43b18;
+    --ngx-color-on-secondary: #ffffff;
+    --ngx-color-success: #27633c;
+    --ngx-color-warning: #805700;
+    --ngx-color-error: #b32935;
+    --ngx-color-on-error: #ffffff;
+    --ngx-color-danger: #b32935;
+    --ngx-color-on-danger: #ffffff;
+    --ngx-color-violet: #805700;
+    --ngx-grid-color: #0075770b;
+    --ngx-scanline-opacity: 0;
+    --ngx-glow: none;
+    @include material-adapter(light);
+  }
+  html[data-ngx-theme='teal-dark'] {
+    color-scheme: dark;
+    --ngx-color-canvas: #0d1024;
+    --ngx-color-surface: #191e35;
+    --ngx-color-text: #fff1d5;
+    --ngx-color-muted: #b6bed1;
+    --ngx-color-border: #697792;
+    --ngx-color-primary: #24d6ce;
+    --ngx-color-on-primary: #002c31;
+    --ngx-color-secondary: #ff8748;
+    --ngx-color-on-secondary: #321208;
+    --ngx-color-success: #91d6a1;
+    --ngx-color-warning: #ffd166;
+    --ngx-color-error: #ff9c8d;
+    --ngx-color-on-error: #390b12;
+    --ngx-color-danger: #ff6e62;
+    --ngx-color-on-danger: #320b10;
+    --ngx-color-violet: #ffd166;
+    --ngx-grid-color: #24d6ce0c;
+    --ngx-scanline-opacity: 0.05;
+    --ngx-glow: 0 0 28px #24d6ce1a;
+  }
+  // NASA-inspired blue/red with contrast-adjusted dark-mode accents.
+  html[data-ngx-theme='nasa-light'] {
+    color-scheme: light;
+    --ngx-color-canvas: #f2f5f9;
+    --ngx-color-surface: #ffffff;
+    --ngx-color-text: #142238;
+    --ngx-color-muted: #526174;
+    --ngx-color-border: #7c8a9a;
+    --ngx-color-primary: #0b3d91;
+    --ngx-color-on-primary: #ffffff;
+    --ngx-color-secondary: #c62d1f;
+    --ngx-color-on-secondary: #ffffff;
+    --ngx-color-success: #246b3c;
+    --ngx-color-warning: #805600;
+    --ngx-color-error: #b92532;
+    --ngx-color-on-error: #ffffff;
+    --ngx-color-danger: #c62d1f;
+    --ngx-color-on-danger: #ffffff;
+    --ngx-color-violet: #52657c;
+    --ngx-grid-color: #0b3d910a;
+    --ngx-scanline-opacity: 0;
+    --ngx-glow: none;
+    @include material-adapter(light);
+  }
+  html[data-ngx-theme='nasa-dark'] {
+    color-scheme: dark;
+    --ngx-color-canvas: #070e1b;
+    --ngx-color-surface: #111e32;
+    --ngx-color-text: #f4f7fb;
+    --ngx-color-muted: #b4c3d6;
+    --ngx-color-border: #657d9b;
+    --ngx-color-primary: #8bbcff;
+    --ngx-color-on-primary: #082346;
+    --ngx-color-secondary: #ff735c;
+    --ngx-color-on-secondary: #360c08;
+    --ngx-color-success: #91d4a5;
+    --ngx-color-warning: #ffc375;
+    --ngx-color-error: #ff9b91;
+    --ngx-color-on-error: #3c0a10;
+    --ngx-color-danger: #ff735c;
+    --ngx-color-on-danger: #360c08;
+    --ngx-color-violet: #bdcce0;
+    --ngx-grid-color: #8bbcff0b;
+    --ngx-scanline-opacity: 0;
+    --ngx-glow: none;
+  }
+  // Orange, peanut-butter gold and chocolate, adjusted for interface contrast.
+  html[data-ngx-theme='reeses-light'] {
+    color-scheme: light;
+    --ngx-color-canvas: #fff5e5;
+    --ngx-color-surface: #fffcf5;
+    --ngx-color-text: #352015;
+    --ngx-color-muted: #725543;
+    --ngx-color-border: #9b7b60;
+    --ngx-color-primary: #b94700;
+    --ngx-color-on-primary: #ffffff;
+    --ngx-color-secondary: #6b371b;
+    --ngx-color-on-secondary: #ffffff;
+    --ngx-color-success: #42652d;
+    --ngx-color-warning: #805600;
+    --ngx-color-error: #b73125;
+    --ngx-color-on-error: #ffffff;
+    --ngx-color-danger: #b73125;
+    --ngx-color-on-danger: #ffffff;
+    --ngx-color-violet: #8a5a00;
+    --ngx-grid-color: #b947000a;
+    --ngx-scanline-opacity: 0;
+    --ngx-glow: none;
+    @include material-adapter(light);
+  }
+  html[data-ngx-theme='reeses-dark'] {
+    color-scheme: dark;
+    --ngx-color-canvas: #1b100b;
+    --ngx-color-surface: #2c1b13;
+    --ngx-color-text: #fff0d4;
+    --ngx-color-muted: #d3b494;
+    --ngx-color-border: #987556;
+    --ngx-color-primary: #ff8618;
+    --ngx-color-on-primary: #371600;
+    --ngx-color-secondary: #efb85d;
+    --ngx-color-on-secondary: #37200b;
+    --ngx-color-success: #b0d38a;
+    --ngx-color-warning: #ffd543;
+    --ngx-color-error: #ffab8a;
+    --ngx-color-on-error: #401307;
+    --ngx-color-danger: #ff926a;
+    --ngx-color-on-danger: #401307;
+    --ngx-color-violet: #ffd543;
+    --ngx-grid-color: #ff86180c;
+    --ngx-scanline-opacity: 0;
+    --ngx-glow: 0 0 24px #ff861818;
   }
   body {
     margin: 0;

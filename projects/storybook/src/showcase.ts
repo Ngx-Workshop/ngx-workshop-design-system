@@ -21,7 +21,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
-import { NgxCodeBlock, NgxPanel, NgxStatus, NgxButton, NgxPanelBackground } from '@tmdjr/ngx-workshop-design-system';
+import {
+  NgxCodeBlock,
+  NgxPanel,
+  NgxStatus,
+  NgxButton,
+  NgxPanelBackground,
+  NgxBackground,
+} from '@tmdjr/ngx-workshop-design-system';
 
 @Component({
   selector: 'ngx-demo-dialog',
@@ -123,6 +130,7 @@ export class DemoShareSheet {
     NgxCodeBlock,
     NgxPanel,
     NgxStatus,
+    NgxBackground,
   ],
   templateUrl: './showcase.html',
   styleUrl: './showcase.scss',
@@ -161,9 +169,24 @@ import { NgxPanel, NgxButton, NgxCodeBlock } from '@tmdjr/ngx-workshop-design-sy
 // @use '@tmdjr/ngx-workshop-design-system/theme' as ngx;
 // @include ngx.theme();`;
   toggleTheme(): void {
-    const value =
-      document.documentElement.getAttribute('data-ngx-theme') === 'neutral' ? 'neon' : 'neutral';
-    document.documentElement.setAttribute('data-ngx-theme', value);
+    const themes = [
+      'neon',
+      'neutral',
+      'light',
+      'amber-light',
+      'amber',
+      'teal-light',
+      'teal-dark',
+      'nasa-light',
+      'nasa-dark',
+      'reeses-light',
+      'reeses-dark',
+    ];
+    const current = document.documentElement.getAttribute('data-ngx-theme') ?? 'neon';
+    document.documentElement.setAttribute(
+      'data-ngx-theme',
+      themes[(themes.indexOf(current) + 1) % themes.length],
+    );
   }
   openDialog(): void {
     this.dialog
