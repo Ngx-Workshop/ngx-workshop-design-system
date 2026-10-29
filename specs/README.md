@@ -38,4 +38,4 @@
 
 - [019 — Reese’s brand refinement](019-reeses-brand-refinement/spec.md) — Complete
 
-- [020 — Theme-aware shared background](020-theme-aware-background/spec.md) — In progress
+- [020 — Theme-aware shared background](020-theme-aware-background/spec.md) — Complete

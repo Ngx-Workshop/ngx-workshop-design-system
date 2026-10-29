@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const story = '/iframe.html?id=foundations-backgrounds-theme-aware--neon&viewMode=story';
+const story = '/iframe.html?id=foundations-backgrounds-theme-aware--automatic&viewMode=story';
 const themes = [
   'neon',
   'neutral',
@@ -44,6 +44,9 @@ test('one component follows all themes, retains content and keeps panel override
     await expect(svg).toHaveCSS('display', branded ? 'none' : 'block');
     await expect(pattern).toHaveCSS('display', branded ? 'block' : 'none');
     if (branded) {
+      await expect
+        .poll(() => pattern.evaluate((el) => getComputedStyle(el).backgroundImage))
+        .toContain(theme.startsWith('nasa') ? '110%2092' : '841.9%20352.3');
       const image = await pattern.evaluate((el) => getComputedStyle(el).backgroundImage);
       expect(image).toContain('data:image/svg+xml');
       expect(image).toContain(theme.startsWith('nasa') ? '110%2092' : '841.9%20352.3');
@@ -59,7 +62,9 @@ test('one component follows all themes, retains content and keeps panel override
     await expect(svg).toHaveAttribute('data-original', 'true');
     await expect(content).toHaveAttribute('data-original', 'true');
     await expect(background.locator('.structure')).toHaveAttribute('d', originalGeometry!);
-    expect(await background.evaluate((el) => el.getAnimations({ subtree: true }).length)).toBe(0);
+    await expect
+      .poll(() => background.evaluate((el) => el.getAnimations({ subtree: true }).length))
+      .toBe(0);
   }
   expect(externalRequests).toEqual([]);
   await page.getByRole('link', { name: 'Explore the scene' }).click();
@@ -69,7 +74,7 @@ test('one component follows all themes, retains content and keeps panel override
 for (const theme of ['nasa-light', 'nasa-dark', 'reeses-light', 'reeses-dark']) {
   test(`${theme}: branded scene, mobile containment and accessibility`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto(`${story}&globals=theme:${theme}`);
+    await page.goto(`/iframe.html?id=foundations-backgrounds-theme-aware--${theme}&viewMode=story`);
     await expect(page.getByRole('heading', { name: 'A background that belongs.' })).toBeVisible();
     const background = page.locator('ngx-background');
     await expect(background).toHaveAttribute('aria-hidden', 'true');
@@ -78,9 +83,9 @@ for (const theme of ['nasa-light', 'nasa-dark', 'reeses-light', 'reeses-dark']) 
     await expect(background.locator('.pattern')).toHaveCSS('display', 'block');
     await page.screenshot({ path: `test-results/background-${theme}-desktop.png`, fullPage: true });
     await page.setViewportSize({ width: 390, height: 844 });
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
-      true,
-    );
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
+      .toBe(true);
     await page.screenshot({ path: `test-results/background-${theme}-mobile.png`, fullPage: true });
     await page.addScriptTag({ path: 'node_modules/axe-core/axe.min.js' });
     const violations = await page.evaluate(async () => {
@@ -111,7 +116,7 @@ test('contained instances and explicit lattice stay independent, still and reduc
     expect((await item.boundingBox())!.height).toBe(498);
     expect(await item.evaluate((el) => el.getAnimations({ subtree: true }).length)).toBe(0);
   }
-  await page.goto(story + '&globals=theme:nasa-dark');
+  await page.goto('/iframe.html?id=foundations-backgrounds-theme-aware--nasa-dark&viewMode=story');
   const background = page.locator('ngx-background');
   await expect(background.locator('.pattern')).toHaveCSS('display', 'block');
   const animations = await background.evaluate((el) =>

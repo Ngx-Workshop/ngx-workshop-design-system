@@ -12,9 +12,9 @@ const meta: Meta<BackgroundLab> = {
     animated: true,
     placement: 'container',
     size: 360,
-    aspectRatio: 104 / 180,
+    aspectRatio: 0.58,
     spacing: 1,
-    rotation: 0,
+    rotation: 60,
     traceSeed: 1,
   },
   argTypes: {

@@ -25,3 +25,5 @@ Evidence: all tasks verified by the build, browser and visual results in [handof
 
 - [x] T017 — Remove recursion implementation, depth/childScale API and preview/export controls (FR-015).
 - [x] T018 — Update stories/docs/package consumer and verify geometry/animation bounds, retained behavior and builds (AC-008).
+
+- [x] T019 — Align component, lab/reset/export, stories and docs with branding defaults; verify default and explicitly configured traces, required builds and background/theme browser checks (AC-009).

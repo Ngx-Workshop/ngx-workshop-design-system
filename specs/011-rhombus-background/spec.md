@@ -55,3 +55,7 @@ User supersedes the fractal requirement due to performance. FR-001/FR-006 recurs
 
 - FR-015: Render only a single rhombus lattice, with no child geometry or recursive controls/API. Preserve other styling, rotation, random traces and configuration copy.
 - AC-008: Default renders 24 rhombi in one structure path plus eight trace groups, bounded to 17 active CSS animations including entrance. Export and stories contain no depth/childScale inputs. Dense/mobile layouts and all retained controls still work.
+
+## Branding lattice defaults — 2026-10-29
+
+- FR-016 / AC-009: Default lattice uses size 360, aspect ratio 0.58, spacing 1, rotation 60°, seed 1, animated container placement, 40–165 trace lengths and zero start delay. Preserve height min(85vh, 900px), opacity 0.48, both 28s cycles, 0.6px outlines, 1px traces and inherited theme colors. Component fallbacks, lab initialization/reset, stories and exported configuration agree. Automatic theme artwork selection remains unchanged.

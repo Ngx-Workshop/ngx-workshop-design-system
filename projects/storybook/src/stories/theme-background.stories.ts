@@ -29,6 +29,7 @@ const meta: Meta = {
   }),
 };
 export default meta;
+export const Automatic: StoryObj = {};
 export const Neon: StoryObj = { globals: { theme: 'neon' } };
 export const NasaLight: StoryObj = { globals: { theme: 'nasa-light' } };
 export const NasaDark: StoryObj = { globals: { theme: 'nasa-dark' } };

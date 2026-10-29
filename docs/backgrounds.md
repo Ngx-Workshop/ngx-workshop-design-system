@@ -29,7 +29,7 @@ The default `design="theme"` follows `data-ngx-theme` automatically. No theme in
 
 Change the theme attribute on `<html>` using your existing picker. The same background instance and page content remain in place. Brand artwork is bundled with the shared theme and has no runtime network dependency. Pattern designs use a larger repeat than the panel patterns and keep the bottom fade; they do not display the lattice or run its trace animations. The standalone showcase already uses this component and inherits the automatic behavior.
 
-To keep the geometric design in every palette, use `<ngx-background design="lattice" />`. Its colors still inherit the selected theme. The existing lattice study/copy controls explicitly select this mode; automatic examples live under **Foundations → Backgrounds → Theme aware**.
+To keep the geometric design in every palette, use `<ngx-background design="lattice" />`. Its colors still inherit the selected theme. The existing lattice study/copy controls explicitly select this mode; automatic examples live under **Foundations → Backgrounds → Theme aware**. The **Automatic** story leaves the toolbar enabled so you can switch the design live; named theme stories provide fixed comparison previews.
 
 In lattice mode, a single lattice of rhombi fades upward from the bottom. Quiet base outlines support traveling traces cycling through `--ngx-color-primary`, `--ngx-color-violet`, `--ngx-color-secondary` and `--ngx-color-danger`. Colors inherit live, including Neutral mode. Lattice geometry needs no assets, timers or global SVG IDs; branded SVG IDs are scoped inside embedded image resources. Multiple instances are independent.
 
@@ -41,7 +41,7 @@ In lattice mode, a single lattice of rhombi fades upward from the bottom. Quiet 
 
 ## Geometry controls
 
-The geometry inputs apply to the lattice design and update reactively. Omit them to keep the original composition. Use `design="lattice"` when exporting or tuning geometry that must remain visible in branded themes.
+The geometry inputs apply to the lattice design and update reactively. Omit them to use the branding composition: size 360, aspect ratio 0.58, spacing 1 and rotation 60°. Use `design="lattice"` when exporting or tuning geometry that must remain visible in branded themes.
 
 ```html
 <ngx-background design="lattice" [size]="420" [aspectRatio]="0.65" [spacing]="1.15" />
@@ -50,8 +50,10 @@ The geometry inputs apply to the lattice design and update reactively. Omit them
 | Input         | Default     | Range and meaning                                               |
 | ------------- | ----------- | --------------------------------------------------------------- |
 | `size`        | `360`       | 180–720; root rhombus width in the 1440-unit SVG canvas         |
-| `aspectRatio` | `104 / 180` | 0.3–1; height divided by width, with 1 giving square diamonds   |
+| `aspectRatio` | `0.58` | 0.3–1; height divided by width, with 1 giving square diamonds   |
 | `spacing`     | `1`         | 0.75–1.75; root spacing multiplier, smaller values overlap more |
+| `rotation`    | `60`        | Clockwise degrees around each rhombus center |
+| `traceSeed`   | `1`         | Reproducible trace lengths and optional randomized starts |
 
 Values clamp to these bounds and non-finite values use defaults. Patterns remain bottom anchored; SVG scales/crops to its field, so size is a design-space measure rather than a fixed screen-pixel width. Geometry recomputes only when these inputs change. Opacity, speed and motion changes retain geometry.
 
@@ -92,13 +94,13 @@ The live lab has four color pickers, separate Pattern cycle and Color cycle slid
 
 ## Rotation
 
-`[rotation]="30"` rotates each rhombus clockwise by 30 degrees around its root center while keeping the lattice positions and bottom fade anchored. Default: `0`. Negative and multiple-turn angles normalize modulo 360; non-finite values fall back to zero. This is an orientation setting, not another animation. The Rotated story provides an example.
+`[rotation]="30"` rotates each rhombus clockwise by 30 degrees around its root center while keeping the lattice positions and bottom fade anchored. Default: `60`. Negative and multiple-turn angles normalize modulo 360; non-finite values fall back to 60. This is an orientation setting, not another animation. The Rotated story provides an example.
 
 ## Trace length and randomized starts
 
-`--ngx-background-trace-length` sets a fixed visible dash length (unitless), overriding the default 40–160 random range when explicit range endpoints are omitted. The length is clamped to 1–719 inside a fixed 720-unit dash cycle, so changing length preserves travel speed and seamless looping. The lab min/max sliders cover 5–360. Use a smaller value for short sparks or a larger value for long moving edges.
+`--ngx-background-trace-length` sets a fixed visible dash length (unitless), overriding the default 40–165 random range when explicit range endpoints are omitted. The length is clamped to 1–719 inside a fixed 720-unit dash cycle, so changing length preserves travel speed and seamless looping. The lab min/max sliders cover 5–360. Use a smaller value for short sparks or a larger value for long moving edges.
 
-`--ngx-background-trace-delay` sets the maximum randomized start delay (default `8s`; use a non-negative duration). The lattice splits its outlines into eight trace groups. One group starts immediately and the others wait a seeded fraction of this maximum, remaining hidden until they start. After starting, traces loop continuously. Set `0s` for synchronized starts. Palette transitions retain their independent timing.
+`--ngx-background-trace-delay` sets the maximum randomized start delay (default `0s`; use a non-negative duration). The lattice splits its outlines into eight trace groups. One group starts immediately and the others wait a seeded fraction of this maximum, remaining hidden until they start. After starting, traces loop continuously. The default `0s` synchronizes starts; set a positive duration to stagger them. Palette transitions retain their independent timing.
 
 ```html
 <ngx-background [traceSeed]="42" />
@@ -115,16 +117,16 @@ The live lab has four color pickers, separate Pattern cycle and Color cycle slid
 
 ## Random length ranges and copying configuration
 
-Set `--ngx-background-trace-min-length` and `--ngx-background-trace-max-length` to give each trace group a reproducible random length. Both accept unitless numbers; values normalize to 1–719, reversed endpoints are sorted, and equal endpoints produce a fixed length. Each endpoint falls back to an explicitly set `--ngx-background-trace-length` when omitted, preserving fixed-length consumers. Otherwise minimum defaults to `40` and maximum to `160`.
+Set `--ngx-background-trace-min-length` and `--ngx-background-trace-max-length` to give each trace group a reproducible random length. Both accept unitless numbers; values normalize to 1–719, reversed endpoints are sorted, and equal endpoints produce a fixed length. Each endpoint falls back to an explicitly set `--ngx-background-trace-length` when omitted, preserving fixed-length consumers. Otherwise minimum defaults to `40` and maximum to `165`.
 
 ```scss
 .scene {
   --ngx-background-trace-min-length: 40;
-  --ngx-background-trace-max-length: 160;
+  --ngx-background-trace-max-length: 165;
 }
 ```
 
-The lab starts with this 40–160 range. Minimum and maximum sliders move the other endpoint when needed to keep the range valid. **Reshuffle traces** changes both lengths and delays using the shared `traceSeed`, without rebuilding geometry. Length variation remains independent of travel speed and palette timing.
+The lab starts with this 40–165 range. Minimum and maximum sliders move the other endpoint when needed to keep the range valid. **Reshuffle traces** changes both lengths and delays using the shared `traceSeed`, without rebuilding geometry. Length variation remains independent of travel speed and palette timing.
 
 **Copy background configuration** copies the current Angular markup and scoped CSS, with import and theme setup guidance. Paste the labeled sections into your component template and stylesheet and add `NgxBackground` to its standalone imports. Install the design-system package and matching Angular/Material dependencies first. Export includes full-precision geometry, placement, seed, paused state, trace range, delay spread, widths, intensity, both durations and any custom palette. Theme mode exports inherited colors so it adapts to the destination app’s theme. The copied geometry and seed reproduce the configuration; the animation restarts in the destination rather than transferring its current elapsed time.
 

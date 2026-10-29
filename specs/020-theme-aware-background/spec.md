@@ -1,6 +1,6 @@
 # Theme-aware shared background
 
-Status: In progress
+Status: Complete
 Created: 2026-10-29
 
 One existing `<ngx-background />` automatically changes its artwork when the document theme changes. No consumer theme switch statements or replacement components are needed.

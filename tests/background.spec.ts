@@ -205,8 +205,10 @@ test('rotation preserves nodes, wraps at 360 degrees and resets', async ({ page 
   await slider.focus();
   await page.keyboard.press('ArrowRight');
   await expect.poll(() => path.getAttribute('d')).not.toBe(original);
+  await page.keyboard.press('Home');
+  const unrotated = await path.getAttribute('d');
   await page.keyboard.press('End');
-  await expect(path).toHaveAttribute('d', original!);
+  await expect(path).toHaveAttribute('d', unrotated!);
   await page.keyboard.press('ArrowLeft');
   await expect.poll(() => path.getAttribute('d')).not.toBe(original);
   await page.getByRole('button', { name: 'Reset', exact: true }).click();
@@ -232,6 +234,11 @@ test('random trace delays reshuffle independently of geometry and reset', async 
     traces.evaluateAll((nodes) =>
       nodes.map((node) => parseFloat(getComputedStyle(node).animationDelay.split(',')[0])),
     );
+  await expect.poll(async () => (await delays()).every((delay) => delay === 0)).toBe(true);
+  const slider = page.getByRole('slider', { name: 'Random delay', exact: true });
+  await slider.focus();
+  await page.keyboard.press('Home');
+  for (let step = 0; step < 8; step++) await page.keyboard.press('ArrowRight');
   const initial = await delays();
   expect(initial[0]).toBe(0);
   expect(new Set(initial).size).toBeGreaterThan(4);
@@ -239,7 +246,6 @@ test('random trace delays reshuffle independently of geometry and reset', async 
   await page.getByRole('button', { name: 'Reshuffle traces', exact: true }).click();
   await expect.poll(delays).not.toEqual(initial);
   await expect(background.locator('.structure').first()).toHaveAttribute('d', geometry!);
-  const slider = page.getByRole('slider', { name: 'Random delay', exact: true });
   await slider.focus();
   await page.keyboard.press('Home');
   await expect.poll(async () => (await delays()).every((delay) => delay === 0)).toBe(true);
@@ -274,7 +280,7 @@ test('random trace delays reshuffle independently of geometry and reset', async 
     .toBe(0);
   await page.getByRole('button', { name: 'Reset', exact: true }).click();
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await expect.poll(delays).toEqual(initial);
+  await expect.poll(async () => (await delays()).every((delay) => delay === 0)).toBe(true);
 });
 
 test('random trace lengths stay in bounds, reshuffle and support equal endpoints', async ({
@@ -294,7 +300,7 @@ test('random trace lengths stay in bounds, reshuffle and support equal endpoints
       ),
     );
   const initial = await lengths();
-  expect(initial.every((value) => value >= 40 && value <= 160)).toBe(true);
+  expect(initial.every((value) => value >= 40 && value <= 165)).toBe(true);
   expect(new Set(initial).size).toBeGreaterThan(4);
   const originalGeometry = await page
     .locator('ngx-background .structure')
@@ -317,7 +323,7 @@ test('random trace lengths stay in bounds, reshuffle and support equal endpoints
   await expect.poll(lengths).toEqual(initial);
   await page.goto('/iframe.html?id=foundations-backgrounds--contained&viewMode=story');
   await expect(traces).toHaveCount(8);
-  expect((await lengths()).every((value) => value >= 40 && value <= 160)).toBe(true);
+  expect((await lengths()).every((value) => value >= 40 && value <= 165)).toBe(true);
   await page.locator('ngx-background').evaluate((node) => {
     const style = (node as HTMLElement).style;
     style.setProperty('--ngx-background-trace-min-length', '200');
@@ -367,7 +373,7 @@ test('copies the current reusable background configuration and updates after edi
     'placement="viewport"',
     '[animated]="false"',
     '[size]="720"',
-    '[aspectRatio]="0.5777777777777777"',
+    '[aspectRatio]="0.58"',
     '[traceSeed]="2"',
     '[rotation]="360"',
     '--ngx-background-trace-min-length: 40;',
@@ -377,7 +383,7 @@ test('copies the current reusable background configuration and updates after edi
     '--ngx-background-color-1: #123456;',
     '--ngx-background-trace-width: 4px;',
     '--ngx-background-opacity: 0.48;',
-    '--ngx-background-trace-delay: 8s;',
+    '--ngx-background-trace-delay: 0s;',
     'isolation: isolate;',
   ])
     expect(content).toContain(fragment);
@@ -435,4 +441,53 @@ test('single lattice bounds geometry and animation work without recursion contro
   expect(
     await background.evaluate((node) => node.getAnimations({ subtree: true }).length),
   ).toBeLessThanOrEqual(17);
+});
+
+test('branding defaults agree across lab export, reset and bare lattice', async ({ page }) => {
+  await page.goto(story);
+  const background = page.locator('ngx-background');
+  const geometry = await background.locator('.structure').getAttribute('d');
+  await page.getByText('View configuration', { exact: true }).click();
+  const configuration = page.locator('pre[aria-label="Background configuration"]');
+  for (const fragment of [
+    'design="lattice"',
+    'placement="container"',
+    '[animated]="true"',
+    '[size]="360"',
+    '[aspectRatio]="0.58"',
+    '[spacing]="1"',
+    '[rotation]="60"',
+    '[traceSeed]="1"',
+    '--ngx-background-height: min(85vh, 900px);',
+    '--ngx-background-opacity: 0.48;',
+    '--ngx-background-flow-duration: 28s;',
+    '--ngx-background-color-duration: 28s;',
+    '--ngx-background-line-width: 0.6px;',
+    '--ngx-background-trace-width: 1px;',
+    '--ngx-background-trace-min-length: 40;',
+    '--ngx-background-trace-max-length: 165;',
+    '--ngx-background-trace-delay: 0s;',
+    'Outline colors inherit the app theme.',
+  ])
+    await expect(configuration).toContainText(fragment);
+  const original = await configuration.textContent();
+  await page.getByRole('slider', { name: 'Rotation', exact: true }).focus();
+  await page.keyboard.press('Home');
+  await page.getByRole('slider', { name: 'Maximum trace length', exact: true }).focus();
+  await page.keyboard.press('End');
+  await page.getByRole('button', { name: 'Reset', exact: true }).click();
+  await expect(configuration).toHaveText(original!);
+  const lengths = await background
+    .locator('.trace')
+    .evaluateAll((nodes) => nodes.map((node) => getComputedStyle(node).strokeDasharray));
+  await page.goto(
+    '/iframe.html?id=foundations-backgrounds-theme-aware--multiple-scenes&viewMode=story',
+  );
+  const bare = page.locator('ngx-background[data-design="lattice"]');
+  await expect(bare.locator('.structure')).toHaveAttribute('d', geometry!);
+  expect(
+    await bare
+      .locator('.trace')
+      .evaluateAll((nodes) => nodes.map((node) => getComputedStyle(node).strokeDasharray)),
+  ).toEqual(lengths);
 });

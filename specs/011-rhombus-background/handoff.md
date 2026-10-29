@@ -69,3 +69,10 @@ User superseded the recursive-pattern requirement. Removed recursive generation 
 Preserved color/style controls, independent durations, rotation, random lengths/delays, still/reduced-motion behavior, placement, export and clipboard fallback. The existing RhombusFractal story URL is retained and labeled Rhombus lattice; Dense Lattice replaces Intricate. Current documentation, README, architecture, stories and packed consumer no longer require recursion inputs. Previously copied templates must remove depth and childScale.
 
 Validation: final `npm run verify` PASS (library/demo/story types/Storybook/packed consumer). Final background/catalog browser suite PASS, 20 tests, including default/densest geometry counts, path/animation bounds, absence of recursion controls, export omission and retained behavior. Exact new clipboard markup and styles compile against the built library in a separate consumer. Desktop/mobile layout review PASS; `git diff --check` PASS. Geometry and animation counts are verified; no frame-rate benchmark is claimed. No remaining local work; no publication/deployment performed.
+
+
+## Branding lattice preset — 2026-10-29
+
+Delivered AC-009: default aspectRatio 0.58, rotation 60°, trace range 40–165 and delay 0s. All remaining requested settings already matched. Updated component inputs/non-finite fallbacks, CSS fallbacks, lab initialization/reset/export, story args and current docs. Default design remains theme-aware; explicit lattice mode and theme-fallback lattice both inherit the new geometry. Existing uncommitted theme-aware work preserved.
+
+Verification: npm run verify passed library/demo/story types/static Storybook and packed Angular/Sass consumer. Final background/theme browser matrix passed all 20 tests (5.3s). Reviewed desktop/mobile screenshots showing the new preset. Updated the rotation wrap check to compare 0°/360° independently of the new 60° reset default. One intermediate theme-cycle check failed at the pre-existing immediate image-equality assertion; the unchanged test passed in the final complete rerun. git diff --check passed. No deployment or publishing performed.

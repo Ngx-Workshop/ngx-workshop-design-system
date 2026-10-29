@@ -104,11 +104,11 @@ export class NgxBackground {
   /** Root rhombus width in SVG units (180–720). */
   readonly size = input(360);
   /** Height / width (0.3–1). A value of 1 produces square diamonds. */
-  readonly aspectRatio = input(104 / 180);
+  readonly aspectRatio = input(0.58);
   /** Distance between root rhombi as a size multiplier (0.75–1.75). */
   readonly spacing = input(1);
   /** Clockwise rotation of each rhombus in degrees. */
-  readonly rotation = input(0);
+  readonly rotation = input(60);
   /** Reproducible randomized trace starts; changing seed leaves geometry intact. */
   readonly traceSeed = input(1);
   protected readonly delays = computed(() => {
@@ -125,9 +125,9 @@ export class NgxBackground {
   protected readonly lattice = computed(() =>
     rhombusLattice(
       bounded(this.size(), 180, 720, 360),
-      bounded(this.aspectRatio(), 0.3, 1, 104 / 180),
+      bounded(this.aspectRatio(), 0.3, 1, 0.58),
       bounded(this.spacing(), 0.75, 1.75, 1),
-      Number.isFinite(this.rotation()) ? this.rotation() % 360 : 0,
+      Number.isFinite(this.rotation()) ? this.rotation() % 360 : 60,
     ),
   );
 }
