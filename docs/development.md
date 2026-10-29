@@ -21,7 +21,7 @@ npm test                   # catalog behavior + keyboard + theme + package consu
 
 Browser tests start a local static server on 6007 and need an existing static Storybook build.
 Storybook's accessibility addon is available for manual per-story inspection; it is not a substitute for an accessibility audit.
-The copy story requires localhost/HTTPS and clipboard permission. No external fonts or images are loaded.
+The copy story requires localhost/HTTPS and clipboard permission. No external fonts or images are loaded at runtime. NASA themes embed locally packaged fonts and insignia artwork; Reese’s themes embed their source wordmark.
 To add a component, first specify its observable behavior, prefer a Material primitive, export it through public-api.ts and add a story.
 
 The root Webpack override matches the Shell (5.105.2) and keeps Angular and Storybook on one compilation instance. Material 21.1 Sass internals currently emit upstream deprecation notices; Storybook emits catalog bundle size warnings. Neither blocks builds.

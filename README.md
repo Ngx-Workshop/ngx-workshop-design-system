@@ -14,18 +14,18 @@ Explore **Material → Catalog → Overview** for the searchable index of all 36
 The toolbar switches Neon, Neutral, Light / Daylight, Amber / Dawn, Amber / Dusk, Teal Light/Dark, NASA Light/Dark and Reese’s Light/Dark themes, including Material overlays.
 Daylight pairs pale surfaces with deep cyan and magenta; Dusk draws on amber city light, sage accents and olive-charcoal shadows. Dawn is its light counterpart, with warm ivory, amber, olive and terracotta.
 The Teal pair combines teal, orange and gold on ivory or deep indigo surfaces.
-NASA pairs mission-control blue/red with cool white or deep-space navy surfaces.
-Reese’s pairs orange, peanut-butter gold and chocolate with cream or dark chocolate surfaces.
+NASA pairs insignia blue/red with cool white or near-black surfaces, Inter headings, Public Sans body text and DM Mono labels. Grid panels include a faint repeating insignia. Fonts and artwork are bundled for offline use.
+Reese’s pairs vibrant orange, bright yellow and rich chocolate with cream or chocolate surfaces, preserving the default typography. Grid panels use a soft staggered wordmark pattern without grid lines.
 `npm start` runs the same showcase as a standalone Angular application on port 4200.
 
 ![HUD design system preview](docs/images/hud-preview.png)
 
 ## Workspace
 
-| Project                    | Purpose                                               |
-| -------------------------- | ----------------------------------------------------- |
-| `projects/ngx-workshop-ui` | Packaged `@tmdjr/ngx-workshop-design-system` library and Sass theme    |
-| `projects/storybook`       | Storybook catalog and standalone showcase application |
+| Project                    | Purpose                                                             |
+| -------------------------- | ------------------------------------------------------------------- |
+| `projects/ngx-workshop-ui` | Packaged `@tmdjr/ngx-workshop-design-system` library and Sass theme |
+| `projects/storybook`       | Storybook catalog and standalone showcase application               |
 
 Included: token/typography foundations, Material buttons, form fields, selects, checkboxes, toggles, tabs, progress and dialogs; shared `NgxPanel`, `NgxStatus` and `NgxCodeBlock`.
 Material controls keep their native APIs. Shared visual treatment uses public Sass override mixins; no private DOM selectors.
@@ -76,8 +76,8 @@ Button variants: [shape, surface and interaction guide](docs/buttons.md). Apply 
 
 Code blocks: [Synthwave ’84 usage and tokens](docs/code.md). Native `<pre><code>` and `NgxCodeBlock` share the code palette; optional languages load standalone parsers. Compare the lightweight renderer with the actual editor under **Components → Code block → CodeMirror parity**.
 
-Overlay depth: [glass backdrops](docs/overlays.md) are shared across CDK-backed dialogs, sheets and popup backdrops. Workshop Frequency includes an interactive glass/solid/grid preview and live overlay actions.
+Overlay depth: [glass backdrops](docs/overlays.md) are shared across CDK-backed modal dialogs and sheets. Menus and selects keep transparent dismissal backdrops. Light palettes include distinct canvas, base and raised surfaces. Workshop Frequency includes an interactive glass/solid/grid preview and live overlay actions.
 
 Shared introductions and Material policy: [NgxEntrance and Sass mixins](docs/entrance.md).
 
-Backgrounds: [Rhombus lattice field](docs/backgrounds.md) adds a bottom-fading animated vector backdrop. Explore **Foundations → Backgrounds**.
+Backgrounds: add one [`<ngx-background />`](docs/backgrounds.md) and the selected theme chooses the design automatically: NASA insignias, Reese’s wordmarks, or the palette-colored lattice. Explore **Foundations → Backgrounds → Theme aware**. Use `design="lattice"` to keep the geometric design in every theme.

@@ -1,14 +1,10 @@
 // CDK's public backdrop hooks. Content, focus trapping, position and pointer handling stay with CDK.
 @mixin overlay-styles() {
-  html .cdk-overlay-backdrop {
-    background: var(--ngx-overlay-backdrop-fallback, var(--ngx-color-canvas));
-  }
-  // Connected overlays use a transparent backdrop for light-dismiss. Blur needs visible opacity.
-  html .cdk-overlay-backdrop.cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
-    opacity: 1;
+  html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop) {
+    background: var(--ngx-overlay-backdrop-fallback, #060714);
   }
   @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-    html .cdk-overlay-backdrop {
+    html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop) {
       background: var(--ngx-overlay-backdrop-tint, #06071480);
       backdrop-filter: blur(var(--ngx-overlay-backdrop-blur, 12px))
         saturate(var(--ngx-overlay-backdrop-saturation, 120%));
@@ -17,19 +13,19 @@
     }
   }
   @media (prefers-reduced-transparency: reduce) {
-    html .cdk-overlay-backdrop {
-      background: var(--ngx-overlay-backdrop-fallback, var(--ngx-color-canvas));
+    html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop) {
+      background: var(--ngx-overlay-backdrop-fallback, #060714);
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
   }
   @media (forced-colors: active) {
-    html .cdk-overlay-backdrop {
+    html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop) {
       background: Canvas;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
-    html .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop).cdk-overlay-backdrop-showing {
       opacity: 0.75;
     }
   }

@@ -15,7 +15,7 @@ const meta: Meta<FormExamples> = {
     docs: {
       description: {
         component:
-          'Single/multiple selection, grouped options, disabled option and required validation. All specimens inherit the root theme, including overlays. Use the global palette toolbar to compare Neon and Neutral.',
+          'Single/multiple selection, grouped options, disabled option and required validation. All specimens inherit the root theme, including overlays. Use the global palette toolbar to compare all light and dark themes. Dismissal backdrops stay transparent and unfiltered.',
       },
     },
   },

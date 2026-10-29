@@ -128,3 +128,9 @@ preferences disable the animation and show the full title immediately.
   <p>Remote configuration</p>
 </ngx-panel>
 ```
+
+Panel grid, solid and glass surfaces use `--ngx-color-surface-high` (falling back to `--ngx-color-surface` for older custom themes), so the panel stays elevated above base workspaces in both light and dark palettes. Glass still mixes that surface with transparency; the decorative outline remains separate.
+
+NASA grid panels replace visible grid lines with a staggered insignia pattern. The optional `--ngx-panel-grid-color` and `--ngx-panel-grid-size` tokens control line color and image repeat size. NASA Light uses a 45% surface contribution for glass, compared with the default 65%; place it over contrasting artwork to see the blur. Foundations → NASA includes a blue/red banded backdrop for comparison.
+
+Reese’s patterned panels also hide grid lines and use the shared image/color/size tokens for a staggered wordmark. Reese’s Light uses a 45% glass fill; **Foundations → Reese’s** shows glass over orange/yellow bands to expose blur.

@@ -22,7 +22,7 @@ const meta: Meta<OverlayExamples> = {
     docs: {
       description: {
         component:
-          'Confirm/cancel dialog returns results, with a separate destructive specimen and keyboard focus management. All specimens inherit the root theme, including overlays. Use the global palette toolbar to compare Neon and Neutral.',
+          'Confirm/cancel dialog returns results, with a separate destructive specimen and keyboard focus management. All specimens inherit the root theme, including overlays. Use the global palette toolbar to compare all light and dark themes. Modal backdrops use a dark glass scrim in every theme; content uses a raised theme surface.',
       },
     },
   },

@@ -15,7 +15,7 @@ const meta: Meta<NavigationExamples> = {
     docs: {
       description: {
         component:
-          'Nested export menu, disabled action and selection feedback. Escape restores trigger focus. All specimens inherit the root theme, including overlays. Use the global palette toolbar to compare Neon and Neutral.',
+          'Nested export menu, disabled action and selection feedback. Escape restores trigger focus. All specimens inherit the root theme, including overlays. Use the global palette toolbar to compare all light and dark themes. Dismissal backdrops stay transparent and unfiltered.',
       },
     },
   },

@@ -32,6 +32,7 @@ import { NgxBackground, NgxButton } from '@tmdjr/ngx-workshop-design-system';
       [style.--ngx-background-color-4]="customColors() ? colors()[3] : null"
     >
       <ngx-background
+        design="lattice"
         [animated]="animated() && !paused()"
         [placement]="placement()"
         [size]="width()"
@@ -297,6 +298,7 @@ import { NgxBackground } from '@tmdjr/ngx-workshop-design-system';
 <!-- Component template -->
 <section class="background-scene">
   <ngx-background
+    design="lattice"
     placement="${this.placement()}"
     [animated]="${this.animated() && !this.paused()}"
     [size]="${n(this.width())}"

@@ -4,18 +4,19 @@ Include `@use '@tmdjr/ngx-workshop-design-system/theme' as ngx; @include ngx.the
 The default HUD palette uses electric cyan (#27f5ef), magenta (#ff52c6), violet (#aa8cff), signal red (#ff3e68) and midnight navy surfaces. Set `data-ngx-theme="neutral"` on `<html>` for the minimal palette.
 Use the document root so dialogs, selects and other CDK overlays inherit tokens.
 
-| Token                                 | Purpose                                      |
-| ------------------------------------- | -------------------------------------------- |
-| --ngx-color-canvas / surface          | Page and elevated surfaces                   |
-| --ngx-color-text / muted              | Body and supporting text                     |
-| --ngx-color-primary / on-primary      | Primary actions and readable foreground      |
-| --ngx-color-secondary / on-secondary  | Secondary accent and foreground              |
-| --ngx-color-border                    | Surface outlines                             |
-| --ngx-color-success / warning / error | Status labels                                |
-| --ngx-font-body / mono / label        | System sans, coder text, small labels        |
-| --ngx-space-2 / 4 / 6                 | 8px, 16px, 24px spacing                      |
-| --ngx-radius                          | Shared 2px control radius                    |
-| --ngx-glow                            | Restrained decorative halo; none for neutral |
+| Token                                    | Purpose                                      |
+| ---------------------------------------- | -------------------------------------------- |
+| --ngx-color-canvas / surface             | Page and elevated surfaces                   |
+| --ngx-color-surface-low / high / highest | Recessed and elevated surface layers         |
+| --ngx-color-text / muted                 | Body and supporting text                     |
+| --ngx-color-primary / on-primary         | Primary actions and readable foreground      |
+| --ngx-color-secondary / on-secondary     | Secondary accent and foreground              |
+| --ngx-color-border                       | Surface outlines                             |
+| --ngx-color-success / warning / error    | Status labels                                |
+| --ngx-font-heading / body / mono / label           | Theme headings/body, coder text, small labels        |
+| --ngx-space-2 / 4 / 6                    | 8px, 16px, 24px spacing                      |
+| --ngx-radius                             | Shared 2px control radius                    |
+| --ngx-glow                               | Restrained decorative halo; none for neutral |
 
 To add a brand, override these variables in a root selector after the mixin. Override paired foreground/background tokens together and verify contrast.
 `tokens()`, `material-adapter()` and `theme()` are exported Sass mixins. `theme()` includes the first two, global focus and reduced-motion rules.
@@ -33,7 +34,7 @@ Material also exposes `--mat-sys-*` for Material-specific roles. Keep that depen
 | `teal-light`        | Teal / Light      | Light  | Ivory, deep teal, burnt orange, gold                    |
 | `teal-dark`         | Teal / Dark       | Dark   | Indigo shadows, luminous teal, orange, gold             |
 | `nasa-light`        | NASA / Light      | Light  | Cool white, deep blue, red, slate                       |
-| `nasa-dark`         | NASA / Dark       | Dark   | Space navy, light blue, red, silver                     |
+| `nasa-dark`         | NASA / Dark       | Dark   | Near-black, light blue, red, silver                     |
 | `reeses-light`      | Reese’s / Light   | Light  | Cream, burnt orange, chocolate, peanut-butter gold      |
 | `reeses-dark`       | Reese’s / Dark    | Dark   | Dark chocolate, vivid orange, peanut-butter gold, cream |
 
@@ -91,9 +92,9 @@ The supplied poster inspires a warm/cool split: teal illumination, orange neon, 
 
 | Role               | Light     | Dark      |
 | ------------------ | --------- | --------- |
-| Canvas             | `#fff6e9` | `#0d1024` |
+| Canvas             | `#eee1cf` | `#0d1024` |
 | Surface            | `#fffcf5` | `#191e35` |
-| Primary / teal     | `#007577` | `#24d6ce` |
+| Primary / teal     | `#006e70` | `#24d6ce` |
 | Secondary / orange | `#b43b18` | `#ff8748` |
 | Instrument / gold  | `#805700` | `#ffd166` |
 | Text               | `#182039` | `#fff1d5` |
@@ -108,44 +109,76 @@ Dawn is the light counterpart to Dusk, using the same amber/olive/ember family w
 
 | Role                | Dawn (light) | Dusk (dark) |
 | ------------------- | ------------ | ----------- |
-| Canvas              | `#fff8ed`    | `#12140f`   |
-| Surface             | `#fffdf6`    | `#22251d`   |
+| Canvas              | `#eee2cd`    | `#12140f`   |
+| Surface             | `#f7efdf`    | `#22251d`   |
 | Primary / amber     | `#8a5200`    | `#ffb547`   |
 | Secondary / olive   | `#52643d`    | `#b8c49a`   |
 | Text                | `#30291c`    | `#f5edda`   |
 | Muted text          | `#665b45`    | `#bebba5`   |
-| Danger / terracotta | `#b73b22`    | `#ff794f`   |
+| Danger / terracotta | `#b43920`    | `#ff794f`   |
 
 Dawn uses Material's light scheme without glow or scanlines. The renamed Teal pair uses `teal-light` and `teal-dark`; replace the previous film-based selectors in local consumers.
 
 ## NASA pair
 
-NASA / Light (`nasa-light`) and NASA / Dark (`nasa-dark`) draw on the blue/red/white family in [NASA's published legacy web palette](https://nasa.github.io/nasawds-site/components/colors/). That archived reference is inspiration; these are application themes adapted for readable contrast. Dark mode uses brighter blue and red so small text and outlined controls remain readable. The existing instrument token `--ngx-color-violet` carries slate/silver here.
+NASA / Light (`nasa-light`) and NASA / Dark (`nasa-dark`) follow the [NASA digital brand guidelines](https://www.nasa.gov/nasa-brand-center/brand-guidelines/). The insignia chart specifies blue `#0032a0` and red `#e4002b`, exposed as `--ngx-nasa-blue` and `--ngx-nasa-red`. Semantic accents use readable shades where needed.
 
-| Role                      | Light     | Dark      |
-| ------------------------- | --------- | --------- |
-| Canvas                    | `#f2f5f9` | `#070e1b` |
-| Surface                   | `#ffffff` | `#111e32` |
-| Primary / blue            | `#0b3d91` | `#8bbcff` |
-| Secondary / red           | `#c62d1f` | `#ff735c` |
-| Instrument / slate-silver | `#52657c` | `#bdcce0` |
-| Text                      | `#142238` | `#f4f7fb` |
-| Muted text                | `#526174` | `#b4c3d6` |
+| Role | Light | Dark |
+| --- | --- | --- |
+| Canvas | `#e8edf5` | `#000000` |
+| Surface | `#f4f6fa` | `#10131a` |
+| Primary | `#0032a0` | `#92b9ff` |
+| Secondary | `#c90026` | `#ff8a9f` |
+| Text | `#161b22` | `#f6f8fc` |
+| Muted | `#505c6c` | `#b4c3d6` |
 
-Both themes omit glow and scanlines for a restrained mission-control appearance. NASA Light uses the public light Material adapter; NASA Dark uses a dark color scheme. Dialogs and selects inherit the root palette. Code blocks retain their independent Synthwave palette. Both appear in the toolbar, eleven-theme showcase cycle and dedicated overview stories.
+`--ngx-font-heading` selects Inter, `--ngx-font-body` Public Sans, and `--ngx-font-mono` DM Mono. Material typography and overlays inherit these semantic font families. Other themes retain their original typography. Bundled Latin WOFF2 fonts use system fallbacks for other scripts and require no asset setup or external requests. Code retains its independent Synthwave palette and font.
+
+`--ngx-panel-grid-image` supplies the soft repeated full-color insignia on grid panels only (144 × 240px tiles, with 120px row pitch and alternating rows offset 72px). Override it with `none` to disable the artwork. `--ngx-panel-grid-size` controls tile size; `--ngx-panel-grid-color: transparent` hides grid lines in both NASA palettes. NASA Light uses `--ngx-panel-glass-opacity: 45%` to reveal its blurred backdrop; Dark retains 65%. No glow or scanlines are used. Compare both palettes and all surfaces in **Foundations → NASA**. Asset sources and licenses ship in `styles/NASA-ASSETS.md` and the adjacent OFL files.
 
 ## Reese’s pair
 
-Reese’s / Light (`reeses-light`) and Reese’s / Dark (`reeses-dark`) interpret the orange, gold and chocolate family associated with [Reese’s peanut butter cups](https://www.hersheyland.com/reeses). Hex values below are application colors adjusted for readable contrast, rather than official brand specifications. No logo or product photography is included.
+Reese’s / Light (`reeses-light`) and Reese’s / Dark (`reeses-dark`) use the user-provided orange `#ff5d00`, yellow `#ffc000` and chocolate `#2f1c0b` references. These exact colors are available as `--ngx-reeses-orange`, `--ngx-reeses-yellow` and `--ngx-reeses-chocolate`. Semantic interface colors are chosen for readable contrast on each surface.
 
-| Role              | Light                 | Dark                           |
-| ----------------- | --------------------- | ------------------------------ |
-| Canvas            | `#fff5e5`             | `#1b100b`                      |
-| Surface           | `#fffcf5`             | `#2c1b13`                      |
-| Primary / orange  | `#b94700`             | `#ff8618`                      |
-| Secondary         | `#6b371b` (chocolate) | `#efb85d` (peanut-butter gold) |
-| Instrument / gold | `#8a5a00`             | `#ffd543`                      |
-| Text              | `#352015`             | `#fff0d4`                      |
-| Muted text        | `#725543`             | `#d3b494`                      |
+| Role | Light | Dark |
+| --- | --- | --- |
+| Canvas | `#f5e4cb` | `#1a0f06` |
+| Surface | `#fff0d9` | `#2f1c0b` |
+| Primary / orange | `#a83e00` | `#ff5d00` |
+| Secondary | `#2f1c0b` (chocolate) | `#ffc000` (yellow) |
+| Instrument / gold | `#8a5a00` | `#ffc000` |
+| Text | `#2f1c0b` | `#fff0d4` |
+| Muted text | `#725543` | `#d3b494` |
 
-The existing instrument token `--ngx-color-violet` carries gold. Light uses the public light Material adapter without glow; Dark adds a restrained orange halo. Both omit scanlines, inherit into overlays and preserve the independent Synthwave code palette. Select the root theme attribute or use the toolbar, dedicated overview stories or eleven-palette showcase cycle.
+Both themes keep the existing system typography and omit glow/scanlines. NASA font families do not persist when switching to Reese’s. Material controls and overlays inherit the semantic palette; code retains its independent Synthwave palette/font.
+
+Grid panels use an embedded source wordmark from [Hersheyland’s Reese’s page](https://www.hersheyland.com/reeses), with visible grid lines hidden. Tiles measure 144 × 192px, with a 96px row pitch and alternate rows shifted 72px; wordmarks measure 108 × 45.2px. Opacity is 22% in light mode and 14% in dark mode. Source lettering/colors/proportions are preserved. The optional `--ngx-panel-grid-image`, `--ngx-panel-grid-color` and `--ngx-panel-grid-size` tokens control the decoration; set the image to `none` to disable it. Solid/glass panels omit the artwork. Light glass uses a 45% surface fill and dark glass retains 65%.
+
+Compare both palettes and all three surfaces under **Foundations → Reese’s**. Source attribution ships in `styles/REESES-ASSETS.md`; no runtime asset downloads or consumer asset-copy configuration are required.
+
+## Surface elevation
+
+Canvas is the page foundation; surface is the base workspace; low, high and
+highest provide recessed and raised layers. `NgxPanel` and outlined Material
+cards use `--ngx-color-surface-high`. Material’s public surface-container roles
+map to the corresponding semantic tokens, so menus, selects, dialogs, sheets
+and nested controls keep distinguishable layers. Foreground content retains the
+active light/dark theme; only modal backdrops use the independent dark scrim.
+
+| Light theme | Canvas    | Low       | Surface   | High (panel) | Highest   |
+| ----------- | --------- | --------- | --------- | ------------ | --------- |
+| Daylight    | `#e0e7ef` | `#e6edf4` | `#edf2f7` | `#f7f9fc`    | `#ffffff` |
+| Dawn        | `#eee2cd` | `#f2e8d6` | `#f7efdf` | `#fcf7ec`    | `#fffdf6` |
+| Teal        | `#eee1cf` | `#f2e7d7` | `#f7eddf` | `#fcf6ec`    | `#fffcf5` |
+| NASA        | `#e8edf5` | `#eef1f7` | `#f4f6fa` | `#fafbfe`    | `#ffffff` |
+| Reese’s     | `#f5e4cb` | `#faead2` | `#fff0d9` | `#fff7e9`    | `#fffcf4` |
+
+NASA Dark defines explicit low/high/highest steps (`#090c12`, `#1b202a`, `#272e3b`). Reese’s Dark defines chocolate low/high/highest steps (`#241507`, `#3b2614`, `#48311d`). Other dark palettes keep their canvas/base colors and derive low/high/highest by
+mixing the palette’s canvas or text into its base surface. Custom themes can
+override all three elevation tokens. Teal/Reese’s primary, NASA secondary and
+Dawn error accents have been darkened slightly to retain AA contrast on the
+deeper light canvases. See [overlay behavior](overlays.md) for scrim tokens.
+
+## Automatic page backgrounds
+
+`<ngx-background />` uses the current theme’s artwork without a consumer theme binding. NASA/Reese’s modules share `--ngx-brand-pattern-image` through independent `--ngx-panel-grid-image` and `--ngx-background-pattern-image` tokens. Page pattern size/display and lattice display tokens select the design; other themes reset to the lattice. See [backgrounds](backgrounds.md) for controls, placement and the `design="lattice"` override.

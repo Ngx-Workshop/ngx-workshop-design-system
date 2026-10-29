@@ -21,7 +21,7 @@ try {
     `import {Component} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {NgxBackground,NgxEntrance,NgxPanel,NgxStatus,NgxCodeBlock,NgxPanelShape,NgxPanelBackground,NgxPanelMotion,NgxButton,NgxButtonShape,NgxCodeLanguage} from '@tmdjr/ngx-workshop-design-system';
-@Component({selector:'consumer-test',imports:[NgxBackground,NgxPanel,NgxStatus,NgxCodeBlock,NgxButton,NgxEntrance,MatButtonModule],template:'<ngx-background [animated]="false" placement="viewport" [size]="420" [aspectRatio]="0.65" [spacing]="1.1" [rotation]="30" [traceSeed]="42" /><ngx-panel ngxEntrance="grow" [entranceDuration]="420" heading="Consumer" [shape]="shape" [background]="background" [motion]="motion"><ngx-status label="Ready" /></ngx-panel><ngx-code-block code="const ready = true;" [language]="language" contrast="original" [wrap]="true" /><button mat-flat-button ngxButton [shape]="buttonShape" surface="outline" motion="glitch">Execute</button>'})
+@Component({selector:'consumer-test',imports:[NgxBackground,NgxPanel,NgxStatus,NgxCodeBlock,NgxButton,NgxEntrance,MatButtonModule],template:'<ngx-background design="theme" [animated]="false" placement="viewport" [size]="420" [aspectRatio]="0.65" [spacing]="1.1" [rotation]="30" [traceSeed]="42" /><ngx-panel ngxEntrance="grow" [entranceDuration]="420" heading="Consumer" [shape]="shape" [background]="background" [motion]="motion"><ngx-status label="Ready" /></ngx-panel><ngx-code-block code="const ready = true;" [language]="language" contrast="original" [wrap]="true" /><button mat-flat-button ngxButton [shape]="buttonShape" surface="outline" motion="glitch">Execute</button>'})
 export class Consumer { language:NgxCodeLanguage="typescript"; buttonShape: NgxButtonShape = "chevron"; shape: NgxPanelShape = "stepped"; background: NgxPanelBackground = "glass"; motion: NgxPanelMotion = "boot"; }`,
   );
   writeFileSync(
@@ -53,6 +53,39 @@ export class Consumer { language:NgxCodeLanguage="typescript"; buttonShape: NgxB
       loadPaths: [path.join(root, 'node_modules')],
     },
   );
+  for (const family of ['Inter', 'Public Sans', 'DM Mono']) {
+    if (!result.css.includes(family)) throw Error(`Missing packaged NASA font: ${family}`);
+  }
+  if (
+    !result.css.includes('data:font/woff2;base64,') ||
+    !result.css.includes('data:image/svg+xml,')
+  )
+    throw Error('Missing embedded NASA assets');
+  for (const file of ['INTER-OFL.txt', 'PUBLICSANS-OFL.txt', 'DMMONO-OFL.txt', 'NASA-ASSETS.md']) {
+    if (!readFileSync(path.join(target, 'styles', file), 'utf8').length)
+      throw Error(`Missing NASA attribution: ${file}`);
+  }
+  for (const [name, color] of [
+    ['orange', '#ff5d00'],
+    ['yellow', '#ffc000'],
+    ['chocolate', '#2f1c0b'],
+  ]) {
+    if (!result.css.includes(`--ngx-reeses-${name}: ${color}`))
+      throw Error(`Missing packaged Reese’s reference: ${name}`);
+  }
+  if (
+    !readFileSync(path.join(target, 'styles/REESES-ASSETS.md'), 'utf8').includes('hersheyland.com')
+  )
+    throw Error('Missing Reese’s source attribution');
+  if (
+    !readFileSync(path.join(target, 'styles/_reeses.scss'), 'utf8').includes('data:image/svg+xml,')
+  )
+    throw Error('Missing embedded Reese’s wordmark');
+  if (
+    !result.css.includes('--ngx-background-pattern-image: var(--ngx-brand-pattern-image)') ||
+    !result.css.includes('--ngx-background-lattice-display: none')
+  )
+    throw Error('Missing packaged automatic background design tokens');
   if (!result.css.includes('--ngx-color-primary: #27f5ef'))
     throw Error('Packaged theme did not emit expected tokens');
   for (const theme of [

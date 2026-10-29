@@ -23,8 +23,22 @@
   );
   animation: ngx-background-arrive 2400ms ease-out both;
 }
-svg {
+.pattern {
+  display: var(--ngx-background-pattern-display, none);
+  position: absolute;
+  inset: 0;
+  background-image: var(--ngx-background-pattern-image, none);
+  background-size: var(--ngx-background-pattern-size, 216px 288px);
+  background-repeat: repeat;
+}
+:host([data-design='lattice']) .pattern {
+  display: none;
+}
+:host([data-design='lattice']) svg {
   display: block;
+}
+svg {
+  display: var(--ngx-background-lattice-display, block);
   width: 100%;
   height: 100%;
   fill: none;

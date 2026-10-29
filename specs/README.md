@@ -31,3 +31,11 @@
 - [015 — NASA light and dark themes](015-nasa-themes/spec.md) — Complete
 
 - [016 — Reese’s light and dark themes](016-reeses-themes/spec.md) — Complete
+
+- [017 — Overlay backdrops and light-theme depth](017-overlay-surface-depth/spec.md) — Implemented; package release integration pending
+
+- [018 — NASA brand refinement](018-nasa-brand-refinement/spec.md) — Complete
+
+- [019 — Reese’s brand refinement](019-reeses-brand-refinement/spec.md) — Complete
+
+- [020 — Theme-aware shared background](020-theme-aware-background/spec.md) — In progress

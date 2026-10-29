@@ -66,7 +66,7 @@ function rhombusLattice(
   return lattice;
 }
 
-/** Decorative rhombus lattice. Place inside an isolated, positioned container. */
+/** Theme-aware decoration. Place inside an isolated, positioned container. */
 @Component({
   selector: 'ngx-background',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -74,9 +74,11 @@ function rhombusLattice(
     'aria-hidden': 'true',
     '[attr.data-placement]': 'placement()',
     '[attr.data-animated]': 'animated()',
+    '[attr.data-design]': 'design()',
   },
   template: `
     <div class="field">
+      <div class="pattern"></div>
       <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" focusable="false">
         <g>
           <path class="structure" [attr.d]="lattice().outline" />
@@ -95,6 +97,8 @@ function rhombusLattice(
   styleUrl: './background.scss',
 })
 export class NgxBackground {
+  /** Follow the active theme, or retain the geometric lattice in every palette. */
+  readonly design = input<'theme' | 'lattice'>('theme');
   readonly animated = input(true);
   readonly placement = input<'container' | 'viewport'>('container');
   /** Root rhombus width in SVG units (180–720). */

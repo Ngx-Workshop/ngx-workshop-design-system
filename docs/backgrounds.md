@@ -1,4 +1,4 @@
-# Rhombus lattice backgrounds
+# Theme-aware backgrounds
 
 Import `NgxBackground` from `@tmdjr/ngx-workshop-design-system` and add it to your standalone component imports. Include the shared theme as usual.
 
@@ -19,19 +19,32 @@ Import `NgxBackground` from `@tmdjr/ngx-workshop-design-system` and add it to yo
 
 The transparent field is absolutely positioned behind the section content. `isolation: isolate` keeps its negative stacking order above the parent's background. For a screen background, put the component inside the application's isolated root and set `placement="viewport"`. Avoid transformed ancestors for fixed placement. Opaque content surfaces cover the field naturally.
 
-A single lattice of rhombi fades upward from the bottom. Quiet base outlines support traveling traces cycling through `--ngx-color-primary`, `--ngx-color-violet`, `--ngx-color-secondary` and `--ngx-color-danger`. Colors inherit live, including Neutral mode. No assets, timers or global SVG IDs are needed; multiple instances are independent.
+The default `design="theme"` follows `data-ngx-theme` automatically. No theme input, service, browser observer or consumer switch statement is needed:
+
+| Selected theme | Background design |
+| --- | --- |
+| NASA Light / Dark | Staggered NASA insignias |
+| Reese’s Light / Dark | Staggered Reese’s wordmarks |
+| Neon, Neutral, Daylight, Amber Dawn/Dusk, Teal Light/Dark | Existing animated rhombus lattice using that palette |
+
+Change the theme attribute on `<html>` using your existing picker. The same background instance and page content remain in place. Brand artwork is bundled with the shared theme and has no runtime network dependency. Pattern designs use a larger repeat than the panel patterns and keep the bottom fade; they do not display the lattice or run its trace animations. The standalone showcase already uses this component and inherits the automatic behavior.
+
+To keep the geometric design in every palette, use `<ngx-background design="lattice" />`. Its colors still inherit the selected theme. The existing lattice study/copy controls explicitly select this mode; automatic examples live under **Foundations → Backgrounds → Theme aware**.
+
+In lattice mode, a single lattice of rhombi fades upward from the bottom. Quiet base outlines support traveling traces cycling through `--ngx-color-primary`, `--ngx-color-violet`, `--ngx-color-secondary` and `--ngx-color-danger`. Colors inherit live, including Neutral mode. Lattice geometry needs no assets, timers or global SVG IDs; branded SVG IDs are scoped inside embedded image resources. Multiple instances are independent.
 
 | Input       | Default       | Behavior                                   |
 | ----------- | ------------- | ------------------------------------------ |
+| `design` | `'theme'` | Automatically select artwork, or use `'lattice'` in every theme |
 | `animated`  | `true`        | Set `[animated]="false"` for a still field |
 | `placement` | `'container'` | `'container'` or fixed `'viewport'`        |
 
 ## Geometry controls
 
-All inputs update reactively. Omit them to keep the original composition.
+The geometry inputs apply to the lattice design and update reactively. Omit them to keep the original composition. Use `design="lattice"` when exporting or tuning geometry that must remain visible in branded themes.
 
 ```html
-<ngx-background [size]="420" [aspectRatio]="0.65" [spacing]="1.15" />
+<ngx-background design="lattice" [size]="420" [aspectRatio]="0.65" [spacing]="1.15" />
 ```
 
 | Input         | Default     | Range and meaning                                               |
@@ -47,12 +60,12 @@ The fullscreen Storybook study includes keyboard-accessible live sliders and Res
 | CSS custom property         | Default            | Purpose                                                             |
 | --------------------------- | ------------------ | ------------------------------------------------------------------- |
 | `--ngx-background-height`   | `min(85vh, 900px)` | Height of the field from the bottom; use `100%` in compact sections |
-| `--ngx-background-opacity`  | `0.48`             | Overall decorative intensity, from 0 to 1                           |
+| `--ngx-background-opacity`  | `0.48`             | Overall decorative intensity, from 0 to 1; branded themes default to 1 because artwork already includes soft opacity                           |
 | `--ngx-background-duration` | `28s`              | Backward-compatible fallback duration for both cycles               |
 
 `--ngx-background-line-width` (default `0.6px`) and `--ngx-background-trace-width` (default `1px`) adjust the quiet outlines and animated traces independently. Widths remain constant while SVG scales.
 
-The initial field eases upward over 2.4 seconds. Reduced motion removes all animations immediately, including on a live preference change; a static trace in the second palette color remains. The component is hidden from assistive technology, contains no focus targets, ignores pointer input and is suppressed in forced-colors mode. Consumers offering continuous motion should expose a pause control or use the still input. Storybook's fullscreen study includes a pause control.
+The initial field eases upward over 2.4 seconds in both designs. Branded patterns remain still after the entrance. Reduced motion removes all animations immediately, including on a live preference change; a static trace in the second palette color remains. The component is hidden from assistive technology, contains no focus targets, ignores pointer input and is suppressed in forced-colors mode. Consumers offering continuous motion should expose a pause control or use the still input. Storybook's fullscreen study includes a pause control.
 
 ## Outline colors, timing and thickness
 
@@ -122,3 +135,17 @@ A successful copy is announced beside the button; editing the configuration clea
 The background renders a single lattice with no recursive children. The default geometry contains 24 rhombi and eight moving trace paths, with all child geometry removed. At most 17 CSS animations run including the initial entrance (16 after it completes). These are rendering-work counts, not a measured frame-rate guarantee.
 
 The `depth` and `childScale` inputs have been removed. Remove them from previously copied templates; new exports omit both. The lab no longer offers recursion or child-scale controls. All other styling, randomized traces, rotation, copy/export and reduced-motion behavior remain available. The existing RhombusFractal story URL is retained for saved links and now displays **Rhombus lattice**.
+
+## Theme artwork tokens
+
+Theme artwork uses separate semantic tokens from panels:
+
+| Token | Default / behavior |
+| --- | --- |
+| `--ngx-brand-pattern-image` | Shared embedded source image; `none` in unbranded themes |
+| `--ngx-background-pattern-image` | Page image; branded themes reference the shared image |
+| `--ngx-background-pattern-size` | NASA `216px 360px`, Reese’s `216px 288px` |
+| `--ngx-background-pattern-display` | `block` in branded themes, `none` otherwise |
+| `--ngx-background-lattice-display` | `none` in branded themes, `block` otherwise |
+
+Custom themes can provide another embedded image and set the two display tokens to select it. Page image/size and panel image/size are independent; overriding `--ngx-panel-grid-image` never removes the page artwork. A local `--ngx-background-opacity` or `--ngx-background-height` still takes precedence over theme defaults. Font, color and image selection are scoped by the current root theme. Pattern/still/reduced-motion modes do not run hidden trace animations; forced colors suppress all decorative backgrounds.

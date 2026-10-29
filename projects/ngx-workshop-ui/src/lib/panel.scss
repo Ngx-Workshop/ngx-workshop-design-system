@@ -97,31 +97,34 @@
 .frame::after {
   inset: 1px;
   background:
+    var(--ngx-panel-grid-image, none),
     linear-gradient(
       120deg,
       color-mix(in srgb, var(--frame-accent) 4%, transparent),
       transparent 50%
     ),
-    linear-gradient(var(--ngx-grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--ngx-grid-color) 1px, transparent 1px), var(--ngx-color-surface);
+    linear-gradient(var(--ngx-panel-grid-color, var(--ngx-grid-color)) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ngx-panel-grid-color, var(--ngx-grid-color)) 1px, transparent 1px),
+    var(--ngx-color-surface-high, var(--ngx-color-surface));
   background-size:
+    var(--ngx-panel-grid-size, 176px 144px),
     auto,
     24px 24px,
     24px 24px,
     auto;
 }
 :host([data-background='solid']) .frame::after {
-  background: var(--ngx-color-surface);
+  background: var(--ngx-color-surface-high, var(--ngx-color-surface));
 }
 // Glass needs an actual cut-out frame, not a translucent fill over an opaque plate.
 :host([data-background='glass']) .frame::after {
-  background: var(--ngx-color-surface);
+  background: var(--ngx-color-surface-high, var(--ngx-color-surface));
 }
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   :host([data-background='glass']) .frame::after {
     background: color-mix(
       in srgb,
-      var(--ngx-color-surface) var(--ngx-panel-glass-opacity, 65%),
+      var(--ngx-color-surface-high, var(--ngx-color-surface)) var(--ngx-panel-glass-opacity, 65%),
       transparent
     );
     backdrop-filter: blur(var(--ngx-panel-blur, 16px)) saturate(130%);
@@ -186,7 +189,7 @@ mat-card-subtitle {
   font-size: 10px;
 }
 mat-card-title {
-  font-family: var(--ngx-font-mono);
+  font-family: var(--ngx-font-heading);
   font-size: 1.15rem;
   margin-top: 10px;
   letter-spacing: -0.03em;
@@ -349,7 +352,7 @@ mat-card-actions {
 }
 @media (prefers-reduced-transparency: reduce) {
   :host([data-background='glass']) .frame::after {
-    background: var(--ngx-color-surface);
+    background: var(--ngx-color-surface-high, var(--ngx-color-surface));
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }

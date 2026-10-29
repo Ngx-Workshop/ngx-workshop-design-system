@@ -362,6 +362,7 @@ test('copies the current reusable background configuration and updates after edi
   await expect(page.locator('.copy-status')).toHaveText('Configuration copied');
   const content = await page.evaluate(() => navigator.clipboard.readText());
   for (const fragment of [
+    'design="lattice"',
     "import { NgxBackground } from '@tmdjr/ngx-workshop-design-system'",
     'placement="viewport"',
     '[animated]="false"',

@@ -3,6 +3,8 @@
 @use './buttons' as buttons;
 @use './code' as code;
 @use './overlays' as overlays;
+@use './nasa' as nasa;
+@use './reeses' as reeses;
 @forward './overlays' show overlay-styles;
 @forward './code' show code-styles;
 @forward './buttons' show button-styles;
@@ -11,6 +13,17 @@
 @mixin tokens() {
   --ngx-color-canvas: #060714;
   --ngx-color-surface: #0d1227;
+  --ngx-color-surface-low: color-mix(
+    in srgb,
+    var(--ngx-color-surface) 65%,
+    var(--ngx-color-canvas)
+  );
+  --ngx-color-surface-high: color-mix(in srgb, var(--ngx-color-surface) 95%, var(--ngx-color-text));
+  --ngx-color-surface-highest: color-mix(
+    in srgb,
+    var(--ngx-color-surface) 90%,
+    var(--ngx-color-text)
+  );
   --ngx-color-text: #e8f3ff;
   --ngx-color-muted: #a2b4cc;
   --ngx-color-border: #34496a;
@@ -23,6 +36,14 @@
   --ngx-color-error: #ff8c9e;
   --ngx-color-on-error: #34000c;
   --ngx-font-body: 'Segoe UI', system-ui, sans-serif;
+  --ngx-font-heading: var(--ngx-font-mono);
+  --ngx-panel-grid-image: none;
+  --ngx-brand-pattern-image: none;
+  --ngx-background-pattern-image: none;
+  --ngx-background-pattern-size: 216px 288px;
+  --ngx-background-pattern-display: none;
+  --ngx-background-lattice-display: block;
+  --ngx-background-opacity: 0.48;
   --ngx-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   --ngx-font-label: 500 0.75rem/1.5 var(--ngx-font-mono);
   --ngx-space-2: 0.5rem;
@@ -35,10 +56,15 @@
   --ngx-grid-color: #27f5ef09;
   --ngx-scanline-opacity: 0.08;
   --ngx-cut: 16px;
-  --ngx-overlay-backdrop-tint: color-mix(in srgb, var(--ngx-color-canvas) 55%, transparent);
+  --ngx-overlay-backdrop-color: #060714;
+  --ngx-overlay-backdrop-tint: color-mix(
+    in srgb,
+    var(--ngx-overlay-backdrop-color) 55%,
+    transparent
+  );
   --ngx-overlay-backdrop-blur: 12px;
   --ngx-overlay-backdrop-saturation: 120%;
-  --ngx-overlay-backdrop-fallback: var(--ngx-color-canvas);
+  --ngx-overlay-backdrop-fallback: var(--ngx-overlay-backdrop-color);
   --ngx-button-cut: 10px;
   --ngx-button-hover-duration: 180ms;
   --ngx-button-scan-duration: 480ms;
@@ -72,8 +98,8 @@
         tertiary: mat.$magenta-palette,
       ),
       typography: (
-        plain-family: 'Segoe UI, system-ui, sans-serif',
-        brand-family: 'Consolas, Liberation Mono, monospace',
+        plain-family: var(--ngx-font-body),
+        brand-family: var(--ngx-font-heading),
       ),
       density: 0,
     )
@@ -98,10 +124,10 @@
       surface: var(--ngx-color-surface),
       surface-variant: var(--ngx-color-surface),
       surface-container: var(--ngx-color-surface),
-      surface-container-low: var(--ngx-color-surface),
+      surface-container-low: var(--ngx-color-surface-low),
       surface-container-lowest: var(--ngx-color-canvas),
-      surface-container-high: var(--ngx-color-surface),
-      surface-container-highest: var(--ngx-color-surface),
+      surface-container-high: var(--ngx-color-surface-high),
+      surface-container-highest: var(--ngx-color-surface-highest),
       on-surface: var(--ngx-color-text),
       on-surface-variant: var(--ngx-color-muted),
       background: var(--ngx-color-canvas),
@@ -113,7 +139,7 @@
       error-container: var(--ngx-color-surface),
       on-error-container: var(--ngx-color-error),
       surface-dim: var(--ngx-color-canvas),
-      surface-bright: var(--ngx-color-surface),
+      surface-bright: var(--ngx-color-surface-highest),
       surface-tint: var(--ngx-color-primary),
       primary-fixed: var(--ngx-color-primary),
       primary-fixed-dim: var(--ngx-color-primary),
@@ -144,7 +170,7 @@
   @include mat.card-overrides(
     (
       outlined-container-shape: var(--ngx-radius),
-      outlined-container-color: var(--ngx-color-surface),
+      outlined-container-color: var(--ngx-color-surface-high),
       outlined-outline-color: var(--ngx-color-border),
     )
   );
@@ -166,7 +192,7 @@
   @include mat.snack-bar-overrides(
     (
       container-shape: var(--ngx-radius),
-      container-color: var(--ngx-color-surface),
+      container-color: var(--ngx-color-surface-high),
       supporting-text-color: var(--ngx-color-text),
       button-color: var(--ngx-color-primary),
     )
@@ -181,7 +207,7 @@
   @include mat.dialog-overrides(
     (
       container-shape: 2px,
-      container-color: var(--ngx-color-surface),
+      container-color: var(--ngx-color-surface-high),
     )
   );
   @include mat.progress-bar-overrides(
@@ -234,6 +260,7 @@
 
 // Include once, at the document root; CDK overlays inherit the same variables.
 @mixin theme() {
+  @include nasa.fonts();
   @include buttons.button-styles();
   @include code.code-styles();
   @include overlays.overlay-styles();
@@ -261,8 +288,11 @@
   }
   html[data-ngx-theme='light'] {
     color-scheme: light;
-    --ngx-color-canvas: #f4f7fa;
-    --ngx-color-surface: #ffffff;
+    --ngx-color-canvas: #e0e7ef;
+    --ngx-color-surface: #edf2f7;
+    --ngx-color-surface-low: #e6edf4;
+    --ngx-color-surface-high: #f7f9fc;
+    --ngx-color-surface-highest: #ffffff;
     --ngx-color-text: #172b3a;
     --ngx-color-muted: #4d6272;
     --ngx-color-border: #7b8a99;
@@ -284,8 +314,11 @@
   }
   html[data-ngx-theme='amber-light'] {
     color-scheme: light;
-    --ngx-color-canvas: #fff8ed;
-    --ngx-color-surface: #fffdf6;
+    --ngx-color-canvas: #eee2cd;
+    --ngx-color-surface: #f7efdf;
+    --ngx-color-surface-low: #f2e8d6;
+    --ngx-color-surface-high: #fcf7ec;
+    --ngx-color-surface-highest: #fffdf6;
     --ngx-color-text: #30291c;
     --ngx-color-muted: #665b45;
     --ngx-color-border: #91816a;
@@ -295,9 +328,9 @@
     --ngx-color-on-secondary: #ffffff;
     --ngx-color-success: #426526;
     --ngx-color-warning: #805500;
-    --ngx-color-error: #b73b22;
+    --ngx-color-error: #b43920;
     --ngx-color-on-error: #ffffff;
-    --ngx-color-danger: #b73b22;
+    --ngx-color-danger: #b43920;
     --ngx-color-on-danger: #ffffff;
     --ngx-color-violet: #776017;
     --ngx-grid-color: #8a52000b;
@@ -329,12 +362,15 @@
   // Teal, orange and gold palette pair.
   html[data-ngx-theme='teal-light'] {
     color-scheme: light;
-    --ngx-color-canvas: #fff6e9;
-    --ngx-color-surface: #fffcf5;
+    --ngx-color-canvas: #eee1cf;
+    --ngx-color-surface: #f7eddf;
+    --ngx-color-surface-low: #f2e7d7;
+    --ngx-color-surface-high: #fcf6ec;
+    --ngx-color-surface-highest: #fffcf5;
     --ngx-color-text: #182039;
     --ngx-color-muted: #51566b;
     --ngx-color-border: #8d7f78;
-    --ngx-color-primary: #007577;
+    --ngx-color-primary: #006e70;
     --ngx-color-on-primary: #ffffff;
     --ngx-color-secondary: #b43b18;
     --ngx-color-on-secondary: #ffffff;
@@ -345,7 +381,7 @@
     --ngx-color-danger: #b32935;
     --ngx-color-on-danger: #ffffff;
     --ngx-color-violet: #805700;
-    --ngx-grid-color: #0075770b;
+    --ngx-grid-color: #006e700b;
     --ngx-scanline-opacity: 0;
     --ngx-glow: none;
     @include material-adapter(light);
@@ -372,63 +408,83 @@
     --ngx-scanline-opacity: 0.05;
     --ngx-glow: 0 0 28px #24d6ce1a;
   }
-  // NASA-inspired blue/red with contrast-adjusted dark-mode accents.
+  // NASA insignia colors with readable interface shades in both color schemes.
+  html[data-ngx-theme='nasa-light'],
+  html[data-ngx-theme='nasa-dark'] {
+    @include nasa.identity();
+  }
   html[data-ngx-theme='nasa-light'] {
+    --ngx-panel-glass-opacity: 45%;
     color-scheme: light;
-    --ngx-color-canvas: #f2f5f9;
-    --ngx-color-surface: #ffffff;
-    --ngx-color-text: #142238;
-    --ngx-color-muted: #526174;
+    --ngx-color-canvas: #e8edf5;
+    --ngx-color-surface: #f4f6fa;
+    --ngx-color-surface-low: #eef1f7;
+    --ngx-color-surface-high: #fafbfe;
+    --ngx-color-surface-highest: #ffffff;
+    --ngx-color-text: #161b22;
+    --ngx-color-muted: #505c6c;
     --ngx-color-border: #7c8a9a;
-    --ngx-color-primary: #0b3d91;
+    --ngx-color-primary: #0032a0;
     --ngx-color-on-primary: #ffffff;
-    --ngx-color-secondary: #c62d1f;
+    --ngx-color-secondary: #c90026;
     --ngx-color-on-secondary: #ffffff;
     --ngx-color-success: #246b3c;
     --ngx-color-warning: #805600;
     --ngx-color-error: #b92532;
     --ngx-color-on-error: #ffffff;
-    --ngx-color-danger: #c62d1f;
+    --ngx-color-danger: #c90026;
     --ngx-color-on-danger: #ffffff;
     --ngx-color-violet: #52657c;
-    --ngx-grid-color: #0b3d910a;
+    --ngx-grid-color: #0032a00a;
     --ngx-scanline-opacity: 0;
     --ngx-glow: none;
     @include material-adapter(light);
   }
   html[data-ngx-theme='nasa-dark'] {
+    @include nasa.dark-pattern();
     color-scheme: dark;
-    --ngx-color-canvas: #070e1b;
-    --ngx-color-surface: #111e32;
-    --ngx-color-text: #f4f7fb;
+    --ngx-color-surface-low: #090c12;
+    --ngx-color-surface-high: #1b202a;
+    --ngx-color-surface-highest: #272e3b;
+    --ngx-color-canvas: #000000;
+    --ngx-color-surface: #10131a;
+    --ngx-color-text: #f6f8fc;
     --ngx-color-muted: #b4c3d6;
     --ngx-color-border: #657d9b;
-    --ngx-color-primary: #8bbcff;
+    --ngx-color-primary: #92b9ff;
     --ngx-color-on-primary: #082346;
-    --ngx-color-secondary: #ff735c;
+    --ngx-color-secondary: #ff8a9f;
     --ngx-color-on-secondary: #360c08;
     --ngx-color-success: #91d4a5;
     --ngx-color-warning: #ffc375;
     --ngx-color-error: #ff9b91;
     --ngx-color-on-error: #3c0a10;
-    --ngx-color-danger: #ff735c;
+    --ngx-color-danger: #ff8a9f;
     --ngx-color-on-danger: #360c08;
     --ngx-color-violet: #bdcce0;
-    --ngx-grid-color: #8bbcff0b;
+    --ngx-grid-color: #92b9ff0b;
     --ngx-scanline-opacity: 0;
     --ngx-glow: none;
   }
-  // Orange, peanut-butter gold and chocolate, adjusted for interface contrast.
+  // Reese’s palette references and decorative logo repeat.
+  html[data-ngx-theme='reeses-light'],
+  html[data-ngx-theme='reeses-dark'] {
+    @include reeses.identity();
+  }
   html[data-ngx-theme='reeses-light'] {
+    --ngx-panel-glass-opacity: 45%;
     color-scheme: light;
-    --ngx-color-canvas: #fff5e5;
-    --ngx-color-surface: #fffcf5;
-    --ngx-color-text: #352015;
+    --ngx-color-canvas: #f5e4cb;
+    --ngx-color-surface: #fff0d9;
+    --ngx-color-surface-low: #faead2;
+    --ngx-color-surface-high: #fff7e9;
+    --ngx-color-surface-highest: #fffcf4;
+    --ngx-color-text: #2f1c0b;
     --ngx-color-muted: #725543;
     --ngx-color-border: #9b7b60;
-    --ngx-color-primary: #b94700;
+    --ngx-color-primary: #a83e00;
     --ngx-color-on-primary: #ffffff;
-    --ngx-color-secondary: #6b371b;
+    --ngx-color-secondary: #2f1c0b;
     --ngx-color-on-secondary: #ffffff;
     --ngx-color-success: #42652d;
     --ngx-color-warning: #805600;
@@ -437,38 +493,45 @@
     --ngx-color-danger: #b73125;
     --ngx-color-on-danger: #ffffff;
     --ngx-color-violet: #8a5a00;
-    --ngx-grid-color: #b947000a;
+    --ngx-grid-color: #a83e000a;
     --ngx-scanline-opacity: 0;
     --ngx-glow: none;
     @include material-adapter(light);
   }
   html[data-ngx-theme='reeses-dark'] {
+    @include reeses.dark-pattern();
     color-scheme: dark;
-    --ngx-color-canvas: #1b100b;
-    --ngx-color-surface: #2c1b13;
+    --ngx-color-surface-low: #241507;
+    --ngx-color-surface-high: #3b2614;
+    --ngx-color-surface-highest: #48311d;
+    --ngx-color-canvas: #1a0f06;
+    --ngx-color-surface: #2f1c0b;
     --ngx-color-text: #fff0d4;
     --ngx-color-muted: #d3b494;
     --ngx-color-border: #987556;
-    --ngx-color-primary: #ff8618;
-    --ngx-color-on-primary: #371600;
-    --ngx-color-secondary: #efb85d;
-    --ngx-color-on-secondary: #37200b;
+    --ngx-color-primary: #ff5d00;
+    --ngx-color-on-primary: #2f1c0b;
+    --ngx-color-secondary: #ffc000;
+    --ngx-color-on-secondary: #2f1c0b;
     --ngx-color-success: #b0d38a;
-    --ngx-color-warning: #ffd543;
+    --ngx-color-warning: #ffc000;
     --ngx-color-error: #ffab8a;
     --ngx-color-on-error: #401307;
     --ngx-color-danger: #ff926a;
     --ngx-color-on-danger: #401307;
-    --ngx-color-violet: #ffd543;
-    --ngx-grid-color: #ff86180c;
+    --ngx-color-violet: #ffc000;
+    --ngx-grid-color: #ff5d000c;
     --ngx-scanline-opacity: 0;
-    --ngx-glow: 0 0 24px #ff861818;
+    --ngx-glow: none;
   }
   body {
     margin: 0;
     background: var(--ngx-color-canvas);
     color: var(--ngx-color-text);
     font-family: var(--ngx-font-body);
+  }
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--ngx-font-heading);
   }
   *,
   *::before,

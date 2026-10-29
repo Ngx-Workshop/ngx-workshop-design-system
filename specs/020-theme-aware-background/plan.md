@@ -1,0 +1,5 @@
+# Plan
+
+Extend NgxBackground with an aria-hidden decorative pattern layer beside its existing deterministic lattice. CSS semantic tokens select the displayed layer so document theme changes apply without browser globals, observers or Angular lifecycle work. Default design=theme; optional design=lattice pins the original composition. Share embedded artwork through --ngx-brand-pattern-image in NASA/Reese’s modules; panel and page image tokens independently reference it. The page uses larger repeat spacing and an upward fade, not duplicate asset payloads. Hidden SVG traces stop animating. Preserve placement/motion/accessibility behavior and verify native theme switching retains the same nodes. Add separate simple automatic-background stories beside the existing geometry lab, which remains available with its existing APIs.
+
+Constitution: public tokens and standalone/OnPush components; no deviations. Run background/theme/panel/catalog browser checks and library/demo/Storybook/packed builds; visually inspect branded pages on desktop/mobile.

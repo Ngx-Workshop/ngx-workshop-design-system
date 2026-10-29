@@ -27,7 +27,7 @@ The complete Material catalog uses development-only standalone demos in `project
 
 Code presentation has an independent Synthwave ’84 token palette in packaged `_code.scss`. NgxCodeBlock lazily loads a semantic highlighter and standalone Lezer grammar only for an explicit language; plain/native code does not instantiate CodeMirror. Editor/theme dependencies live only in the development comparison demo. Source is rendered as text spans; no innerHTML path exists. See [code guide](code.md).
 
-Packaged `_overlays.scss` styles the public CDK backdrop hooks and leaves overlay content, stacking and interaction behavior with Material/CDK. Workshop Frequency consumes the current button, panel and code APIs and has a surface-switching glass specimen with dialog/sheet previews. See [overlays](overlays.md).
+Packaged `_overlays.scss` styles nontransparent public CDK backdrop hooks with a palette-independent dark scrim, excludes transparent menu/select backdrops in all media modes, and leaves overlay content, stacking and interaction behavior with Material/CDK. Workshop Frequency consumes the current button, panel and code APIs and has a surface-switching glass specimen with dialog/sheet previews. See [overlays](overlays.md).
 
 NgxPanel's opt-in headingMotion=stagger and headingMotionKey inputs animate only
 title grapheme spans. Accessible full-heading semantics and reduced-motion CSS
@@ -43,3 +43,11 @@ policy in the theme export; controls remain native Material. See [entrance guide
 Local CSS tokens own palette, independent flow/color durations, intensity, height, line widths, random trace-length bounds and delay spread. Seeded hash streams supply repeatable per-group length and delay factors without rebuilding geometry. Reduced motion and still mode expose all traces immediately and stop all animations. Consumers own the isolated stacking context and choose container or viewport placement. See [backgrounds](backgrounds.md).
 
 The development-only BackgroundLab offers live controls, reset, reshuffle and current configuration export via CDK Clipboard with selectable-source fallback. Library geometry has no dependency on Forms or Clipboard. Copied markup omits the removed recursion inputs. The original RhombusFractal story URL remains available, labeled Rhombus lattice.
+
+Surface depth uses semantic low/base/high/highest tokens mapped to public Material surface-container roles. Panels and outlined cards use the high surface; modal and popup content stays on raised theme surfaces. All five light palettes define explicit elevation steps; dark palettes derive steps from their existing surface/text colors.
+
+NASA typography/artwork lives in packaged `_nasa.scss`: embedded offline Latin fonts and a decorative SVG tile. Semantic heading/body/mono tokens feed the public Material typography configuration and shared heading styles. Only NASA selectors set the optional panel grid image; component surface variants own whether it is rendered.
+
+Reese’s identity lives in packaged `_reeses.scss`: user-provided orange/yellow/chocolate references and an embedded official-source SVG tile. It reuses the optional panel grid image/color/size tokens, hides grid lines and preserves the default font tokens. Both palettes define their own surface hierarchy; Light uses a 45% glass fill. Source attribution ships in `REESES-ASSETS.md`.
+
+NgxBackground now defaults to design=theme: a token-selected pattern layer displays NASA/Reese’s artwork and hides the SVG in branded themes; other palettes retain the lattice. An optional design=lattice pins geometry. CSS handles document theme changes without observers, browser globals or service dependencies. Brand modules share --ngx-brand-pattern-image between independent page/panel image tokens, avoiding duplicate embedded payloads. Pattern pages use larger tiles and the existing entrance/fade/motion/placement contract. The standalone showcase automatically inherits the new behavior; the development geometry lab explicitly pins lattice and includes that mode in copied markup.

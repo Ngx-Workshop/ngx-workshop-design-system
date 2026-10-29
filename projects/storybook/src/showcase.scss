@@ -117,7 +117,7 @@ nav a:hover {
   );
 }
 h1 {
-  font-family: var(--ngx-font-mono);
+  font-family: var(--ngx-font-heading);
   text-transform: uppercase;
   font-size: clamp(42px, 5.5vw, 76px);
   font-weight: 800;
