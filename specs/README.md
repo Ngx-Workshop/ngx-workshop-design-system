@@ -41,3 +41,5 @@
 - [020 — Theme-aware shared background](020-theme-aware-background/spec.md) — Complete
 
 - [021 — Workspace actions and feedback](021-workspace-feedback/spec.md) — Implemented locally; publication and consumer adoption deferred
+
+- [022 — Shared overlay styling policy](022-overlay-policy/spec.md) — Implemented locally; publication and consumer adoption deferred

@@ -1,32 +1,50 @@
-// CDK's public backdrop hooks. Content, focus trapping, position and pointer handling stay with CDK.
-@mixin overlay-styles() {
-  html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop) {
+// Consumer-owned classes and public CDK hooks only. Material/CDK retain behavior.
+@mixin -backdrop-treatment() {
+  &:not(.cdk-overlay-transparent-backdrop) {
     background: var(--ngx-overlay-backdrop-fallback, #060714);
-  }
-  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-    html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop) {
+    @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
       background: var(--ngx-overlay-backdrop-tint, #06071480);
       backdrop-filter: blur(var(--ngx-overlay-backdrop-blur, 12px))
         saturate(var(--ngx-overlay-backdrop-saturation, 120%));
       -webkit-backdrop-filter: blur(var(--ngx-overlay-backdrop-blur, 12px))
         saturate(var(--ngx-overlay-backdrop-saturation, 120%));
     }
-  }
-  @media (prefers-reduced-transparency: reduce) {
-    html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop) {
+    @media (prefers-reduced-transparency: reduce) {
       background: var(--ngx-overlay-backdrop-fallback, #060714);
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
-  }
-  @media (forced-colors: active) {
-    html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop) {
+    @media (forced-colors: active) {
       background: Canvas;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
+      &.cdk-overlay-backdrop-showing {
+        opacity: 0.75;
+      }
     }
-    html .cdk-overlay-backdrop:not(.cdk-overlay-transparent-backdrop).cdk-overlay-backdrop-showing {
-      opacity: 0.75;
-    }
+  }
+}
+
+// Existing global backdrop contract, including transparent dismissal exclusions.
+@mixin overlay-styles() {
+  html .cdk-overlay-backdrop {
+    @include -backdrop-treatment();
+  }
+}
+
+// Include globally: overlay portals do not live inside an encapsulated component.
+@mixin overlay-policy() {
+  .ngx-design-system-overlay {
+    color: var(--ngx-color-text);
+    font-family: var(--ngx-font-body);
+    color-scheme: inherit;
+  }
+  .ngx-design-system-backdrop {
+    @include -backdrop-treatment();
+  }
+  .ngx-select-panel {
+    // Material's inline animation shorthand resets fill-mode. Retain its final
+    // fade frame until Material's own animationend handler detaches the panel.
+    animation-fill-mode: forwards !important;
   }
 }

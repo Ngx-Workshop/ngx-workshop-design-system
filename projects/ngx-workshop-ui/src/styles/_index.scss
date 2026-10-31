@@ -5,7 +5,7 @@
 @use './overlays' as overlays;
 @use './nasa' as nasa;
 @use './reeses' as reeses;
-@forward './overlays' show overlay-styles;
+@forward './overlays' show overlay-styles, overlay-policy;
 @forward './code' show code-styles;
 @forward './buttons' show button-styles;
 
@@ -264,6 +264,7 @@
   @include buttons.button-styles();
   @include code.code-styles();
   @include overlays.overlay-styles();
+  @include overlays.overlay-policy();
   html {
     color-scheme: dark;
     @include tokens();

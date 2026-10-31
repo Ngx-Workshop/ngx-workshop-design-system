@@ -83,3 +83,5 @@ Shared introductions and Material policy: [NgxEntrance and Sass mixins](docs/ent
 Backgrounds: add one [`<ngx-background />`](docs/backgrounds.md) and the selected theme chooses the design automatically: NASA insignias, Reese’s wordmarks, or the palette-colored lattice. Explore **Foundations → Backgrounds → Theme aware**. Use `design="lattice"` to keep the geometric design in every theme.
 
 Workspace UI: [shared action bars, save feedback and inline indicators](docs/workspace-actions.md). Explore **Components → Action bar → Workspace** for responsive composition and retry intent.
+
+Shared overlay policy: [portal classes and select closing behavior](docs/overlays.md#shared-portal-policy). `theme()` includes the policy; custom compositions can use `overlay-policy()`. Explore **Foundations → Overlay policy** in native-popover and container modes.

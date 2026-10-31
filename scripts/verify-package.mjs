@@ -47,7 +47,7 @@ export class Consumer { height = 0; saveState:NgxSaveState = "error"; retryState
   );
   const sass = await import('sass');
   const result = sass.compileString(
-    '@use "pkg:@tmdjr/ngx-workshop-design-system/theme" as ngx; @include ngx.theme(); .consumer { @include ngx.expansion-theme(); } .warning { @include ngx.warning-slide-toggle(); }',
+    '@use "pkg:@tmdjr/ngx-workshop-design-system/theme" as ngx; @include ngx.theme(); .packed-overlay-policy { @include ngx.overlay-policy(); } .consumer { @include ngx.expansion-theme(); } .warning { @include ngx.warning-slide-toggle(); }',
     {
       importers: [new sass.NodePackageImporter(temp)],
       loadPaths: [path.join(root, 'node_modules')],
@@ -123,6 +123,26 @@ export class Consumer { height = 0; saveState:NgxSaveState = "error"; retryState
     !result.css.includes('.cdk-overlay-backdrop')
   )
     throw Error('Packaged glass overlay styles are missing');
+  if (
+    !result.css.includes('.packed-overlay-policy .ngx-select-panel') ||
+    !result.css.includes('animation-fill-mode: forwards !important') ||
+    !result.css.includes('.packed-overlay-policy .ngx-design-system-overlay') ||
+    !result.css.includes(
+      '.packed-overlay-policy .ngx-design-system-backdrop:not(.cdk-overlay-transparent-backdrop)',
+    )
+  )
+    throw Error('Missing packaged overlay policy or transparent-backdrop exclusion');
+  const policyOnly = sass.compileString(
+    '@use "pkg:@tmdjr/ngx-workshop-design-system/theme" as ngx; @include ngx.overlay-policy();',
+    {
+      importers: [new sass.NodePackageImporter(temp)],
+      loadPaths: [path.join(root, 'node_modules')],
+    },
+  ).css;
+  if (!policyOnly.includes('.ngx-select-panel') || !policyOnly.includes('color-scheme: inherit'))
+    throw Error('Standalone packaged overlay policy is missing its class contracts');
+  if (policyOnly.includes('--mat-sys-primary:') || policyOnly.includes('color-scheme: dark'))
+    throw Error('Standalone overlay policy unexpectedly regenerates a Material palette');
   const pkg = JSON.parse(readFileSync(path.join(target, 'package.json'), 'utf8'));
   if (!pkg.exports['.'] || !pkg.exports['./theme']) throw Error('Missing exports');
   console.log(
