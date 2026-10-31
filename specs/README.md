@@ -39,3 +39,5 @@
 - [019 — Reese’s brand refinement](019-reeses-brand-refinement/spec.md) — Complete
 
 - [020 — Theme-aware shared background](020-theme-aware-background/spec.md) — Complete
+
+- [021 — Workspace actions and feedback](021-workspace-feedback/spec.md) — Implemented locally; publication and consumer adoption deferred

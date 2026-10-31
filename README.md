@@ -81,3 +81,5 @@ Overlay depth: [glass backdrops](docs/overlays.md) are shared across CDK-backed 
 Shared introductions and Material policy: [NgxEntrance and Sass mixins](docs/entrance.md).
 
 Backgrounds: add one [`<ngx-background />`](docs/backgrounds.md) and the selected theme chooses the design automatically: NASA insignias, Reese’s wordmarks, or the palette-colored lattice. Explore **Foundations → Backgrounds → Theme aware**. Use `design="lattice"` to keep the geometric design in every theme.
+
+Workspace UI: [shared action bars, save feedback and inline indicators](docs/workspace-actions.md). Explore **Components → Action bar → Workspace** for responsive composition and retry intent.

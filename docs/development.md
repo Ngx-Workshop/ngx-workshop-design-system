@@ -31,3 +31,5 @@ The Material catalog covers all 36 installed public UI families (including core 
 The accessibility addon starts in manual mode (`globals.a11y.manual`) so its background scan cannot race the explicit Playwright axe runs. Use **Run accessibility scan** in the addon for ad hoc inspection. Automated tests still run axe without disabling rules.
 
 The code comparison pins the Shell’s Synthwave theme to 6.0.4. Production code uses standalone Lezer packages; CodeMirror is dev-only. If upgrading the upstream theme, review `synthwave-tags.ts`, `_code.scss`, attribution and the parity tests together. `tests/code.spec.ts` checks real editor/snippet colors, source safety/clipboard, native CSS, parser fallback, runtime dependency boundaries, mobile layouts and readable-mode accessibility.
+
+`tests/workspace-feedback.spec.ts` checks composed action-bar wrapping/height/stickiness/cleanup, retained drafts and live-region nodes, keyboard retry intent, localized feedback, optional announcements and light/dark accessibility. Run after rebuilding static Storybook. Public package verification also compiles all three exports and their outputs in the tarball consumer.
