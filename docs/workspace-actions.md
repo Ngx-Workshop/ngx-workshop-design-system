@@ -97,3 +97,20 @@ install the actual published version in both MFEs and ensure the shell provides 
 compatible shared singleton before consumer migration. Replace each app's action-bar
 presentation while retaining its store/view-model notification semantics, retry rules
 and labels. Host/service acceptance remains a consumer adoption check.
+
+## Tablet density
+
+At viewport widths from 600px through 1366px inclusive, action bars use 4px vertical
+padding, 8px gaps, 14px headings, 11px inline indicators and 12px save feedback.
+The background is solid and content determines the height. Existing feedback
+wrapping below 720px and `heightChange` measurement remain active. The range also
+applies to desktop windows of the same width; it does not identify a device model.
+
+The bar supplies inherited `--ngx-inline-status-font-size`, `--ngx-inline-status-gap`,
+`--ngx-inline-status-dot-size`, `--ngx-save-feedback-font-size` and
+`--ngx-save-feedback-gap` properties. A projected status/feedback host can override
+these locally. Standalone statuses and feedback retain their original sizing.
+
+Explore **Components → Responsive density → Workspace** at 951 × 585, tablet
+portrait/landscape and desktop widths. Toggle panel actions and save to compare
+compact buttons, nested panels and persistent feedback.

@@ -134,3 +134,15 @@ Panel grid, solid and glass surfaces use `--ngx-color-surface-high` (falling bac
 NASA grid panels replace visible grid lines with a staggered insignia pattern. The optional `--ngx-panel-grid-color` and `--ngx-panel-grid-size` tokens control line color and image repeat size. NASA Light uses a 45% surface contribution for glass, compared with the default 65%; place it over contrasting artwork to see the blur. Foundations → NASA includes a blue/red banded backdrop for comparison.
 
 Reese’s patterned panels also hide grid lines and use the shared image/color/size tokens for a staggered wordmark. Reese’s Light uses a 45% glass fill; **Foundations → Reese’s** shows glass over orange/yellow bands to expose blur.
+
+## Compact tablet spacing and optional actions
+
+At 600–1366px viewport widths inclusive, panels use 14px vertical frame padding,
+12px horizontal header/body/action padding, 8px header gaps, 16px titles and 13px
+body text. Nested panels independently inherit the same responsive treatment.
+Narrow phones and wider desktops retain the original spacing.
+
+An omitted `[ngxPanelActions]` slot, or an empty marked wrapper, hides the actions
+row completely. Conditional projected content can reveal it again without
+recreating the panel or its body. Supply meaningful controls inside the wrapper;
+remove controls with Angular conditional rendering when they are not applicable.

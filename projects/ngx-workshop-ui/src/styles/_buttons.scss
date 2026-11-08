@@ -134,6 +134,26 @@ $shapes: (
       transform var(--ngx-button-hover-duration, 180ms) ease,
       filter var(--ngx-button-hover-duration, 180ms) ease;
   }
+  @media (min-width: 600px) and (max-width: 1366px) {
+    html .ngx-button {
+      @include mat.button-overrides(
+        (
+          filled-container-height: 40px,
+          outlined-container-height: 40px,
+          text-container-height: 40px,
+          protected-container-height: 40px,
+          tonal-container-height: 40px,
+          filled-label-text-size: 0.75rem,
+          outlined-label-text-size: 0.75rem,
+          text-label-text-size: 0.75rem,
+          protected-label-text-size: 0.75rem,
+          tonal-label-text-size: 0.75rem,
+        )
+      );
+      min-height: 40px;
+      padding-inline: 20px;
+    }
+  }
   html .ngx-button[data-ngx-tone='secondary'] {
     --button-accent: var(--ngx-color-secondary);
     --button-on-accent: var(--ngx-color-on-secondary);

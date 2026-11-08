@@ -102,3 +102,13 @@ Storybook: **Components → Button → Interaction lab**, including shape/surfac
 ![Button surface and tone matrix](images/button-surfaces.png)
 
 Hover and focus glow uses `drop-shadow` on the owned decoration, so it follows each silhouette. Public Material state-layer and ripple color overrides are transparent on `NgxButton`; shaped scan/press feedback remains enabled. The native hit area and visible keyboard outline remain rectangular and unclipped.
+
+## Tablet density
+
+Between 600px and 1366px viewport width inclusive, packaged `NgxButton` styles use
+40px container/minimum height, 20px horizontal padding and 12px labels, compared
+with the default 52px minimum height and 30px horizontal padding. All five Material
+button variants receive sizing through public `mat.button-overrides`; the native
+Material touch target, disabled, keyboard, link and form behavior are retained.
+Only hosts with `ngxButton` receive this treatment. Plain Material buttons are not
+changed. Shapes, surfaces and motion remain independent of sizing.

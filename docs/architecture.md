@@ -55,3 +55,10 @@ NgxBackground now defaults to design=theme: a token-selected pattern layer displ
 `NgxActionBar` projects heading-adjacent indicators, feedback and actions, with consumer-owned sticky offsets and a measured heightChange output. `NgxSaveFeedback` owns persistent live-region presentation and optional retry intent; `NgxInlineStatus` owns compact text/dot tones and opt-in announcements. Stores, timers, retry execution and counts remain consumer-owned. See [workspace actions](workspace-actions.md).
 
 Public `overlay-policy()` centralizes consumer-marked portal typography/document scheme, scoped token-based backdrops and opt-in `ngx-select-panel` final-frame retention. `theme()` includes it once; standalone custom compositions can import it independently. The existing `overlay-styles()` shares private backdrop declarations and retains its global CDK contract. No Material-private DOM, animation names, wrappers or runtime listeners are shipped. See [overlay policy](overlays.md#shared-portal-policy).
+
+Tablet viewport density (600–1366px inclusive) is shared by NgxActionBar, NgxPanel
+and packaged NgxButton Sass. Action-bar inherited semantic sizing properties reach
+projected status/feedback components without internal selectors; their independent
+defaults are unchanged. Empty panel action slots/wrappers collapse through owned
+projection-container CSS, including conditional changes. See responsive-density
+stories and specs/023-responsive-density for the measured-device acceptance scope.

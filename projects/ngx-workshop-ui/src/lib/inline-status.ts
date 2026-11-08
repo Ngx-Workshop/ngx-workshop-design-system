@@ -20,11 +20,11 @@ export type NgxInlineStatusTone = 'neutral' | 'info' | 'success' | 'warning' | '
         --_status-color: var(--ngx-color-muted);
         display: inline-flex;
         align-items: center;
-        gap: var(--ngx-space-2);
+        gap: var(--ngx-inline-status-gap, var(--ngx-space-2));
         min-width: 0;
         max-width: 100%;
         color: var(--_status-color);
-        font: 0.75rem/1.5 var(--ngx-font-mono);
+        font: var(--ngx-inline-status-font-size, 0.75rem) / 1.5 var(--ngx-font-mono);
         overflow-wrap: anywhere;
       }
       :host([data-tone='info']) {
@@ -43,9 +43,9 @@ export type NgxInlineStatusTone = 'neutral' | 'info' | 'success' | 'warning' | '
         min-width: 0;
       }
       .ngx-inline-status__light {
-        flex: 0 0 0.5rem;
-        width: 0.5rem;
-        height: 0.5rem;
+        flex: 0 0 var(--ngx-inline-status-dot-size, 0.5rem);
+        width: var(--ngx-inline-status-dot-size, 0.5rem);
+        height: var(--ngx-inline-status-dot-size, 0.5rem);
         border-radius: 50%;
         background: currentColor;
         box-shadow: 0 0 0.5rem color-mix(in srgb, currentColor 40%, transparent);

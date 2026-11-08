@@ -33,11 +33,11 @@ export type NgxSaveState = 'idle' | 'saving' | 'saved' | 'error';
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        gap: var(--ngx-space-2);
+        gap: var(--ngx-save-feedback-gap, var(--ngx-space-2));
         min-width: 0;
         max-width: 100%;
         color: var(--ngx-color-muted);
-        font: 0.8rem/1.5 var(--ngx-font-body);
+        font: var(--ngx-save-feedback-font-size, 0.8rem) / 1.5 var(--ngx-font-body);
         overflow-wrap: anywhere;
       }
       :host([data-state='saved']) {

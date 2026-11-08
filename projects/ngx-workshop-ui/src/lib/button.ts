@@ -12,7 +12,9 @@ export type NgxButtonShape = 'notched' | 'chamfered' | 'beveled' | 'stepped' | '
 export type NgxButtonTone = 'primary' | 'secondary' | 'danger';
 export type NgxButtonSurface = 'filled' | 'outline' | 'glass';
 export type NgxButtonMotion = 'none' | 'scan' | 'glitch' | 'pulse';
-/** Visual treatment for a native button/anchor already enhanced by Material MatButton. */
+/** Visual treatment for a native button/anchor already enhanced by Material MatButton.
+ * Packaged button Sass applies compact sizing at tablet viewport widths (600–1366px).
+ */
 @Directive({
   selector: 'button[ngxButton],a[ngxButton]',
   host: {

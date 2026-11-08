@@ -43,3 +43,5 @@
 - [021 — Workspace actions and feedback](021-workspace-feedback/spec.md) — Implemented locally; publication and consumer adoption deferred
 
 - [022 — Shared overlay styling policy](022-overlay-policy/spec.md) — Implemented locally; publication and consumer adoption deferred
+
+- [023 — Responsive workspace density](023-responsive-density/spec.md) — Complete locally; publication deferred

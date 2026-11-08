@@ -34,12 +34,10 @@ import {
         z-index: var(--ngx-action-bar-z-index, 10);
         width: 100%;
         min-width: 0;
-        min-height: 56px;
         padding: 0.5rem 1rem;
         border-bottom: 1px solid var(--ngx-color-border);
-        background: color-mix(in srgb, var(--ngx-color-canvas) 85%, transparent);
+        background: var(--ngx-color-canvas);
         color: var(--ngx-color-text);
-        backdrop-filter: blur(16px);
       }
       .ngx-action-bar__heading {
         margin: 0;
@@ -68,6 +66,26 @@ import {
       .ngx-action-bar__actions:empty {
         display: none;
       }
+      @media (min-width: 600px) and (max-width: 1366px) {
+        :host {
+          gap: var(--ngx-space-2);
+          padding: 0.25rem 0.75rem;
+          --ngx-inline-status-font-size: 0.6875rem;
+          --ngx-inline-status-gap: 0.25rem;
+          --ngx-inline-status-dot-size: 0.375rem;
+          --ngx-save-feedback-font-size: 0.75rem;
+          --ngx-save-feedback-gap: 0.25rem;
+        }
+        .ngx-action-bar__heading {
+          font-size: 0.875rem;
+        }
+        .ngx-action-bar__indicators,
+        .ngx-action-bar__feedback {
+          gap: 0.25rem;
+          font-size: 0.75rem;
+          line-height: 1.35;
+        }
+      }
       @media (max-width: 720px) {
         .ngx-action-bar__feedback {
           order: 3;
@@ -81,6 +99,11 @@ import {
         :host {
           background: var(--ngx-color-canvas);
           backdrop-filter: none;
+        }
+      }
+      @media (min-width: 900px) and (max-width: 1024px) {
+        :host {
+          --ngx-action-bar-top: var(--publisher-toolbar-top, 52px);
         }
       }
     `,

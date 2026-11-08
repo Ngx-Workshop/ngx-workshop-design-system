@@ -203,6 +203,37 @@ mat-card-actions {
   padding: var(--ngx-space-4);
   gap: var(--ngx-space-2);
 }
+// Projection anchors are comments, so :empty also follows conditional actions.
+mat-card-actions:empty,
+mat-card-actions:has(> [ngxPanelActions]:empty):not(:has(> [ngxPanelActions]:not(:empty))) {
+  display: none;
+}
+@media (min-width: 600px) and (max-width: 1366px) {
+  .frame {
+    padding: 14px 3px;
+  }
+  mat-card-header {
+    gap: var(--ngx-space-2);
+    margin: 0 0 var(--ngx-space-2);
+    padding: 8px 12px 0;
+  }
+  mat-card-title {
+    font-size: 1rem;
+    margin-top: 4px;
+  }
+  mat-card-content {
+    padding: 0 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  mat-card-content:last-child {
+    padding-bottom: 12px;
+  }
+  mat-card-actions {
+    padding: var(--ngx-space-2) 12px;
+    min-height: 0;
+  }
+}
 :host(.ngx-panel-enter-boot) {
   animation: panel-boot-in var(--panel-enter-duration) cubic-bezier(0.16, 1, 0.3, 1) both;
 }
