@@ -46,4 +46,4 @@
 
 - [023 — Responsive workspace density](023-responsive-density/spec.md) — Complete locally; publication deferred
 
-- [024-static-deployment-cleanup](024-static-deployment-cleanup/spec.md): Static deployment cleanup; helper verified, Actions rollout pending.
+- [024-static-deployment-cleanup](024-static-deployment-cleanup/spec.md): Static deployment cleanup; helper tests, Actions rollout and live Nginx entrypoints verified.
