@@ -45,3 +45,5 @@
 - [022 — Shared overlay styling policy](022-overlay-policy/spec.md) — Implemented locally; publication and consumer adoption deferred
 
 - [023 — Responsive workspace density](023-responsive-density/spec.md) — Complete locally; publication deferred
+
+- [024-static-deployment-cleanup](024-static-deployment-cleanup/spec.md): Static deployment cleanup; helper verified, Actions rollout pending.

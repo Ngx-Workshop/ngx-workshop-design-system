@@ -36,10 +36,10 @@ Grant this repository the same frontend secrets used by `mfe-shell-admin`:
 
 These may be repository secrets or organization secrets with this repository selected for access.
 They are checked before building or publishing. Keep the server directory writable by root and
-its static files readable by Nginx. The workflow matches the existing SCP deployment pattern:
-overwrite current files, retain older assets. Files copy directly into the mounted directory,
-so catalog deployment does not require an Nginx restart. Upload is not atomic; retry a failed
-upload to finish it. Restrict pushes to main to trusted maintainers.
+its static files readable by Nginx. The workflow stages a complete build, then uses the guarded synchronization described in
+[static deployment](static-deployment.md) to remove obsolete assets while preserving the
+mounted directory. A temporary hard-link backup restores previous contents on promotion
+failure. No Nginx restart is needed. Restrict pushes to main to trusted maintainers.
 
 ## Version policy and retries
 
